@@ -5,15 +5,15 @@ const Mood = require("./models/mood");
 const UserActivity = require("./models/userActivity");
 
 //associations
-User.belongsToMany(User, { through: "friendship" });
+User.belongsToMany(User, { as: "friend", through: "friendship" });
 
 //Mood to activities => mood belongs to activity
 //activities can have many moods
-Mood.belongsTo(Activity, { through: UserActivity });
-Activity.hasMany(Mood, { through: UserActivity });
+Mood.belongsToMany(Activity, { through: UserActivity });
+Activity.belongsToMany(Mood, { through: UserActivity });
 
 //user can have many moods
-User.hasMany(Mood);
+User.belongsToMany(Mood, { through: UserActivity });
 
 module.exports = {
   db,
