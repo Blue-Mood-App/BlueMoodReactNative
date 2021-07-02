@@ -4,6 +4,7 @@ import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 
 export default function App() {
+
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Woooo!!! We have a map and a marker!</Text>
