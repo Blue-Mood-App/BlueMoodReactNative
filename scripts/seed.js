@@ -9,9 +9,7 @@ const {
 
 async function seed() {
   await db.sync({ force: true });
-  console.log(
-    `${blue("db synced!")}: process.env.NODE_ENV: ${process.env.NODE_ENV}`
-  );
+  console.log(blue("synced!"));
   let users, activities, moods, userSpecificActivities;
 
   const usersCall = await fetch(
