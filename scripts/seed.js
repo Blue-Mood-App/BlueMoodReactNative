@@ -4,7 +4,7 @@ const { white, blue, green } = require("chalk");
 
 const {
   db,
-  models: { User, Activity, Mood, UserSpecificActivity },
+  models: { User, Activity, Mood, UserActivity },
 } = require("../server/db");
 
 async function seed() {
@@ -48,7 +48,7 @@ async function seed() {
   await Promise.all(
     userSpecificActivities.map(
       async (userSpecificActivity) =>
-        await UserSpecificActivity.create(userSpecificActivity)
+        await UserActivity.create(userSpecificActivity)
     )
   );
 }
@@ -67,6 +67,6 @@ async function runSeed() {
   }
 }
 
-  runSeed();
+runSeed();
 
 module.exports = seed;
