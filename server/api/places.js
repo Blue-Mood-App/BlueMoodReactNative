@@ -1,0 +1,28 @@
+const router = require("express").Router();
+const fetch = require("node-fetch");
+
+router.get("/", async function (req, res, next) {
+  /*
+Once a user picks an activity, we need to find this activity in the table, grab the search query, and then modify that in the api call
+*/
+  try {
+    const auth = {
+      headers: {
+        Authorization:
+          "Bearer mzV3sXG2N7TBo_ESDOAeYcdVDFBC2sw2aTSI_NhEB4TRwFu6y7XxLSj_47_N2OLMIH0c0VCGuYKIOC--59jDtkmWMS1NhNhyXcO0q6ZiWJOmCRgjv8S4g35YGg_eYHYx",
+      },
+    };
+
+    const data = await fetch(
+      "https://api.yelp.com/v3/businesses/search?terms=parks&categories=dog_parks&latitude=37.786882&longitude=-122.399972&radius=20000",
+      auth
+    );
+
+    const mapData = await data.json();
+    res.send(mapData);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+module.exports = router;
