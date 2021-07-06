@@ -1,10 +1,17 @@
-import { createStore, combineReducers } from "redux";
-import registration from "./registration";
+import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { createLogger } from 'redux-logger'
+import thunkMiddleware from 'redux-thunk'
+import { composeWithDevTools } from 'redux-devtools-extension'
+import auth from './auth'
+
 
 const reducer = combineReducers({
-  registration
-});
+  auth,
+})
 
-const store = createStore(reducer);
+const middleware = composeWithDevTools(
+  applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
+)
+const store = createStore(reducer, middleware)
 
-export default store;
+export default store

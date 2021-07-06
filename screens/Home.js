@@ -1,7 +1,10 @@
 import React from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
+import { authenticate } from "../store/auth"
+import { useDispatch } from "react-redux";
 
 export default function Home({ navigation }) {
+  const dispatch = useDispatch()
 
   return (
     <View style={styles.homeContainer}>
@@ -15,6 +18,10 @@ export default function Home({ navigation }) {
         title="Go to Login"
         onPress={() => navigation.navigate("Login")}
         style={styles.btn}
+      ></Button>
+      <Button
+        title="Test auth"
+        onPress={() => dispatch(authenticate('kyle@email.com', 'abc', 'login'))}
       ></Button>
     </View>
   );

@@ -9,6 +9,7 @@ import Register from "./screens/Register";
 import store from './store';
 import { Provider } from 'react-redux';
 
+
 const Stack = createStackNavigator()
 
 export default function App() {

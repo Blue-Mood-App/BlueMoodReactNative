@@ -6,7 +6,7 @@
     "ios": "react-native run-ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "start-dev": "JWT=shh nodemon server & expo start",
+    "start-dev": "JWT=shh nodemon server & expo start --clear",
     "start:dev-windows": "set JWT=shh&&expo start&&nodemon server",
     "seed": "node ./scripts/seed.js"
   },
@@ -18,7 +18,9 @@
     "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
     "chalk": "^4.1.1",
+    "cors": "^2.8.5",
     "expo": "~42.0.0",
+    "expo-secure-store": "~10.2.0",
     "expo-splash-screen": "~0.11.2",
     "expo-status-bar": "~1.0.4",
     "expo-updates": "~0.8.0",
@@ -41,6 +43,9 @@
     "react-native-web": "~0.13.12",
     "react-redux": "^7.2.4",
     "redux": "^4.1.0",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
     "sequelize": "^6.6.4"
   },
   "devDependencies": {
