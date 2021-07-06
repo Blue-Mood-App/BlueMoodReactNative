@@ -4,36 +4,34 @@ const { white, blue, green } = require("chalk");
 
 const {
   db,
-  models: { User, Activity, Mood, UserSpecificActivity },
+  models: { User, Activity, Mood, UserActivity },
 } = require("../server/db");
 
 async function seed() {
   await db.sync({ force: true });
-  console.log(
-    `${blue("db synced!")}: process.env.NODE_ENV: ${process.env.NODE_ENV}`
-  );
+  console.log(blue("synced!"));
   let users, activities, moods, userSpecificActivities;
 
   const usersCall = await fetch(
-    "https://spreadsheets.google.com/feeds/list/2PACX-1vTJyTrq6Hz5eg98WUiy2IWG3pBVuAJaqmxdYrs0AE4xKlgRrlEsZCRylOhlo3wQSCLL-nMXIU4RiWOj/1/public/values?alt=json"
+    "https://spreadsheets.google.com/feeds/list/1FOJOP5FwnfP6xDrBp7eUWLqFZlDZL_0yxC3V35MgzrY/1/public/values?alt=json"
   );
   const usersJson = await usersCall.json();
   users = googleJSONCleaner(usersJson.feed.entry);
 
   const activitiesCall = await fetch(
-    "https://spreadsheets.google.com/feeds/list/2PACX-1vTJyTrq6Hz5eg98WUiy2IWG3pBVuAJaqmxdYrs0AE4xKlgRrlEsZCRylOhlo3wQSCLL-nMXIU4RiWOj/2/public/values?alt=json"
+    "https://spreadsheets.google.com/feeds/list/1FOJOP5FwnfP6xDrBp7eUWLqFZlDZL_0yxC3V35MgzrY/2/public/values?alt=json"
   );
   const activitiesJson = await activitiesCall.json();
   activities = googleJSONCleaner(activitiesJson.feed.entry);
 
   const moodsCall = await fetch(
-    "https://spreadsheets.google.com/feeds/list/2PACX-1vTJyTrq6Hz5eg98WUiy2IWG3pBVuAJaqmxdYrs0AE4xKlgRrlEsZCRylOhlo3wQSCLL-nMXIU4RiWOj/3/public/values?alt=json"
+    "https://spreadsheets.google.com/feeds/list/1FOJOP5FwnfP6xDrBp7eUWLqFZlDZL_0yxC3V35MgzrY/3/public/values?alt=json"
   );
   const moodsJson = await moodsCall.json();
   moods = googleJSONCleaner(moodsJson.feed.entry);
 
   const userSpecificActivitiesCall = await fetch(
-    "https://spreadsheets.google.com/feeds/list/2PACX-1vTJyTrq6Hz5eg98WUiy2IWG3pBVuAJaqmxdYrs0AE4xKlgRrlEsZCRylOhlo3wQSCLL-nMXIU4RiWOj/4/public/values?alt=json"
+    "https://spreadsheets.google.com/feeds/list/1FOJOP5FwnfP6xDrBp7eUWLqFZlDZL_0yxC3V35MgzrY/4/public/values?alt=json"
   );
   const userSpecificActivitiesJson = await userSpecificActivitiesCall.json();
   userSpecificActivities = googleJSONCleaner(
@@ -48,7 +46,11 @@ async function seed() {
   await Promise.all(
     userSpecificActivities.map(
       async (userSpecificActivity) =>
-        await UserSpecificActivity.create(userSpecificActivity)
+        await UserActivity.create({
+          moodId: +userSpecificActivity.moodId,
+          userId: +userSpecificActivity.userId,
+          activityId: +userSpecificActivity.activityId,
+        })
     )
   );
 }
@@ -67,6 +69,6 @@ async function runSeed() {
   }
 }
 
-  runSeed();
+runSeed();
 
 module.exports = seed;
