@@ -12,4 +12,17 @@ const UserActivity = db.define("userActivity", {
   },
 });
 
+
+// UserActivity.beforeCreate((userActivity) => {
+//   const { userId, moodId, activityId } = userActivity
+//   const doesItExistAlready = UserActivity.findAll({
+  //  where: {
+//     userId,
+//     moodId,
+//     activityId
+//      }
+//   })
+//   if (doesItExistAlready.length) return new Error('activity/mood already exists for this user')
+// })
+
 module.exports = UserActivity;
