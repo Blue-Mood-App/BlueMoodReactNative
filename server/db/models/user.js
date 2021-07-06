@@ -51,8 +51,8 @@ User.prototype.generateToken = function () {
 /**
  * classMethods
  */
-User.authenticate = async function ({ username, password }) {
-  const user = await this.findOne({ where: { username } });
+User.authenticate = async function ({ usernameEmail, password }) {
+  const user = await this.findOne({ where: { usernameEmail } });
   if (!user || !(await user.correctPassword(password))) {
     const error = Error("Incorrect username/password");
     error.status = 401;

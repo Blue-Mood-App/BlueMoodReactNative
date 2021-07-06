@@ -1,54 +1,58 @@
-import axios from 'axios'
-import * as SecureStore from 'expo-secure-store';
+import axios from "axios";
+import * as SecureStore from "expo-secure-store";
 
-const TOKEN = 'token'
+const TOKEN = "token";
 
 /**
  * ACTION TYPES
  */
-const SET_AUTH = 'SET_AUTH'
+const SET_AUTH = "SET_AUTH";
 
 /**
  * ACTION CREATORS
  */
-const setAuth = auth => ({ type: SET_AUTH, auth })
+const setAuth = (auth) => ({ type: SET_AUTH, auth });
 /**
  * THUNK CREATORS
  */
-export const me = () => async dispatch => {
-  const token = await SecureStore.getItemAsync(TOKEN)
-  console.log('token pulled SecureStorage', token)
+export const me = () => async (dispatch) => {
+  const token = await SecureStore.getItemAsync(TOKEN);
+  console.log("token pulled SecureStorage", token);
   if (token) {
-    const res = await axios.get('/auth/me', {
+    const res = await axios.get("http://127.0.0.1:1337/auth/me", {
       headers: {
-        authorization: token
-      }
-    })
-    return dispatch(setAuth(res.data))
+        authorization: token,
+      },
+    });
+    return dispatch(setAuth(res.data));
   }
-}
+};
 
 // when dispatching authenticate -- method is used to determine if it's "login" or "signup" use either or in place of method.
-export const authenticate = (usernameEmail, password, method) => async dispatch => {
-  try {
-    const res = await axios.post(`/auth/${method}`, { usernameEmail, password })
-    console.log('token in auth', res.data.token)
-    await SecureStore.setItemAsync(TOKEN, res.data.token)
-    dispatch(me())
-    //history.push() we're going to need a method to send us to home page after login
-  } catch (authError) {
-    return dispatch(setAuth({ error: authError }))
-  }
-}
+export const authenticate =
+  (usernameEmail, password, method) => async (dispatch) => {
+    try {
+      const res = await axios.post(`http://127.0.0.1:1337/auth/${method}`, {
+        usernameEmail,
+        password,
+      });
+      console.log("token in auth", res.data.token);
+      await SecureStore.setItemAsync(TOKEN, res.data.token);
+      dispatch(me());
+      //history.push() we're going to need a method to send us to home page after login
+    } catch (authError) {
+      return dispatch(setAuth({ error: authError }));
+    }
+  };
 
-export const logout = async() => {
-  await SecureStore.deleteItemAsync(TOKEN)
+export const logout = async () => {
+  await SecureStore.deleteItemAsync(TOKEN);
   //history.push() we're going to need a method to send us to home page after login
   return {
     type: SET_AUTH,
-    auth: {}
-  }
-}
+    auth: {},
+  };
+};
 
 /**
  * REDUCER
@@ -56,8 +60,8 @@ export const logout = async() => {
 export default function (state = {}, action) {
   switch (action.type) {
     case SET_AUTH:
-      return action.auth
+      return action.auth;
     default:
-      return state
+      return state;
   }
 }
