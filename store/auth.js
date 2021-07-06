@@ -28,11 +28,11 @@ export const me = () => async (dispatch) => {
   }
 };
 
-// when dispatching authenticate -- method is used to determine if it's "login" or "signup" use either or in place of method.
-export const authenticate =
-  (usernameEmail, password, method) => async (dispatch) => {
+// when dispatching authenticateLogin -- method is used to determine if it's "login" or "signup" use either or in place of method.
+export const authenticateLogin =
+  (usernameEmail, password) => async (dispatch) => {
     try {
-      const res = await axios.post(`http://127.0.0.1:1337/auth/${method}`, {
+      const res = await axios.post("http://127.0.0.1:1337/auth/login", {
         usernameEmail,
         password,
       });

@@ -1,37 +1,69 @@
 import axios from "axios";
+import * as SecureStore from "expo-secure-store";
 
-//action creator
-const setNewUser = (auth) => ({
-  type: "SET_NEW_USER",
-  auth,
-});
+const TOKEN = "token";
 
-//thunk
-//post request to '/api/register'
-export const newUser =
-  (firstName, lastName, email, password, confirmPassword) =>
-  async (dispatch) => {
+/**
+ * ACTION TYPES
+ */
+const SET_AUTH_REGISTER = "SET_AUTH_REGISTER";
+
+/**
+ * ACTION CREATORS
+ */
+const setAuth = (auth) => ({ type: SET_AUTH_REGISTER, auth });
+/**
+ * THUNK CREATORS
+ */
+export const me = () => async (dispatch) => {
+  const token = await SecureStore.getItemAsync(TOKEN);
+  console.log("token pulled SecureStorage", token);
+  if (token) {
+    const res = await axios.get("http://127.0.0.1:1337/auth/me", {
+      headers: {
+        authorization: token,
+      },
+    });
+    return dispatch(setAuth(res.data));
+  }
+};
+
+// when dispatching authenticateRegister -- method is used to determine if it's "login" or "signup" use either or in place of method.
+export const authenticateRegister =
+  (firstName, lastName, usernameEmail, password) => async (dispatch) => {
     try {
-      const res = await axios.post("/auth/signup", {
+      const res = await axios.post("http://127.0.0.1:1337/auth/signup", {
         firstName,
         lastName,
-        email,
+        usernameEmail,
         password,
-        confirmPassword,
       });
-    } catch (err) {
-      console.error(err);
+      console.log("token in auth", res.data.token);
+      await SecureStore.setItemAsync(TOKEN, res.data.token);
+      dispatch(me());
+      //history.push() we're going to need a method to send us to home page after login
+    } catch (authError) {
+      return dispatch(setAuth({ error: authError }));
     }
   };
 
-//reducer
-export default function authenticateReducer(state = {}, action) {
+export const logout = async () => {
+  await SecureStore.deleteItemAsync(TOKEN);
+  //history.push() we're going to need a method to send us to home page after login
+  return {
+    type: SET_AUTH_REGISTER,
+    auth: {},
+  };
+};
+
+/**
+ * REDUCER
+ */
+export default function (state = {}, action) {
   switch (action.type) {
-    case "SET_NEW_USER":
+    case SET_AUTH_REGISTER:
       return action.auth;
     default:
       return state;
   }
 }
-
-
