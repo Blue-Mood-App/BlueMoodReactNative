@@ -5,6 +5,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import ActivitiesMap from './screens/ActivitiesMap';
 import Home from './screens/Home';
+import { Provider } from 'react-redux';
+import store from './store'
 
 const Stack = createStackNavigator()
 
@@ -12,10 +14,12 @@ export default function App() {
 
   return (
     <NavigationContainer>
+    <Provider store={store}>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Where to go" component={ActivitiesMap} />
       </Stack.Navigator>
+      </Provider>
     </NavigationContainer>
   );
 }
