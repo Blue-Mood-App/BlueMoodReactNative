@@ -46,7 +46,11 @@ async function seed() {
   await Promise.all(
     userSpecificActivities.map(
       async (userSpecificActivity) =>
-        await UserActivity.create(userSpecificActivity)
+        await UserActivity.create({
+          moodId: +userSpecificActivity.moodId,
+          userId: +userSpecificActivity.userId,
+          activityId: +userSpecificActivity.activityId,
+        })
     )
   );
 }
