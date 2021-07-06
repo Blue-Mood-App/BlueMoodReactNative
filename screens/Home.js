@@ -2,6 +2,7 @@ import React from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
 
 export default function Home({ navigation }) {
+
   return (
     <View style={styles.homeContainer}>
       <Text>Welcome to BlueMood</Text>
