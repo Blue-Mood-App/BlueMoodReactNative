@@ -1,7 +1,7 @@
 import React from 'react';
 import { Alert, Dimensions, StyleSheet, Text, View } from 'react-native';
 import MapView, { Callout, Marker } from 'react-native-maps';
-import MarkerCallout from './screens/MarkerCallout';
+import MarkerCallout from './MarkerCallout';
 
 export default function ActivitiesMap() {
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Image, StyleSheet, Text, View } from 'react-native';
-import placeholder from "./assets/coffee.png";
+import placeholder from "../assets/coffee.png";
 
 const MarkerCallout = props => {
     const { title, cat, url } = props;

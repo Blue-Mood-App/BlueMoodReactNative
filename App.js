@@ -1,18 +1,22 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import 'react-native-gesture-handler'
+import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import ActivitiesMap from './screens/ActivitiesMap';
-import MarkerCallout from './screens/MarkerCallout';
+import Home from './screens/Home';
+
+const Stack = createStackNavigator()
 
 export default function App() {
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Woooo!!! We have a map and a marker!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Where to go" component={ActivitiesMap} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
