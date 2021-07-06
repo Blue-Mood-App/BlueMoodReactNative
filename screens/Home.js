@@ -2,11 +2,10 @@ import React from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 
 export default function Home({ navigation }) {
-    console.log(this.props)
     return (
         <View style={styles.homeContainer}>
             <Text>Welcome to BlueMood</Text>
-            <Button 
+            <Button
                 title="Go to Activities Map Demo"
                 onPress={() => navigation.navigate("Where to go")}>
             </Button>
