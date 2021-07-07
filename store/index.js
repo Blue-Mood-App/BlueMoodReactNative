@@ -5,11 +5,13 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import auth from "./auth";
 import registration from "./registration";
 import activities from "./activities";
+import places from "./places";
 
 const reducer = combineReducers({
   auth,
   registration,
   activities,
+  places
 });
 
 const middleware = composeWithDevTools(
