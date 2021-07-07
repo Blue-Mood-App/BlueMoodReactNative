@@ -39,7 +39,7 @@ export const me = () => async (dispatch) => {
 export const authenticateLogin =
   (usernameEmail, password) => async (dispatch) => {
     try {
-       const res = await axios.post(`${location}/auth/login/`, {
+       const res = await axios.post(`${location}/auth/login`, {
         usernameEmail,
         password,
       });
@@ -52,6 +52,25 @@ export const authenticateLogin =
       return dispatch(setAuth({ error: authError }));
   }
 };
+
+export const authenticateRegister =
+  (firstName, lastName, usernameEmail, password) => async (dispatch) => {
+    try {
+      const res = await axios.post(`${location}/auth/signup`, {
+        firstName,
+        lastName,
+        usernameEmail,
+        password,
+      });
+      console.log("token in auth", res.data.token);
+      await SecureStore.setItemAsync(TOKEN, res.data.token);
+      dispatch(me());
+      //history.push() we're going to need a method to send us to home page after login
+    } catch (authError) {
+      return dispatch(setAuth({ error: authError }));
+    }
+  };
+
 
 export const logout = async () => {
   await SecureStore.deleteItemAsync(TOKEN);
