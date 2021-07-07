@@ -35,15 +35,15 @@ export const me = () => async (dispatch) => {
   }
 };
 
-// when dispatching authenticate -- method is used to determine if it's "login" or "signup" use either or in place of method.
-export const authenticate = (usernameEmail, password, method) => async (
-  dispatch
-) => {
-  try {
-    const res = await axios.post(`${location}/auth/login/`, {
-      usernameEmail,
-      password,
-    });
+// when dispatching authenticateLogin -- method is used to determine if it's "login" or "signup" use either or in place of method.
+export const authenticateLogin =
+  (usernameEmail, password) => async (dispatch) => {
+    try {
+       const res = await axios.post(`${location}/auth/login/`, {
+        usernameEmail,
+        password,
+      });
+      console.log("token in auth", res.data.token);
       await SecureStore.setItemAsync(TOKEN, res.data.token);
       dispatch(me());
       //history.push() we're going to need a method to send us to home page after login

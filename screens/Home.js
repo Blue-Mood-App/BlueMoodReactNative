@@ -12,6 +12,12 @@ export default function Home({ navigation }) {
       <Button
         title="Go to Activities Map Demo"
         onPress={() => navigation.navigate("Where to go")}
+        style={styles.btn}
+      ></Button>
+      <Button
+        title="Go to Login"
+        onPress={() => navigation.navigate("Login")}
+        style={styles.btn}
       ></Button>
       <Button
         title="Test auth"
@@ -27,4 +33,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  btn: {
+    marginVertical: 8,
+  }
 });
