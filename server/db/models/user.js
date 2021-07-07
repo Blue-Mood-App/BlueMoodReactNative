@@ -66,7 +66,7 @@ User.findByToken = async function (token) {
     console.log("this is token in class method: ", token);
 
     const { id } = await jwt.verify(token, process.env.JWT);
-    const user = User.findByPk(id);
+    const user = await User.findByPk(id);
 
     console.log(user);
 
