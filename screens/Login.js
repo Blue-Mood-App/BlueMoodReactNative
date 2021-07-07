@@ -11,7 +11,7 @@ export default function Login({ navigation }) {
 
   const handleSubmit = () => {
     dispatch(authenticateLogin(email, password));
-    console.log("Email => ", email, "Pwrd => ", password);
+    navigation.navigate("Home");
   };
 
   return (

@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 import { authenticateRegister } from "../store/auth";
 
-export default function Register() {
+export default function Register({ navigation }) {
   const dispatch = useDispatch();
 
   const [firstName, setfirstName] = useState("");
@@ -13,15 +13,9 @@ export default function Register() {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSubmit = () => {
-    const userObj = {
-      firstName,
-      lastName,
-      email,
-      password,
-    };
     if (password === confirmPassword) {
-      dispatch(authenticateRegister(userObj));
-      // console.log("firstName => ", firstName, "lastName => ", lastName, "email => ", email, "password => ", password, "confirm password => ", confirmPassword);
+      dispatch(authenticateRegister(firstName, lastName, email, password));
+      navigation.navigate("Home");
     } else {
       alert("Password doesn't match");
     }
@@ -53,6 +47,8 @@ export default function Register() {
         ></TextInput>
         <TextInput
           placeholder="Confirm Password"
+          textContentType="password"
+          autoCapitalize="none"
           onChangeText={(evt) => setConfirmPassword(evt)}
         ></TextInput>
 
