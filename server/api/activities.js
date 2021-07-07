@@ -22,7 +22,7 @@ router.get("/", async function (req, res, next) {
 router.get("/:moodId", requireToken, async function (req, res, next) {
   try {
     const { id } = req.user;
-    console.log(id, "userid", req.params.moodId, "mood id in route");
+    //console.log(id, "userid", req.params.moodId, "mood id in route");
     const activities = await UserActivity.findAll({
       where: {
         userId: id,

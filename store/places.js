@@ -23,13 +23,16 @@ export const fetchPlaces = (searchQuery) => async (dispatch) => {
   try {
     const token = await SecureStore.getItemAsync(TOKEN);
     if (token) {
-      const { data } = await axios.get(`${location}/api/places/?searchQuery=${searchQuery}`, {
-        headers: {
-          authorization: token,
-        },
-      });
+      const { data } = await axios.get(
+        `${location}/api/places/?searchQuery=${searchQuery}`,
+        {
+          headers: {
+            authorization: token,
+          },
+        }
+      );
 
-      console.log(data);
+      console.log(data, "in thunk");
       dispatch(getPlaces(data));
     } else {
       console.log("not logged in");

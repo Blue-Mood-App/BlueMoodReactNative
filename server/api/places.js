@@ -1,14 +1,13 @@
 const router = require("express").Router();
 const fetch = require("node-fetch");
-const { blue } = require('chalk')
+const { blue } = require("chalk");
 
 router.get("/", async function (req, res, next) {
   /*
 Once a user picks an activity, we need to find this activity in the table, grab the search query, and then modify that in the api call
 */
   try {
-    const { searchQuery } = req.query
-
+    const { searchQuery } = req.query;
     const auth = {
       headers: {
         Authorization:
@@ -22,7 +21,7 @@ Once a user picks an activity, we need to find this activity in the table, grab 
     );
 
     const mapData = await data.json();
-    console.log(blue('in route', mapData))
+    // console.log(blue('in route', mapData))
     res.send(mapData);
   } catch (error) {
     console.log(error);
