@@ -9,6 +9,7 @@ import Register from "./screens/Register";
 import MoodsPage from "./screens/MoodsPage";
 import store from "./store";
 import { Provider } from "react-redux";
+import RegisterActivities from "./screens/RegisterActivities";
 
 const Stack = createStackNavigator();
 
@@ -22,6 +23,10 @@ export default function App() {
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="Select Mood" component={MoodsPage} />
+          <Stack.Screen
+            name="Register Activities"
+            component={RegisterActivities}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

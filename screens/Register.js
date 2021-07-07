@@ -15,7 +15,7 @@ export default function Register({ navigation }) {
   const handleSubmit = () => {
     if (password === confirmPassword) {
       dispatch(authenticateRegister(firstName, lastName, email, password));
-      navigation.navigate("Home");
+      navigation.navigate("Register Activities");
     } else {
       alert("Password doesn't match");
     }
