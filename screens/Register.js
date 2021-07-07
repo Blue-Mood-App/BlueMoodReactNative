@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import { authenticateRegister } from "../store/registration";
 
 export default function Register() {
 
@@ -13,9 +14,15 @@ export default function Register() {
     const [confirmPassword, setConfirmPassword] = useState("");
 
     const handleSubmit = () => {
+        const userObj = {
+            firstName,
+            lastName,
+            email,
+            password
+        }
         if (password === confirmPassword) {
+            dispatch(authenticateRegister(userObj))
             console.log("firstName => ", firstName, "lastName => ", lastName, "email => ", email, "password => ", password, "confirm password => ", confirmPassword);
-            //dispatch(thunkForRegister(firstName, lastName, email, password, confirmPassword))
         } else {
             alert("Password doesn't match");
         };

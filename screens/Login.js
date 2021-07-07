@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
-import { authenticateLogin } from "../store";
+import { authenticateLogin } from "../store/auth";
 
 export default function Login({ navigation }) {
   const dispatch = useDispatch();
@@ -9,9 +9,9 @@ export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = () => {
-    // console.log("Email => ", email, "Pwrd => ", password)
+  const handleSubmit = () => {    
     dispatch(authenticateLogin(email, password));
+    console.log("Email => ", email, "Pwrd => ", password)
   };
 
   return (
