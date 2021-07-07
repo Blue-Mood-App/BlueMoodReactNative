@@ -1,8 +1,8 @@
 const router = require("express").Router();
 const {
-  models: { User },
+  models: { User, UserActivity, Activity },
 } = require("../db");
-const requireToken = require('../auth/middleware')
+const requireToken = require("../auth/middleware");
 
 router.get("/", async function (req, res, next) {
   try {
@@ -14,6 +14,23 @@ router.get("/", async function (req, res, next) {
     need to find all userSpecificActivities based on a user id
     */
     res.send("hi in activities");
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.get("/:moodId", requireToken, async function (req, res, next) {
+  try {
+    const { id } = req.user;
+    console.log(id, "userid", req.params.moodId, "mood id in route");
+    const activities = await UserActivity.findAll({
+      where: {
+        userId: id,
+        moodId: +req.params.moodId,
+      },
+      include: [Activity],
+    });
+    res.send(activities);
   } catch (error) {
     console.log(error);
   }
