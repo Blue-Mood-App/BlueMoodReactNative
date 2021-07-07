@@ -4,10 +4,12 @@ import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import auth from "./auth";
 import registration from "./registration";
+import activities from "./activities";
 
 const reducer = combineReducers({
   auth,
   registration,
+  activities,
 });
 
 const middleware = composeWithDevTools(
