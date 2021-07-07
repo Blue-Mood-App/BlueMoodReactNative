@@ -9,9 +9,9 @@ export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = () => {    
+  const handleSubmit = () => {
     dispatch(authenticateLogin(email, password));
-    console.log("Email => ", email, "Pwrd => ", password)
+    console.log("Email => ", email, "Pwrd => ", password);
   };
 
   return (
@@ -20,10 +20,14 @@ export default function Login({ navigation }) {
       <View>
         <TextInput
           placeholder="Email"
+          autoCapitalize="none"
+          textContentType="emailAddress"
           onChangeText={(evt) => setEmail(evt)}
         ></TextInput>
         <TextInput
           placeholder="password"
+          textContentType="password"
+          autoCapitalize="none"
           onChangeText={(evt) => setPassword(evt)}
         ></TextInput>
         <Button
