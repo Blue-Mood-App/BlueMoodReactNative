@@ -1,6 +1,13 @@
 import axios from "axios";
 import * as SecureStore from "expo-secure-store";
+import Constants from "expo-constants";
+const { manifest } = Constants;
 
+const location = `http://${
+  typeof manifest.packagerOpts === "object" && manifest.packagerOpts.dev
+    ? manifest.debuggerHost.split(":")[0]
+    : ""
+}:1337`;
 const TOKEN = "token";
 
 /**
@@ -19,7 +26,7 @@ export const me = () => async (dispatch) => {
   const token = await SecureStore.getItemAsync(TOKEN);
   console.log("token pulled SecureStorage", token);
   if (token) {
-    const res = await axios.get("http://127.0.0.1:1337/auth/me", {
+    const res = await axios.get(`${location}/auth/me`, {
       headers: {
         authorization: token,
       },
@@ -32,7 +39,7 @@ export const me = () => async (dispatch) => {
 export const authenticateLogin =
   (usernameEmail, password) => async (dispatch) => {
     try {
-      const res = await axios.post("http://127.0.0.1:1337/auth/login", {
+       const res = await axios.post(`${location}/auth/login/`, {
         usernameEmail,
         password,
       });
@@ -40,10 +47,11 @@ export const authenticateLogin =
       await SecureStore.setItemAsync(TOKEN, res.data.token);
       dispatch(me());
       //history.push() we're going to need a method to send us to home page after login
-    } catch (authError) {
+  } catch (authError) {
+    console.log(authError);
       return dispatch(setAuth({ error: authError }));
-    }
-  };
+  }
+};
 
 export const logout = async () => {
   await SecureStore.deleteItemAsync(TOKEN);
