@@ -2,7 +2,6 @@ const router = require("express").Router();
 const {
   models: { Mood, Activity },
 } = require("../db");
-const { route } = require("./activities");
 
 router.get("/moods", async function (req, res, next) {
   try {

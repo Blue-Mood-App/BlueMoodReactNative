@@ -29,6 +29,10 @@ export default function Home({ navigation }) {
         title="Select Mood"
         onPress={() => navigation.navigate("Select Mood")}
       ></Button>
+      <Button
+        title="Go to Register Activities"
+        onPress={() => navigation.navigate("Register Activities")}
+      ></Button>
     </View>
   );
 }

@@ -8,14 +8,21 @@ const RegisterActivities = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("running use effect");
     dispatch(getMoods());
-    const state = useSelector((state) => state.registration);
-  }, []);
+    dispatch(getActivities())
+  }, [dispatch]);
+
+  const registration = useSelector((state) => state.registration);
+  const { moods, activities } = registration
 
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Tell us more about you...</Text>
+      {moods.map(mood => {
+        return (
+          <Text>{mood.id}</Text>
+        )
+      })}
     </View>
   );
 };

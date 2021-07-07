@@ -1,4 +1,12 @@
 import axios from "axios";
+import Constants from "expo-constants";
+const { manifest } = Constants;
+
+const location = `http://${
+  typeof manifest.packagerOpts === "object" && manifest.packagerOpts.dev
+    ? manifest.debuggerHost.split(":")[0]
+    : ""
+}:1337`;
 
 //action creator
 const SET_MOOD = "SET_MOOD";
@@ -17,9 +25,7 @@ const setActivity = (activities) => ({
 //moods thunk
 export const getMoods = () => async (dispatch) => {
   try {
-    console.log("in the thunk");
-    const { data } = axios.get("/api/registerActivities/moods");
-    console.log(data);
+    const { data } = await axios.get(`${location}/api/registerActivities/moods`);
     dispatch(setMood(data));
   } catch (err) {
     console.error(err);
@@ -29,7 +35,7 @@ export const getMoods = () => async (dispatch) => {
 //activities thunk
 export const getActivities = () => async (dispatch) => {
   try {
-    const { data } = axios.get("/api/registerActivities/activities");
+    const { data } = await axios.get(`${location}/api/registerActivities/activities`);
     dispatch(setActivity(data));
   } catch (err) {
     console.error(err);
@@ -37,12 +43,12 @@ export const getActivities = () => async (dispatch) => {
 };
 
 //Reducer
-export default function (state = [], action) {
+export default function (state = { moods: [], activities: [] }, action) {
   switch (action.type) {
     case SET_MOOD:
-      return action.moods;
+      return {...state, moods: action.moods};
     case SET_ACTIVITY:
-      return action.activities;
+      return {...state, activities: action.activities};
     default:
       return state;
   }
