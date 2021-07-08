@@ -42,6 +42,15 @@ export const getActivities = () => async (dispatch) => {
   }
 };
 
+//favoritActivity thunk
+export const setFavActivity = (actionId, userId, moodId ) => async () => {
+  try {
+    await axios.post(`${location}/api/registerActivities/`, { actionId, userId, moodId })
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 //Reducer
 export default function (state = { moods: [], activities: [] }, action) {
   switch (action.type) {

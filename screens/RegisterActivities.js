@@ -12,7 +12,7 @@ const RegisterActivities = () => {
     dispatch(getMoods());
     dispatch(getActivities());
   }, [dispatch]);
-
+  
   const registration = useSelector((state) => state.registration);
   const { moods, activities } = registration;
 
@@ -24,7 +24,7 @@ const RegisterActivities = () => {
           return (
             <View key={mood.id}>
               <Text style={styles.text}>{`when I am ${mood.name}...`}</Text>
-              <ActivitySelector activities={activities} />
+              <ActivitySelector activities={activities} moodId={mood.id}/>
             </View>
           );
         })}

@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const {
-  models: { Mood, Activity },
+  models: { Mood, Activity, UserActivity },
 } = require("../db");
 
 router.get("/moods", async function (req, res, next) {
@@ -18,6 +18,15 @@ router.get("/activities", async function (req, res, next) {
     res.send(activities);
   } catch (err) {
     console.error(err);
+  }
+});
+
+router.post("/", async function (req, res, next) {
+  try {
+    await UserActivity.create(req.body)
+    res.sendStatus(201)
+  } catch (err) {
+    console.error(err)
   }
 });
 

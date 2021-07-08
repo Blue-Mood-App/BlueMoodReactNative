@@ -1,24 +1,38 @@
-import React, { useEffect, useState } from "react";
-import Register from "./Register";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
 import {
   StyleSheet,
   Text,
-  View,
-  FlatList,
   TouchableOpacity,
-  SectionList,
   Image,
-  Dimensions,
 } from "react-native";
 import SideSwipe from "react-native-sideswipe";
 import circle from "../assets/circle.png";
+import { setFavActivity } from "../store/registration"
 
-const ActivitySelector = ({ activities }) => {
+const ActivitySelector = ({ activities, moodId }) => {
   const [index, setIndex] = useState(0);
+  const [selected, setSelected] = useState(false)
 
-  const Item = ({ name }) => {
+  const user = useSelector((state) => state.auth);
+  const dispatch = useDispatch()
+  const { id: userId } = user;
+
+  const handleClick = actionId => {
+    console.log("Selected variable =>", selected, "Current Action ID => ",  actionId)
+    if (!selected && actionId) {
+      console.log("Selected variable in condition =>", selected, "Current Action ID in condition => ",  actionId)
+      setSelected(true);
+      //dispatch(setFavActivity(actionId, userId, moodId));
+      
+    } else {
+      setSelected(false);
+    }
+  };
+
+  const Item = ({ id, name }) => {
     return (
-      <TouchableOpacity style={styles.container}>
+      <TouchableOpacity onPress={() => handleClick(id)} style={styles.container}>
         <Image style={styles.image} source={circle} />
         <Text style={styles.text}>{name}</Text>
       </TouchableOpacity>
@@ -26,7 +40,7 @@ const ActivitySelector = ({ activities }) => {
   };
 
   const renderItem = ({ item }) => {
-    return <Item name={item.name} image={circle} />;
+    return <Item id={item.id} name={item.name} image={circle} />;
   };
 
   return (
@@ -35,7 +49,7 @@ const ActivitySelector = ({ activities }) => {
       data={activities}
       renderItem={renderItem}
       itemWidth={activities.length * 10}
-      onIndexChange={(index) => ({ setIndex: index })}
+      onIndexChange={(index) => setIndex(index) }
     />
   );
 };
