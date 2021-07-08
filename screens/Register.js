@@ -48,7 +48,7 @@ export default function Register({ navigation }) {
         <TextInput
           placeholder="Confirm Password"
           textContentType="password"
-          autoCapitalize="none"
+          autoCapitalize="nonea"
           onChangeText={(evt) => setConfirmPassword(evt)}
         ></TextInput>
 

@@ -1,41 +1,40 @@
 import React, { useEffect } from "react";
 import Register from "./Register";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { getActivities, getMoods } from "../store/registration";
+import ActivitySelector from "./ActivitySelector";
 
 const RegisterActivities = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getMoods());
-    dispatch(getActivities())
+    dispatch(getActivities());
   }, [dispatch]);
 
   const registration = useSelector((state) => state.registration);
-  const { moods, activities } = registration
+  const { moods, activities } = registration;
 
   return (
-    <View style={styles.container}>
+    <ScrollView>
       <Text style={styles.text}>Tell us more about you...</Text>
-      {moods.map(mood => {
+      {moods.map((mood) => {
         return (
-          <Text>{mood.id}</Text>
-        )
+          <View key={mood.id}>
+            <Text style={styles.text}>{mood.name}</Text>
+            <ActivitySelector activities={activities} />
+          </View>
+        );
       })}
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    padding: 16,
-  },
   text: {
-    fontSize: 23,
+    fontSize: 20,
+    padding: 10,
   },
 });
 
