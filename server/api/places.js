@@ -1,11 +1,13 @@
 const router = require("express").Router();
 const fetch = require("node-fetch");
+const { blue } = require("chalk");
 
 router.get("/", async function (req, res, next) {
   /*
 Once a user picks an activity, we need to find this activity in the table, grab the search query, and then modify that in the api call
 */
   try {
+    const { searchQuery } = req.query;
     const auth = {
       headers: {
         Authorization:
@@ -14,11 +16,12 @@ Once a user picks an activity, we need to find this activity in the table, grab 
     };
 
     const data = await fetch(
-      "https://api.yelp.com/v3/businesses/search?terms=parks&categories=dog_parks&latitude=37.786882&longitude=-122.399972&radius=20000",
+      `https://api.yelp.com/v3/businesses/search?categories=${searchQuery}&latitude=37.786882&longitude=-122.399972&radius=20000`,
       auth
     );
 
     const mapData = await data.json();
+    // console.log(blue('in route', mapData))
     res.send(mapData);
   } catch (error) {
     console.log(error);

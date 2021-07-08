@@ -7,6 +7,7 @@ import Home from "./screens/Home";
 import Login from "./screens/Login";
 import Register from "./screens/Register";
 import MoodsPage from "./screens/MoodsPage";
+import ActivitiesPage from './screens/ActivitiesPage'
 import store from "./store";
 import { Provider } from "react-redux";
 
@@ -22,6 +23,8 @@ export default function App() {
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="Select Mood" component={MoodsPage} />
+          <Stack.Screen name="Select Activity" component={ActivitiesPage} />
+
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
