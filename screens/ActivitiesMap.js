@@ -18,116 +18,29 @@ export default function ActivitiesMap() {
         initialRegion={{
           latitude: location.coords.latitude,
           longitude: location.coords.longitude,
-          latitudeDelta: 0.009,
-          longitudeDelta: 0.0089,
+          latitudeDelta: 0.1,
+          longitudeDelta: 0.1,
         }}
         showsPointsOfInterest={false}
       >
-        <Marker
-          key={1}
-          coordinate={{ latitude: 37.78979, longitude: -122.43371 }}
-        >
-          <Callout
-            style={styles.callout}
-            onPress={() => Alert.alert("Pending feature")}
-          >
-            <MarkerCallout title="Peet's Coffee" cat="Coffee Shop" />
-          </Callout>
-        </Marker>
-        <Marker
-          key={2}
-          coordinate={{ latitude: 37.78944, longitude: -122.43402 }}
-        >
-          <Callout
-            style={styles.callout}
-            onPress={() => Alert.alert("Pending feature")}
-          >
-            <MarkerCallout title="Jane on Fillmore" cat="Coffee Shop" />
-          </Callout>
-        </Marker>
-        <Marker
-          key={3}
-          coordinate={{ latitude: 37.79036, longitude: -122.43348 }}
-        >
-          <Callout
-            style={styles.callout}
-            onPress={() => Alert.alert("Pending feature")}
-          >
-            <MarkerCallout title="Starbucks" cat="Coffee Shop" />
-          </Callout>
-        </Marker>
-        <Marker
-          key={4}
-          coordinate={{ latitude: 37.78874, longitude: -122.4342 }}
-        >
-          <Callout
-            style={styles.callout}
-            onPress={() => Alert.alert("Pending feature")}
-          >
-            <MarkerCallout title="Starbucks" cat="Coffee Shop" />
-          </Callout>
-        </Marker>
-        <Marker
-          key={5}
-          coordinate={{ latitude: 37.78796, longitude: -122.43339 }}
-        >
-          <Callout
-            style={styles.callout}
-            onPress={() => Alert.alert("Pending feature")}
-          >
-            <MarkerCallout
-              title="La boulangerie de San Francisco"
-              cat="Coffee Shop"
-            />
-          </Callout>
-        </Marker>
-        <Marker
-          key={6}
-          coordinate={{ latitude: 37.78744, longitude: -122.43315 }}
-        >
-          <Callout
-            style={styles.callout}
-            onPress={() => Alert.alert("Pending feature")}
-          >
-            <MarkerCallout title="Compton's Coffee House" cat="Coffee Shop" />
-          </Callout>
-        </Marker>
-        <Marker
-          key={7}
-          coordinate={{ latitude: 37.7856, longitude: -122.43485 }}
-        >
-          <Callout
-            style={styles.callout}
-            onPress={() => Alert.alert("Pending feature")}
-          >
-            <MarkerCallout title="Cafe Murano" cat="Coffee Shop" />
-          </Callout>
-        </Marker>
-        <Marker
-          key={8}
-          coordinate={{ latitude: 37.78582, longitude: -122.4312 }}
-        >
-          <Callout
-            style={styles.callout}
-            onPress={() => Alert.alert("Pending feature")}
-          >
-            <MarkerCallout
-              title="Crown & Crumpet Tea Salon"
-              cat="Coffee Shop"
-            />
-          </Callout>
-        </Marker>
-        <Marker
-          key={9}
-          coordinate={{ latitude: 37.78538, longitude: -122.4298 }}
-        >
-          <Callout
-            style={styles.callout}
-            onPress={() => Alert.alert("Pending feature")}
-          >
-            <MarkerCallout title="Cafe Hana" cat="Coffee Shop" />
-          </Callout>
-        </Marker>
+        {places.businesses.map((place) => {
+          const { id, name, coordinates, image_url, distance, url } = place;
+          return (
+            <Marker
+              key={id}
+              coordinate={{ latitude: coordinates.latitude, longitude: coordinates.longitude }}
+            >
+              <Callout
+                style={styles.callout}
+                onPress={() => Alert.alert("Pending feature")}
+              >
+                <MarkerCallout name={name} imageUrl={image_url} url={url} cat="Coffee Shop" />
+              </Callout>
+            </Marker>
+          );
+        })}
+
+
       </MapView>
     </View>
   );
