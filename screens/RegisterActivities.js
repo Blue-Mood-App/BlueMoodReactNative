@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Register from "./Register";
 import { StyleSheet, Text, View, ScrollView, SafeAreaView } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
@@ -15,13 +15,6 @@ const RegisterActivities = () => {
 
   const registration = useSelector((state) => state.registration);
   const { moods, activities } = registration;
-  const selectedActivities = {};
-
-  if (activities.length > 0) {
-    activities.map((activity) => {
-      selectedActivities[activity.id] = false;
-    });
-  }
 
   return (
     <SafeAreaView>
@@ -31,11 +24,7 @@ const RegisterActivities = () => {
           return (
             <View key={mood.id}>
               <Text style={styles.text}>{`when I am ${mood.name}...`}</Text>
-              <ActivitySelector
-                activities={activities}
-                moodId={mood.id}
-                selectedActivities={selectedActivities}
-              />
+              <ActivitySelector activities={activities} moodId={mood.id} />
             </View>
           );
         })}

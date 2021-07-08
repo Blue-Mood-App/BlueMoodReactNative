@@ -3,44 +3,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { StyleSheet, Text, TouchableOpacity, Image } from "react-native";
 import SideSwipe from "react-native-sideswipe";
 import circle from "../assets/circle.png";
-import { setFavActivity } from "../store/registration";
+import { setFavActivity, deleteFavActivity } from "../store/registration";
 
-const ActivitySelector = ({ activities, moodId, selectedActivities }) => {
+const ActivitySelector = ({ activities, moodId }) => {
   const [index, setIndex] = useState(0);
-  const [activityObj, setActivityObj] = useState({});
+  const [selectedActivities, setSelectedActivities] = useState({});
 
+  //accessing user data
   const user = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const { id: userId } = user;
 
   const handleClick = (activityId) => {
-    // console.log(
-    //   "activity0",
-    //   activityId,
-    //   "selectedActivity",
-    //   selectedActivities[activityId]
-    // );
     if (!selectedActivities[activityId]) {
+      setSelectedActivities({ ...selectedActivities, [activityId]: true });
       dispatch(setFavActivity(activityId, userId, moodId));
-      selectedActivities[activityId] = true;
-      // setActivityObj({});
-      // console.log(
-      //   "activity1",
-      //   activityId,
-      //   "selectedActivity",
-      //   selectedActivities[activityId]
-      // );
     } else {
-      selectedActivities[activityId] = false;
-      // setActivityObj({});
-      // console.log(
-      //   "activity2",
-      //   activityId,
-      //   "selectedActivity",
-      //   selectedActivities[activityId]
-      // );
-
-      //dispatch the delete route
+      setSelectedActivities({ ...selectedActivities, [activityId]: false });
+      //dispatch delete thunk
     }
   };
 

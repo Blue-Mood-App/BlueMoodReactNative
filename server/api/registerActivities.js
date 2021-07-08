@@ -23,11 +23,13 @@ router.get("/activities", async function (req, res, next) {
 
 router.post("/", async function (req, res, next) {
   try {
-    await UserActivity.create(req.body)
-    res.sendStatus(201)
+    await UserActivity.create(req.body);
+    res.sendStatus(201);
   } catch (err) {
-    console.error(err)
+    console.error(err);
   }
 });
+
+//delete route for unselected activites goes here
 
 module.exports = router;

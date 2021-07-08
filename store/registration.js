@@ -59,6 +59,8 @@ export const setFavActivity = (activityId, userId, moodId) => async () => {
   }
 };
 
+//delete unselected favorite activites thunk goes here 
+
 //Reducer
 export default function (state = { moods: [], activities: [] }, action) {
   switch (action.type) {
