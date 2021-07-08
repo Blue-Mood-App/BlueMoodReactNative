@@ -19,7 +19,6 @@ const ActivitySelector = ({ activities }) => {
   };
 
   const renderItem = ({ item }) => {
-    // console.log(item);
     return <Item name={item.name} />;
   };
 

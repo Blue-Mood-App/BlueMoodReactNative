@@ -6,7 +6,6 @@ const {
 router.get("/moods", async function (req, res, next) {
   try {
     const moods = await Mood.findAll();
-    console.log(moods);
     res.send(moods);
   } catch (err) {
     console.error(err);

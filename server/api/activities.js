@@ -15,14 +15,13 @@ router.get("/", async function (req, res, next) {
     */
     res.send("hi in activities");
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 });
 
 router.get("/:moodId", requireToken, async function (req, res, next) {
   try {
     const { id } = req.user;
-    console.log(id, "userid", req.params.moodId, "mood id in route");
     const activities = await UserActivity.findAll({
       where: {
         userId: id,

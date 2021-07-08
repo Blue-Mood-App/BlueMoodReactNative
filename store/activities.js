@@ -29,7 +29,6 @@ export const fetchActivity = (moodId) => async (dispatch) => {
         },
       });
 
-      console.log(data);
       dispatch(getActivity(data));
     } else {
       console.log("not logged in");
