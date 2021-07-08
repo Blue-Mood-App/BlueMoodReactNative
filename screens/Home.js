@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
 import { authenticateLogin } from "../store/auth";
 import { useDispatch } from "react-redux";

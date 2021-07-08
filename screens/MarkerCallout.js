@@ -8,10 +8,10 @@ const MarkerCallout = props => {
     return (
         <View style={styles.calloutContainer}>
             <Text style={styles.calloutImgContainer}>
-                <Image 
-                    defaultSource={placeholder}
-                    source={placeholder}
-                    style={styles.calloutImg} 
+                <Image
+                    defaultSource={{placeholder}}
+                    source={{uri: 'https://reactnative.dev/img/tiny_logo.png'}}
+                    style={styles.calloutImg}
                     resizeMethod="scale"
                     resizeMode="center"
                     />
