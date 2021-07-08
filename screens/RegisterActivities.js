@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Register from "./Register";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { StyleSheet, Text, View, ScrollView, SafeAreaView } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { getActivities, getMoods } from "../store/registration";
 import ActivitySelector from "./ActivitySelector";
@@ -17,7 +17,7 @@ const RegisterActivities = () => {
   const { moods, activities } = registration;
 
   return (
-    <View>
+    <SafeAreaView>
       <Text style={styles.text}>Tell us more about you...</Text>
       <ScrollView>
         {moods.map((mood) => {
@@ -29,7 +29,7 @@ const RegisterActivities = () => {
           );
         })}
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 
