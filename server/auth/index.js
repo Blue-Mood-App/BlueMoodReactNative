@@ -6,7 +6,6 @@ const requireToken = require("./middleware");
 module.exports = router;
 
 router.post("/login", async (req, res, next) => {
-   console.log('here');
   try {
     res.send({ token: await User.authenticate(req.body) });
   } catch (err) {

@@ -24,7 +24,7 @@ const setAuth = (auth) => ({ type: SET_AUTH, auth });
  */
 export const me = () => async (dispatch) => {
   const token = await SecureStore.getItemAsync(TOKEN);
-  console.log("token pulled SecureStorage", token);
+
   if (token) {
     const res = await axios.get(`${location}/auth/me`, {
       headers: {
@@ -39,13 +39,11 @@ export const me = () => async (dispatch) => {
 export const authenticateLogin =
   (usernameEmail, password) => async (dispatch) => {
     try {
-      console.log("location =>", location);
-      console.log("test =>", typeof manifest.packagerOpts === "object");
       const res = await axios.post(`${location}/auth/login`, {
         usernameEmail,
         password,
       });
-      console.log("token in auth", res.data.token);
+
       await SecureStore.setItemAsync(TOKEN, res.data.token);
       dispatch(me());
       //history.push() we're going to need a method to send us to home page after login
@@ -64,7 +62,7 @@ export const authenticateRegister =
         usernameEmail,
         password,
       });
-      console.log("token in auth", res.data.token);
+
       await SecureStore.setItemAsync(TOKEN, res.data.token);
       dispatch(me());
       //history.push() we're going to need a method to send us to home page after login

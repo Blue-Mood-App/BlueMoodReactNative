@@ -13,11 +13,11 @@ const reducer = combineReducers({
   registration,
   activities,
   places,
-  location
+  location,
 });
 
 const middleware = composeWithDevTools(
-  applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
+  applyMiddleware(thunkMiddleware /*, createLogger({ collapsed: true })*/)
 );
 const store = createStore(reducer, middleware);
 
