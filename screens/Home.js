@@ -9,7 +9,7 @@ export default function Home({ navigation }) {
 
   return (
     <View style={styles.homeContainer}>
-      <Hamburger />
+    <Hamburger />
       <Text>Welcome to BlueMood</Text>
       <Button
         title="Go to Activities Map Demo"

@@ -1,6 +1,6 @@
 import _ from "lodash";
 import React, { PureComponent } from "react";
-import { ScrollView, StyleSheet } from "react-native";
+import { ScrollView, StyleSheet, TouchableOpacity } from "react-native";
 import {
   Card,
   Text,
@@ -17,6 +17,8 @@ const cardImage2 = require("../assets/coffee.png");
 const cardImage = require("../assets/coffee.png");
 const chevronDown = require("../assets/coffee.png");
 const chevronUp = require("../assets/coffee.png");
+
+import hamburger from '../assets/Hamburger_icon.png'
 
 const elements = [
   <Card style={{ marginBottom: 10 }} onPress={() => {}}>
@@ -98,16 +100,23 @@ export default class ExpandableSectionScreen extends PureComponent {
     const { expanded, top } = this.state;
 
     return (
-      <ScrollView>
-        <ExpandableSection
-          top={false}
-          expanded={expanded}
-          sectionHeader={this.getHeaderElement()}
-          onPress={() => this.onExpand()}
-        >
-          {this.getBodyElement()}
-        </ExpandableSection>
-      </ScrollView>
+      <ExpandableSection
+        top={false}
+        expanded={expanded}
+        sectionHeader={<Image style={styles.icon} source={hamburger} />}
+        onPress={() => this.onExpand()}
+      >
+        <TouchableOpacity>
+          <Text dark10 text60>
+            Menu
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Text dark10 text60>
+            Logout
+          </Text>
+        </TouchableOpacity>
+      </ExpandableSection>
     );
   }
 }
@@ -115,5 +124,7 @@ export default class ExpandableSectionScreen extends PureComponent {
 const styles = StyleSheet.create({
   icon: {
     alignSelf: "center",
+    width: 30,
+    height: 30
   },
 });
