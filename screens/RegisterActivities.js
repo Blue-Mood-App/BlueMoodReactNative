@@ -12,9 +12,16 @@ const RegisterActivities = () => {
     dispatch(getMoods());
     dispatch(getActivities());
   }, [dispatch]);
-  
+
   const registration = useSelector((state) => state.registration);
   const { moods, activities } = registration;
+  const selectedActivities = {};
+
+  if (activities.length > 0) {
+    activities.map((activity) => {
+      selectedActivities[activity.id] = false;
+    });
+  }
 
   return (
     <SafeAreaView>
@@ -24,7 +31,11 @@ const RegisterActivities = () => {
           return (
             <View key={mood.id}>
               <Text style={styles.text}>{`when I am ${mood.name}...`}</Text>
-              <ActivitySelector activities={activities} moodId={mood.id}/>
+              <ActivitySelector
+                activities={activities}
+                moodId={mood.id}
+                selectedActivities={selectedActivities}
+              />
             </View>
           );
         })}

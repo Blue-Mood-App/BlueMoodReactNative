@@ -25,7 +25,9 @@ const setActivity = (activities) => ({
 //moods thunk
 export const getMoods = () => async (dispatch) => {
   try {
-    const { data } = await axios.get(`${location}/api/registerActivities/moods`);
+    const { data } = await axios.get(
+      `${location}/api/registerActivities/moods`
+    );
     dispatch(setMood(data));
   } catch (err) {
     console.error(err);
@@ -35,7 +37,9 @@ export const getMoods = () => async (dispatch) => {
 //activities thunk
 export const getActivities = () => async (dispatch) => {
   try {
-    const { data } = await axios.get(`${location}/api/registerActivities/activities`);
+    const { data } = await axios.get(
+      `${location}/api/registerActivities/activities`
+    );
     dispatch(setActivity(data));
   } catch (err) {
     console.error(err);
@@ -43,21 +47,25 @@ export const getActivities = () => async (dispatch) => {
 };
 
 //favoritActivity thunk
-export const setFavActivity = (actionId, userId, moodId ) => async () => {
+export const setFavActivity = (activityId, userId, moodId) => async () => {
   try {
-    await axios.post(`${location}/api/registerActivities/`, { actionId, userId, moodId })
+    await axios.post(`${location}/api/registerActivities/`, {
+      activityId,
+      userId,
+      moodId,
+    });
   } catch (err) {
-    console.log(err)
+    console.log(err);
   }
-}
+};
 
 //Reducer
 export default function (state = { moods: [], activities: [] }, action) {
   switch (action.type) {
     case SET_MOOD:
-      return {...state, moods: action.moods};
+      return { ...state, moods: action.moods };
     case SET_ACTIVITY:
-      return {...state, activities: action.activities};
+      return { ...state, activities: action.activities };
     default:
       return state;
   }
