@@ -23,7 +23,7 @@ const RegisterActivities = () => {
         {moods.map((mood) => {
           return (
             <View key={mood.id}>
-              <Text style={styles.text}>{mood.name}</Text>
+              <Text style={styles.text}>{`when I am ${mood.name}...`}</Text>
               <ActivitySelector activities={activities} />
             </View>
           );
