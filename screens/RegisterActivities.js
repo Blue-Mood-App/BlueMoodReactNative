@@ -17,17 +17,19 @@ const RegisterActivities = () => {
   const { moods, activities } = registration;
 
   return (
-    <ScrollView>
+    <View>
       <Text style={styles.text}>Tell us more about you...</Text>
-      {moods.map((mood) => {
-        return (
-          <View key={mood.id}>
-            <Text style={styles.text}>{mood.name}</Text>
-            <ActivitySelector activities={activities} />
-          </View>
-        );
-      })}
-    </ScrollView>
+      <ScrollView>
+        {moods.map((mood) => {
+          return (
+            <View key={mood.id}>
+              <Text style={styles.text}>{mood.name}</Text>
+              <ActivitySelector activities={activities} />
+            </View>
+          );
+        })}
+      </ScrollView>
+    </View>
   );
 };
 
