@@ -18,6 +18,8 @@ async function seed() {
   const usersJson = await usersCall.json();
   users = googleJSONCleaner(usersJson.feed.entry);
 
+  console.log(users)
+
   const activitiesCall = await fetch(
     "https://spreadsheets.google.com/feeds/list/1FOJOP5FwnfP6xDrBp7eUWLqFZlDZL_0yxC3V35MgzrY/2/public/values?alt=json"
   );
@@ -38,15 +40,15 @@ async function seed() {
     userSpecificActivitiesJson.feed.entry
   );
 
-  await Promise.all(users.map(async (user) => await User.create(user)));
+  await User.bulkCreate(users)
+
+  await Activity.bulkCreate(activities)
+
+  await Mood.bulkCreate(moods)
+
   await Promise.all(
-    activities.map(async (activity) => await Activity.create(activity))
-  );
-  await Promise.all(moods.map(async (mood) => await Mood.create(mood)));
-  await Promise.all(
-    userSpecificActivities.map(
-      async (userSpecificActivity) =>
-        await UserActivity.create({
+    userSpecificActivities.map((userSpecificActivity) =>
+        UserActivity.create({
           moodId: +userSpecificActivity.moodId,
           userId: +userSpecificActivity.userId,
           activityId: +userSpecificActivity.activityId,

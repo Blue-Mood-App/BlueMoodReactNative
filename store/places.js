@@ -19,12 +19,12 @@ const getPlaces = (places) => {
   };
 };
 
-export const fetchPlaces = (searchQuery) => async (dispatch) => {
+export const fetchPlaces = (searchQuery, geo) => async (dispatch) => {
   try {
     const token = await SecureStore.getItemAsync(TOKEN);
     if (token) {
       const { data } = await axios.get(
-        `${location}/api/places/?searchQuery=${searchQuery}`,
+        `${location}/api/places/?searchQuery=${searchQuery}&lat=${geo.coords.latitude}&long=${geo.coords.longitude}`,
         {
           headers: {
             authorization: token,
@@ -32,12 +32,13 @@ export const fetchPlaces = (searchQuery) => async (dispatch) => {
         }
       );
 
-      console.log(data, "in thunk");
       dispatch(getPlaces(data));
     } else {
       console.log("not logged in");
     }
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export default function (state = {}, action) {

@@ -24,6 +24,7 @@ const setAuth = (auth) => ({ type: SET_AUTH, auth });
  */
 export const me = () => async (dispatch) => {
   const token = await SecureStore.getItemAsync(TOKEN);
+
   if (token) {
     const res = await axios.get(`${location}/auth/me`, {
       headers: {
@@ -38,7 +39,6 @@ export const me = () => async (dispatch) => {
 export const authenticateLogin =
   (usernameEmail, password) => async (dispatch) => {
     try {
-  
       const res = await axios.post(`${location}/auth/login`, {
         usernameEmail,
         password,

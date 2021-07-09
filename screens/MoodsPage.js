@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { TouchableOpacity, StyleSheet, View, Text } from "react-native";
 import { fetchActivity } from "../store/activities";
 import { useSelector, useDispatch } from "react-redux";
+import { getLocation } from "../store/location";
+
 
 export default function MoodsPage() {
+  const dispatch = useDispatch();
   const handleSubmit = (val) => {
     dispatch(fetchActivity(val));
   };
 
-  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getLocation())
+
+  }, [])
+
+
 
   return (
     <View style={styles.center}>

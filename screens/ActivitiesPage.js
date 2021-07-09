@@ -10,21 +10,24 @@ import { fetchPlaces } from "../store/places";
 import { useSelector, useDispatch } from "react-redux";
 
 export default function ActivityPage() {
+  const location = useSelector((state) => state.location);
+
   const handleSubmit = (searchQuery) => {
-    dispatch(fetchPlaces(searchQuery));
+    dispatch(fetchPlaces(searchQuery, location));
   };
 
-  const Item = ({name, searchQuery}) => {
+  const Item = ({ name, searchQuery }) => {
     return (
-       <TouchableOpacity onPress={() => handleSubmit(searchQuery)}>
+      <TouchableOpacity onPress={() => handleSubmit(searchQuery)}>
         <Text style={styles.title}>{name}</Text>
-       </TouchableOpacity>
+      </TouchableOpacity>
     );
   };
 
   const renderItem = ({ item }) => {
-    console.log(item);
-    return <Item name={item.activity.name} searchQuery={item.activity.searchQuery} />;
+    return (
+      <Item name={item.activity.name} searchQuery={item.activity.searchQuery} />
+    );
   };
 
   const activities = useSelector((state) => state.activities);
