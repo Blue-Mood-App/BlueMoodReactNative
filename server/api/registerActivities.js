@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const {
-  models: { Mood, Activity, UserActivity },
+  models: { Mood, Activity, UserActivity, User },
 } = require("../db");
 
 router.get("/moods", async function (req, res, next) {
@@ -47,5 +47,17 @@ router.delete("/:activityId/:userId/:moodId", async function (req, res, next) {
     console.error(err);
   }
 });
+
+//Contact List put route.
+router.put("/:userId", async function (req, res, next) {
+  const { agreedToMeet, contacts } = req.body;
+  const { userId } = req.params;
+  try {
+    await User.update({ agreedToMeet, contactList: contacts }, { where: { id: userId }});
+    res.sendStatus(200);
+  } catch (err) {
+    console.error(err)
+  }
+})
 
 module.exports = router;

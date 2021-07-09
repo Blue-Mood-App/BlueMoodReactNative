@@ -37,7 +37,7 @@ const RegisterActivities = ({ navigation }) => {
             </View>
           );
         })}
-        <Button title="Next" onPress={() => navigation.navigate("Home")} />
+        <Button title="Next" onPress={() => navigation.navigate("User Contacts")} />
       </ScrollView>
     </SafeAreaView>
   );
