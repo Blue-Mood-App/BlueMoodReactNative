@@ -31,5 +31,21 @@ router.post("/", async function (req, res, next) {
 });
 
 //delete route for unselected activites goes here
+router.delete("/:activityId/:userId/:moodId", async function (req, res, next) {
+  try {
+    const { activityId, userId, moodId } = req.params;
+    console.log(req.params);
+    await UserActivity.destroy({
+      where: {
+        activityId,
+        userId,
+        moodId,
+      },
+    });
+    res.sendStatus(200);
+  } catch (err) {
+    console.error(err);
+  }
+});
 
 module.exports = router;

@@ -20,7 +20,7 @@ const ActivitySelector = ({ activities, moodId }) => {
       dispatch(setFavActivity(activityId, userId, moodId));
     } else {
       setSelectedActivities({ ...selectedActivities, [activityId]: false });
-      //dispatch delete thunk
+      dispatch(deleteFavActivity(activityId, userId, moodId));
     }
   };
 

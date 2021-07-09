@@ -59,7 +59,16 @@ export const setFavActivity = (activityId, userId, moodId) => async () => {
   }
 };
 
-//delete unselected favorite activites thunk goes here 
+//delete unselected favorite activites thunk goes here
+export const deleteFavActivity = (activityId, userId, moodId) => async () => {
+  try {
+    await axios.delete(
+      `${location}/api/registerActivities/${activityId}/${userId}/${moodId}`
+    );
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 //Reducer
 export default function (state = { moods: [], activities: [] }, action) {
