@@ -69,14 +69,14 @@ const styles = StyleSheet.create({
   image: {
     width: 55,
     height: 55,
-    borderWidth: 2,
+    borderWidth: 5,
     borderRadius: 32,
     borderColor: "#8AB0AB",
   },
   selectedImage: {
     width: 55,
     height: 55,
-    borderWidth: 2,
+    borderWidth: 5,
     borderRadius: 32,
     borderColor: "#EC7505",
   },
