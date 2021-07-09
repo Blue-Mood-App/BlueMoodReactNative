@@ -43,12 +43,10 @@ export const authenticateLogin =
         usernameEmail,
         password,
       });
-
       await SecureStore.setItemAsync(TOKEN, res.data.token);
       dispatch(me());
       //history.push() we're going to need a method to send us to home page after login
     } catch (authError) {
-      console.log(authError);
       return dispatch(setAuth({ error: authError }));
     }
   };
@@ -62,7 +60,6 @@ export const authenticateRegister =
         usernameEmail,
         password,
       });
-
       await SecureStore.setItemAsync(TOKEN, res.data.token);
       dispatch(me());
       //history.push() we're going to need a method to send us to home page after login

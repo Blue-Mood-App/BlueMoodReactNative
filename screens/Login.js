@@ -16,7 +16,7 @@ export default function Login({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Login</Text>
+      <Text style={styles.text}>Sign in</Text>
       <View>
         <TextInput
           placeholder="Email"

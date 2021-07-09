@@ -28,6 +28,7 @@ export const fetchActivity = (moodId) => async (dispatch) => {
           authorization: token,
         },
       });
+
       dispatch(getActivity(data));
     } else {
       console.log("not logged in");

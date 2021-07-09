@@ -12,10 +12,9 @@ router.get("/me", async (req, res, next) => {
         password: password,
       },
     });
-
     res.send(user);
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 });
 
