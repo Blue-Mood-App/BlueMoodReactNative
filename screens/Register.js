@@ -17,7 +17,7 @@ export default function Register({ navigation }) {
       dispatch(authenticateRegister(firstName, lastName, email, password));
       navigation.navigate("Register Activities");
       Alert.alert(
-        "Hi there,",
+        `Hi ${firstName},`,
         "please help us personalize your profile and give you exactly what you need to perfect your day!"
       );
     } else {
