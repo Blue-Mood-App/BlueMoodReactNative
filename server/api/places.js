@@ -24,7 +24,7 @@ Once a user picks an activity, we need to find this activity in the table, grab 
     // console.log(blue('in route', mapData))
     res.send(mapData);
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 });
 

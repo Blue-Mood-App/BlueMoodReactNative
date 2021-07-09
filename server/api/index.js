@@ -3,7 +3,8 @@ const router = require("express").Router();
 router.use("/activities", require("./activities.js"));
 
 router.use("/places", require("./places.js"));
-//auth route goes here
+
+router.use("/registerActivities", require("./registerActivities"));
 
 router.use(function (req, res, next) {
   const err = new Error("Not found.");
