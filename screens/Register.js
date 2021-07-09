@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import { Alert, Button, StyleSheet, Text, TextInput, View } from "react-native";
 import { authenticateRegister } from "../store/auth";
 
 export default function Register({ navigation }) {
@@ -16,6 +16,10 @@ export default function Register({ navigation }) {
     if (password === confirmPassword) {
       dispatch(authenticateRegister(firstName, lastName, email, password));
       navigation.navigate("Register Activities");
+      Alert.alert(
+        "Hi there,",
+        "please help us personalize your profile and give you exactly what you need to perfect your day!"
+      );
     } else {
       alert("Password doesn't match");
     }
