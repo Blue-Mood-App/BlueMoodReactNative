@@ -7,17 +7,19 @@ import registration from "./registration";
 import activities from "./activities";
 import places from "./places";
 import location from "./location";
+import userActivities from "./userActivities";
 
 const reducer = combineReducers({
   auth,
   registration,
   activities,
+  userActivities,
   places,
   location,
 });
 
 const middleware = composeWithDevTools(
-  applyMiddleware(thunkMiddleware /*, createLogger({ collapsed: true })*/)
+  applyMiddleware(thunkMiddleware /*, createLogger({ collapsed: true }) */)
 );
 const store = createStore(reducer, middleware);
 

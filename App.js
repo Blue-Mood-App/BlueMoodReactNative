@@ -8,19 +8,19 @@ import Home from "./screens/Home";
 import Login from "./screens/Login";
 import Register from "./screens/Register";
 import MoodsPage from "./screens/MoodsPage";
-import ActivitiesPage from './screens/ActivitiesPage'
+import ActivitiesPage from "./screens/ActivitiesPage";
 import store from "./store";
 import { Provider } from "react-redux";
-import Hamburger from "./screens/Navbar"
+import Hamburger from "./screens/Navbar";
 import RegisterActivities from "./screens/RegisterActivities";
-
+import EditProfile from "./screens/EditProfile";
 
 const Stack = createStackNavigator();
 
 export default function App() {
   return (
     <Provider store={store}>
-    <Hamburger style={styles.container} />
+      <Hamburger style={styles.container} />
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen name="Home" component={Home} />
@@ -33,6 +33,7 @@ export default function App() {
             component={RegisterActivities}
           />
           <Stack.Screen name="Select Activity" component={ActivitiesPage} />
+          <Stack.Screen name="Profile" component={EditProfile} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
@@ -41,8 +42,8 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-   position: 'absolute',
-   top: 23,
-   left: 100
-  }
-})
+    position: "absolute",
+    top: 23,
+    left: 100,
+  },
+});

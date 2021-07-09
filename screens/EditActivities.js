@@ -8,6 +8,15 @@ import { setFavActivity, deleteFavActivity } from "../store/registration";
 const ActivitySelector = ({ activities, moodId }) => {
   const [index, setIndex] = useState(0);
   const [selectedActivities, setSelectedActivities] = useState({});
+  const [usersLoadedActivity, setUserLoadedActivity] = useState([]);
+
+  useEffect(() => {
+    let newArr = activities.filter((el) => {
+      return el.currentActivity;
+    });
+
+    //console.log(newArr, "in new child");
+  });
 
   //accessing user data
   const user = useSelector((state) => state.auth);
@@ -17,10 +26,12 @@ const ActivitySelector = ({ activities, moodId }) => {
   const handleClick = (activityId) => {
     if (!selectedActivities[activityId]) {
       setSelectedActivities({ ...selectedActivities, [activityId]: true });
+
       dispatch(setFavActivity(activityId, userId, moodId));
     } else {
       setSelectedActivities({ ...selectedActivities, [activityId]: false });
       //dispatch delete thunk
+      dispatch(deleteFavActivity(activityId, userId, moodId));
     }
   };
 
@@ -44,7 +55,8 @@ const ActivitySelector = ({ activities, moodId }) => {
     return <Item id={item.id} name={item.name} image={circle} />;
   };
 
-  console.log(selectedActivities, "state");
+  //console.log(selectedActivities, "current state");
+  //console.log(usersLoadedActivity, "in child");
   return (
     <SideSwipe
       index={index}
