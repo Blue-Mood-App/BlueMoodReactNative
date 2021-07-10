@@ -13,9 +13,12 @@ const ActivitySelector = ({ activities, moodId }) => {
   useEffect(() => {
     let newArr = activities.filter((el) => {
       return el.currentActivity;
-    });
+    }, []);
 
-    //console.log(newArr, "in new child");
+    if (newArr[0]) {
+      setLoadedActivitiesColor(newArr);
+    }
+    //console.log(activities, "in new child");
   });
 
   //accessing user data
@@ -23,7 +26,21 @@ const ActivitySelector = ({ activities, moodId }) => {
   const dispatch = useDispatch();
   const { id: userId } = user;
 
+  const setLoadedActivitiesColor = (arr) => {
+    arr.forEach((el) => {
+      console.log(el);
+      // if (!selectedActivities[el.id]) {
+      //   setSelectedActivities({ ...selectedActivities, [el.id]: true });
+      //   dispatch(setFavActivity(el.id, userId, moodId));
+      // } else {
+      //   setSelectedActivities({ ...selectedActivities, [el.id]: false });
+      //   dispatch(deleteFavActivity(el.id, userId, moodId));
+      // }
+    });
+  };
+
   const handleClick = (activityId) => {
+    console.log("hi");
     if (!selectedActivities[activityId]) {
       setSelectedActivities({ ...selectedActivities, [activityId]: true });
 

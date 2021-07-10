@@ -30,6 +30,15 @@ const RegisterActivities = ({ navigation }) => {
   const sortUserActivities = (moodId) => {
     let newArr = [];
     let newArr2 = [];
+    let activitiesArr = [];
+
+    for (let i = 0; i < activities.length; i++) {
+      let newObj = { ...activities[i] };
+      newObj.currentActivity = false;
+      newObj.queensAddress = `${newObj["id"]}-${moodId}`;
+      activitiesArr.push(newObj);
+    }
+    // console.log(activitiesArr, "new act arr");
     if (userActiv[0]) {
       for (let z = 0; z < userActiv.length; z++) {
         if (userActiv[z].moodId === moodId) {
@@ -38,22 +47,20 @@ const RegisterActivities = ({ navigation }) => {
       }
 
       for (let z = 0; z < newArr.length; z++) {
-        for (let j = 0; j < activities.length; j++) {
-          if (activities[j].id === newArr[z].activityId) {
-            if (!newArr2.includes(activities[j])) {
-              let newActivity = { ...activities[j] };
-              newActivity.currentActivity = true;
-              newArr2.push(newActivity);
+        for (let j = 0; j < activitiesArr.length; j++) {
+          if (activitiesArr[j].id === newArr[z].activityId) {
+            if (!newArr2.includes(activitiesArr[j])) {
+              activitiesArr[j].currentActivity = true;
+              newArr2.push(activitiesArr[j]);
             }
           }
         }
       }
 
-      for (let m = 0; m < activities.length; m++) {
-        if (!newArr2.includes(activities[m])) {
-          let newActivity = { ...activities[m] };
-          newActivity.currentActivity = false;
-          newArr2.push(newActivity);
+      for (let m = 0; m < activitiesArr.length; m++) {
+        if (!newArr2.includes(activitiesArr[m])) {
+          activitiesArr[m].currentActivity = false;
+          newArr2.push(activitiesArr[m]);
         }
       }
     }
