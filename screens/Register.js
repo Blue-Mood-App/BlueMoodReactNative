@@ -1,21 +1,21 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { FormBuilder } from "react-native-paper-form-builder";
-import { useForm } from 'react-hook-form';
+import { useForm } from "react-hook-form";
 import { Alert, StyleSheet, Text, ScrollView, View } from "react-native";
-import { Button, TextInput } from 'react-native-paper';
+import { Button, TextInput } from "react-native-paper";
 import { authenticateRegister } from "../store/auth";
 
 export default function Register({ navigation }) {
-  const { control, setFocus, handleSubmit} = useForm({
+  const { control, setFocus, handleSubmit } = useForm({
     defaultValues: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
     },
-    mode: 'onChange'
+    mode: "onChange",
   });
 
   const dispatch = useDispatch();
@@ -23,94 +23,97 @@ export default function Register({ navigation }) {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollViewStyle}>
-      <Text style={styles.text}>Register</Text>
-        <FormBuilder 
+        <Text style={styles.text}>Register</Text>
+        <FormBuilder
           control={control}
           setFocus={setFocus}
           formConfigArray={[
             {
-              type: 'text',
-              name: 'firstName',
+              type: "text",
+              name: "firstName",
 
               rules: {
                 required: {
                   value: true,
-                  message: 'First name is required',
+                  message: "First name is required",
                 },
               },
               textInputProps: {
-                label: 'First Name',
-                left: <TextInput.Icon name={'account'} />
+                label: "First Name",
+                left: <TextInput.Icon name={"account"} />,
               },
             },
             {
-              type: 'text',
-              name: 'lastName',
+              type: "text",
+              name: "lastName",
 
               rules: {
                 required: {
                   value: true,
-                  message: 'Last name is required',
+                  message: "Last name is required",
                 },
               },
               textInputProps: {
-                label: 'Last Name',
-                left: <TextInput.Icon name={'account'} />
+                label: "Last Name",
+                left: <TextInput.Icon name={"account"} />,
               },
             },
             {
-              type: 'email',
-              name: 'email',
+              type: "email",
+              name: "email",
 
               rules: {
                 required: {
                   value: true,
-                  message: 'Email is required',
+                  message: "Email is required",
                 },
               },
               textInputProps: {
-                label: 'Email',
-                left: <TextInput.Icon name={'email'} />,
+                label: "Email",
+                left: <TextInput.Icon name={"email"} />,
               },
             },
             {
-              type: 'password',
-              name: 'password',
+              type: "password",
+              name: "password",
 
               rules: {
                 required: {
                   value: true,
-                  message: 'Password is required',
+                  message: "Password is required",
                 },
               },
               textInputProps: {
-                label: 'Password',
-                left: <TextInput.Icon name={'lock'} />,
+                label: "Password",
+                left: <TextInput.Icon name={"lock"} />,
               },
             },
             {
-              type: 'password',
-              name: 'confirmPassword',
+              type: "password",
+              name: "confirmPassword",
 
               rules: {
                 required: {
                   value: true,
-                  message: 'Please confirm your password',
+                  message: "Please confirm your password",
                 },
               },
               textInputProps: {
-                label: 'Confirm password',
-                left: <TextInput.Icon name={'lock'} />,
+                label: "Confirm password",
+                left: <TextInput.Icon name={"lock"} />,
               },
             },
           ]}
         />
         <Button
           mode={"contained"}
-          onPress={handleSubmit(data => {
-            const { firstName, lastName, email, password, confirmPassword } = data;
+          onPress={handleSubmit((data) => {
+            const { firstName, lastName, email, password, confirmPassword } =
+              data;
             if (password === confirmPassword) {
-              dispatch(authenticateRegister(firstName, lastName, email, password));
+              dispatch(
+                authenticateRegister(firstName, lastName, email, password)
+              );
               navigation.navigate("Register Activities");
               Alert.alert(
                 `Hi ${firstName},`,
@@ -121,8 +124,10 @@ export default function Register({ navigation }) {
             }
           })}
           style={styles.btn}
-        >Next</Button>
-        </ScrollView>
+        >
+          Next
+        </Button>
+      </ScrollView>
     </View>
   );
 }
@@ -134,12 +139,13 @@ const styles = StyleSheet.create({
   scrollViewStyle: {
     flex: 1,
     padding: 15,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   text: {
-    fontSize: 23,
-    marginHorizontal: 13,
-    marginBottom: 30,
+    fontSize: 40,
+    textAlign: "center",
+    marginBottom: 32,
+    fontWeight: "700",
   },
   btn: {
     marginVertical: 8,
