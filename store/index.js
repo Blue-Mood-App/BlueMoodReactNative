@@ -8,12 +8,14 @@ import activities from "./activities";
 import places from "./places";
 import location from "./location";
 import userActivities from "./userActivities";
+import sortedActivities from "./sortedActivities";
 
 const reducer = combineReducers({
   auth,
   registration,
   activities,
   userActivities,
+  sortedActivities,
   places,
   location,
 });

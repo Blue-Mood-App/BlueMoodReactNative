@@ -13,6 +13,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getActivities, getMoods } from "../store/registration";
 import EditActivities from "./EditActivities.js";
 import { fetchUserActivities } from "../store/userActivities";
+import { setSortedActivities } from "../store/sortedActivities";
 
 const RegisterActivities = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -38,7 +39,6 @@ const RegisterActivities = ({ navigation }) => {
       newObj.queensAddress = `${newObj["id"]}-${moodId}`;
       activitiesArr.push(newObj);
     }
-    // console.log(activitiesArr, "new act arr");
     if (userActiv[0]) {
       for (let z = 0; z < userActiv.length; z++) {
         if (userActiv[z].moodId === moodId) {
@@ -68,6 +68,7 @@ const RegisterActivities = ({ navigation }) => {
     return newArr2;
   };
 
+  let sortedActivities = [];
   return (
     <SafeAreaView>
       <Text style={styles.title}>Tell us more about you...</Text>
@@ -75,7 +76,6 @@ const RegisterActivities = ({ navigation }) => {
       <ScrollView contentContainerStyle={styles.contentContainer}>
         {moods.map((mood) => {
           let result = sortUserActivities(mood.id);
-          //console.log(result, "in parent");
           return (
             <View key={mood.id}>
               <Text style={styles.text}>{`when I am ${mood.name}...`}</Text>

@@ -8,57 +8,37 @@ import { setFavActivity, deleteFavActivity } from "../store/registration";
 const ActivitySelector = ({ activities, moodId }) => {
   const [index, setIndex] = useState(0);
   const [selectedActivities, setSelectedActivities] = useState({});
+  const [allActivities, setAllActivities] = useState(activities);
   const [usersLoadedActivity, setUserLoadedActivity] = useState([]);
-
-  useEffect(() => {
-    let newArr = activities.filter((el) => {
-      return el.currentActivity;
-    }, []);
-
-    if (newArr[0]) {
-      setLoadedActivitiesColor(newArr);
-    }
-    //console.log(activities, "in new child");
-  });
 
   //accessing user data
   const user = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const { id: userId } = user;
 
-  const setLoadedActivitiesColor = (arr) => {
-    arr.forEach((el) => {
-      console.log(el);
-      // if (!selectedActivities[el.id]) {
-      //   setSelectedActivities({ ...selectedActivities, [el.id]: true });
-      //   dispatch(setFavActivity(el.id, userId, moodId));
-      // } else {
-      //   setSelectedActivities({ ...selectedActivities, [el.id]: false });
-      //   dispatch(deleteFavActivity(el.id, userId, moodId));
-      // }
-    });
+  const handleClick = (currentActivity, queensAddress) => {
+    setAllActivities(activities);
+    // console.log(allActivities, "in child component");
+    // if (!selectedActivities[currentActivity]) {
+    //   setSelectedActivities({ ...selectedActivities, [currentActivity]: true });
+    //   dispatch(setFavActivity(currentActivity, userId, moodId));
+    // } else {
+    //   setSelectedActivities({
+    //     ...selectedActivities,
+    //     [currentActivity]: false,
+    //   });
+    //   //dispatch delete thunk
+    //   dispatch(deleteFavActivity(currentActivity, userId, moodId));
+    // }
   };
 
-  const handleClick = (activityId) => {
-    console.log("hi");
-    if (!selectedActivities[activityId]) {
-      setSelectedActivities({ ...selectedActivities, [activityId]: true });
-
-      dispatch(setFavActivity(activityId, userId, moodId));
-    } else {
-      setSelectedActivities({ ...selectedActivities, [activityId]: false });
-      //dispatch delete thunk
-      dispatch(deleteFavActivity(activityId, userId, moodId));
-    }
-  };
-
-  const Item = ({ id, name }) => {
+  const Item = ({ currentActivity, queensAddress, id, name }) => {
     return (
       <TouchableOpacity
-        onPress={() => handleClick(id)}
+        onPress={() => handleClick(currentActivity, queensAddress)}
         style={styles.container}
       >
-        {selectedActivities[id] ? (
+        {currentActivity ? (
           <Image style={styles.selectedImage} source={circle} />
         ) : (
           <Image style={styles.image} source={circle} />
@@ -69,11 +49,17 @@ const ActivitySelector = ({ activities, moodId }) => {
   };
 
   const renderItem = ({ item }) => {
-    return <Item id={item.id} name={item.name} image={circle} />;
+    return (
+      <Item
+        currentActivity={item.currentActivity}
+        queensAddress={item.queensAddress}
+        id={item.id}
+        name={item.name}
+        image={circle}
+      />
+    );
   };
 
-  //console.log(selectedActivities, "current state");
-  //console.log(usersLoadedActivity, "in child");
   return (
     <SideSwipe
       index={index}
