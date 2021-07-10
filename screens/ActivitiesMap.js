@@ -8,9 +8,7 @@ export default function ActivitiesMap() {
   const location = useSelector((state) => state.location);
   const places = useSelector((state) => state.places);
 
-  console.log(places, "in component");
-
-  return (
+  return !places.businesses && !location ? <Text>loading...</Text> : (
     <View style={styles.container}>
       <MapView
         provider="google"
