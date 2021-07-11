@@ -60,6 +60,8 @@ const ActivitySelector = ({ activities, moodId }) => {
     );
   };
 
+  
+
   return (
     <SideSwipe
       index={index}

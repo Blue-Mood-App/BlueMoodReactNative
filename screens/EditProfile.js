@@ -28,7 +28,8 @@ const RegisterActivities = ({ navigation }) => {
   const userActiv = useSelector((state) => state.userActivities);
   const { moods, activities } = registration;
 
-  const sortUserActivities = (moodId) => {
+  const sortUserActivities = (mood) => {
+    let moodId = mood.id;
     let newArr = [];
     let newArr2 = [];
     let activitiesArr = [];
@@ -36,6 +37,7 @@ const RegisterActivities = ({ navigation }) => {
     for (let i = 0; i < activities.length; i++) {
       let newObj = { ...activities[i] };
       newObj.currentActivity = false;
+      newObj.mood = mood.name;
       newObj.queensAddress = `${newObj["id"]}-${moodId}`;
       activitiesArr.push(newObj);
     }
@@ -68,14 +70,13 @@ const RegisterActivities = ({ navigation }) => {
     return newArr2;
   };
 
-  let sortedActivities = [];
   return (
     <SafeAreaView>
       <Text style={styles.title}>Tell us more about you...</Text>
 
       <ScrollView contentContainerStyle={styles.contentContainer}>
         {moods.map((mood) => {
-          let result = sortUserActivities(mood.id);
+          let result = sortUserActivities(mood);
           return (
             <View key={mood.id}>
               <Text style={styles.text}>{`when I am ${mood.name}...`}</Text>

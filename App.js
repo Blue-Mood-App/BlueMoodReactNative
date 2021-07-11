@@ -14,6 +14,7 @@ import { Provider } from "react-redux";
 import Hamburger from "./screens/Navbar";
 import RegisterActivities from "./screens/RegisterActivities";
 import EditProfile from "./screens/EditProfile";
+import EditMoods from "./screens/EditMoods";
 
 const Stack = createStackNavigator();
 
@@ -33,7 +34,7 @@ export default function App() {
             component={RegisterActivities}
           />
           <Stack.Screen name="Select Activity" component={ActivitiesPage} />
-          <Stack.Screen name="Profile" component={EditProfile} />
+          <Stack.Screen name="Profile" component={EditMoods} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
