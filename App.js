@@ -25,6 +25,7 @@ import hamburger from "./assets/Hamburger_icon.png";
 import AniActivitiesPage from "./screens/AniActivitiesPage";
 import Menu from "./screens/Menu";
 import { me } from "./store/auth";
+import Animations from './screens/Animation'
 
 
 const Stack = createStackNavigator();
@@ -70,6 +71,8 @@ const Main = ({ navigation }) => {
       <Stack.Screen name="Register Activities" component={RegisterActivities} />
       <Stack.Screen name="Select Activity" component={ActivitiesPage} />
       <Stack.Screen name="Select Activity Ani" component={AniActivitiesPage} />
+      <Stack.Screen name="Animations" component={Animations} />
+      <Stack.Screen name="User Contacts" component={UserContacts} />
     </Stack.Navigator>
   );
 };

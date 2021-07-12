@@ -40,8 +40,8 @@ export default function Home({ navigation }) {
         onPress={() => navigation.navigate("Select Activity")}
       ></Button>
       <Button
-        title="User Contacts"
-        onPress={() => navigation.navigate("User Contacts")}
+        title="Animations"
+        onPress={() => navigation.navigate("Animations")}
       ></Button>
     </View>
   );
