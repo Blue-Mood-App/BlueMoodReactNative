@@ -49,7 +49,6 @@ const RegisterActivities = ({ navigation }) => {
           );
         })}
         <Button
-          mode={"contained"}
           style={styles.btn}
           onPress={() => navigation.navigate("User Contacts")}
         >
@@ -83,10 +82,7 @@ const styles = StyleSheet.create({
   },
 
   btn: {
-    padding: 5,
-    maxWidth: Dimensions.get("window").width * 0.9,
-    marginLeft: 15,
-    marginTop: 8,
+    marginTop: 20,
   },
 });
 
