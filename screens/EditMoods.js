@@ -12,28 +12,43 @@ import {
   Image,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { getActivities, getMoods } from "../store/registration";
-import EditActivities from "./EditActivities.js";
-import { fetchUserActivities } from "../store/userActivities";
-import { setSortedActivities } from "../store/sortedActivities";
-import { getActivitiesAndMoods } from "../store/sortedActivities";
+import {
+  getActivitiesAndMoods,
+  editMoodActivities,
+  addUserActivities,
+} from "../store/sortedActivities";
 import SideSwipe from "react-native-sideswipe";
 import circle from "../assets/circle.png";
-import { setFavActivity, deleteFavActivity } from "../store/registration";
 
 const EditMoods = ({ navigation }) => {
   const [index, setIndex] = useState(0);
+  const user = useSelector((state) => state.auth);
+  const sortedActivities = useSelector((state) => state.sortedActivities);
+  const [allClickedActivities, setClickedActivities] = useState([]);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getActivitiesAndMoods(4));
-  }, [dispatch]);
-
-  const sortedActivities = useSelector((state) => state.sortedActivities);
-  const clickedActivities = [];
+    dispatch(getActivitiesAndMoods(user.id));
+  }, []);
 
   const handleClick = (element, currentActivity, queensAddress) => {
-    console.log(element["item"]);
+    setClickedActivities([...allClickedActivities, element]);
+    dispatch(editMoodActivities(queensAddress));
+  };
+
+  const handleSubmit = (userId) => {
+    let currentActivities = [];
+    sortedActivities.forEach((el) => {
+      let trueCurrentActivities = el.filter((el) => {
+        return el.currentActivity;
+      });
+
+      if (trueCurrentActivities[0]) {
+        currentActivities.push(trueCurrentActivities);
+      }
+    });
+    dispatch(addUserActivities(user.Id, currentActivities.flat()));
   };
 
   const Item = (currentObj) => {
@@ -70,6 +85,7 @@ const EditMoods = ({ navigation }) => {
 
   return (
     <SafeAreaView>
+      <Button title="Update" onPress={() => handleSubmit(user.id)} />
       <ScrollView contentContainerStyle={styles.contentContainer}>
         {Array.isArray(sortedActivities) &&
           sortedActivities.map((el, idx) => {
