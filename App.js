@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "react-native-gesture-handler";
 import {
   StyleSheet,
@@ -19,38 +20,51 @@ import ActivitiesPage from "./screens/ActivitiesPage";
 import store from "./store";
 import { Provider } from "react-redux";
 import RegisterActivities from "./screens/RegisterActivities";
-import Hamburger from "./screens/Navbar";
-import { Header } from "react-native-elements";
-import NavButton from "./screens/NavButton";
 import hamburger from "./assets/Hamburger_icon.png";
-import AniActivitiesPage from "./screens/AniActivitiesPage"
+import AniActivitiesPage from "./screens/AniActivitiesPage";
+import Menu from "./screens/Menu";
+import { me } from "./store/auth";
 
 const Stack = createStackNavigator();
 const RootStack = createStackNavigator();
 
-function ModalScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text style={{ fontSize: 30 }}>This is a modal!</Text>
-      <Button onPress={() => navigation.goBack()} title="Dismiss" />
-    </View>
-  );
-}
+const Main = ({ navigation }) => {
+  const auth = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
-const Main = ({navigation}) => {
+  useEffect(() => {
+    dispatch(me());
+    return () => {
+    };
+  }, []);
+
   return (
     <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen name="Home" options={{
-        headerRight: () => (
-          <TouchableOpacity onPress={() => navigation.navigate("MyModal")}>
-          <Image style={styles.icon} source={hamburger} />
-          </TouchableOpacity>
-        )
-      }} component={Home} />
+      <Stack.Screen
+        name="Home"
+        options={{
+          headerRight: () => (
+            <TouchableOpacity onPress={() => navigation.navigate("MyModal")}>
+              <Image style={styles.icon} source={hamburger} />
+            </TouchableOpacity>
+          ),
+        }}
+        component={Home}
+      />
       <Stack.Screen name="Where to go" component={ActivitiesMap} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Register" component={Register} />
-      <Stack.Screen name="Select Mood" component={MoodsPage} />
+      <Stack.Screen
+        name="Select Mood"
+        component={MoodsPage}
+        options={{
+          headerRight: () => (
+            <TouchableOpacity onPress={() => navigation.navigate("MyModal")}>
+              <Image style={styles.icon} source={hamburger} />
+            </TouchableOpacity>
+          ),
+        }}
+      />
       <Stack.Screen name="Register Activities" component={RegisterActivities} />
       <Stack.Screen name="Select Activity" component={ActivitiesPage} />
       <Stack.Screen name="Select Activity Ani" component={AniActivitiesPage} />
@@ -68,7 +82,7 @@ export default function App() {
             component={Main}
             options={{ headerShown: false }}
           />
-          <RootStack.Screen name="MyModal" component={ModalScreen} />
+          <RootStack.Screen name="MyModal" component={Menu} />
         </RootStack.Navigator>
       </NavigationContainer>
     </Provider>
