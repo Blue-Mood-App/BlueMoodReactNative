@@ -8,7 +8,9 @@ export default function ActivitiesMap() {
   const location = useSelector((state) => state.location);
   const places = useSelector((state) => state.places);
 
-  return !places.businesses && !location ? <Text>loading...</Text> : (
+  return !places.businesses || !location ? (
+    <Text>loading...</Text>
+  ) : (
     <View style={styles.container}>
       <MapView
         provider="google"
@@ -26,19 +28,25 @@ export default function ActivitiesMap() {
           return (
             <Marker
               key={id}
-              coordinate={{ latitude: coordinates.latitude, longitude: coordinates.longitude }}
+              coordinate={{
+                latitude: coordinates.latitude,
+                longitude: coordinates.longitude,
+              }}
             >
               <Callout
                 style={styles.callout}
                 onPress={() => Alert.alert("Pending feature")}
               >
-                <MarkerCallout name={name} imageUrl={image_url} url={url} cat="Coffee Shop" />
+                <MarkerCallout
+                  name={name}
+                  imageUrl={image_url}
+                  url={url}
+                  cat="Coffee Shop"
+                />
               </Callout>
             </Marker>
           );
         })}
-
-
       </MapView>
     </View>
   );
