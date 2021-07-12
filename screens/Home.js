@@ -2,14 +2,14 @@ import React, { useEffect } from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
 import { authenticateLogin } from "../store/auth";
 import { useDispatch } from "react-redux";
-import Hamburger from "./Navbar.js";
+import Hamburger from "./Navbar"
+import { Header } from "react-native-elements";
 
 export default function Home({ navigation }) {
   const dispatch = useDispatch();
 
   return (
     <View style={styles.homeContainer}>
-      <Hamburger />
       <Text>Welcome to BlueMood</Text>
       <Button
         title="Go to Activities Map Demo"
