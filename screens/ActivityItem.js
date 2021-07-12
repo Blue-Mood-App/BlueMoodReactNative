@@ -11,6 +11,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { fetchPlaces } from "../store/places";
 import hamburger from "../assets/Hamburger_icon.png";
+import LottiveView from 'lottie-react-native';
 
 
 const { width: screenWidth } = Dimensions.get("window");
