@@ -34,10 +34,14 @@ export default function Home({ navigation }) {
       <Button
         title="Go to Register Activities"
         onPress={() => navigation.navigate("Register Activities")}
-        ></Button>
+      ></Button>
       <Button
         title="Select Activity"
         onPress={() => navigation.navigate("Select Activity")}
+      ></Button>
+      <Button
+        title="User Contacts"
+        onPress={() => navigation.navigate("User Contacts")}
       ></Button>
     </View>
   );

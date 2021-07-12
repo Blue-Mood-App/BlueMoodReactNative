@@ -34,7 +34,7 @@ const User = db.define("user", {
     allowNull: true,
   },
   contactList: {
-    type: Sequelize.STRING,
+    type: Sequelize.ARRAY(Sequelize.STRING),
     allowNull: true,
   },
 });

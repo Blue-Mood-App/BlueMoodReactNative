@@ -4,8 +4,18 @@ import { StyleSheet, Text, TouchableOpacity, Image } from "react-native";
 import SideSwipe from "react-native-sideswipe";
 import circle from "../assets/circle.png";
 import { setFavActivity, deleteFavActivity } from "../store/registration";
+import {
+  useFonts,
+  OpenSansCondensed_300Light,
+  OpenSansCondensed_700Bold,
+} from "@expo-google-fonts/open-sans-condensed";
 
 const ActivitySelector = ({ activities, moodId }) => {
+  let [fontsLoaded] = useFonts({
+    OpenSansCondensed_300Light,
+    OpenSansCondensed_700Bold,
+  });
+
   const [index, setIndex] = useState(0);
   const [selectedActivities, setSelectedActivities] = useState({});
 
@@ -20,7 +30,7 @@ const ActivitySelector = ({ activities, moodId }) => {
       dispatch(setFavActivity(activityId, userId, moodId));
     } else {
       setSelectedActivities({ ...selectedActivities, [activityId]: false });
-      //dispatch delete thunk
+      dispatch(deleteFavActivity(activityId, userId, moodId));
     }
   };
 
@@ -57,14 +67,18 @@ const ActivitySelector = ({ activities, moodId }) => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: "transparent",
-    padding: 16,
-    margin: 6,
+    paddingHorizontal: 5,
+    marginHorizontal: 14,
+    alignItems: "center",
   },
   text: {
-    fontSize: 13,
-    width: 60,
+    fontSize: 16,
+    width: 65,
     textAlign: "center",
+    letterSpacing: 1.4,
+    fontFamily: "OpenSansCondensed_300Light",
   },
   image: {
     width: 55,

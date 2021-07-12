@@ -22,7 +22,7 @@ const setActivity = (activities) => ({
   activities,
 });
 
-//moods thunk
+//moods thunk go here
 export const getMoods = () => async (dispatch) => {
   try {
     const { data } = await axios.get(
@@ -34,7 +34,7 @@ export const getMoods = () => async (dispatch) => {
   }
 };
 
-//activities thunk
+//activities thunk goes here
 export const getActivities = () => async (dispatch) => {
   try {
     const { data } = await axios.get(
@@ -46,7 +46,7 @@ export const getActivities = () => async (dispatch) => {
   }
 };
 
-//favoritActivity thunk
+//favoritActivity thunk goes here
 export const setFavActivity = (activityId, userId, moodId) => async () => {
   try {
     await axios.post(`${location}/api/registerActivities/`, {
@@ -59,7 +59,27 @@ export const setFavActivity = (activityId, userId, moodId) => async () => {
   }
 };
 
-//delete unselected favorite activites thunk goes here 
+//delete unselected favorite activites thunk goes here
+export const deleteFavActivity = (activityId, userId, moodId) => async () => {
+  try {
+    await axios.delete(
+      `${location}/api/registerActivities/${activityId}/${userId}/${moodId}`
+    );
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+//update contact list thunk goes here
+export const setContactList = (agreedToMeet, contacts, userId) => async () => {
+  try {
+    await axios.put(
+      `${location}/api/registerActivities/${userId}`, { agreedToMeet, contacts }
+    );
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 //Reducer
 export default function (state = { moods: [], activities: [] }, action) {

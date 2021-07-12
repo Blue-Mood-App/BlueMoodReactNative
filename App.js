@@ -20,10 +20,12 @@ import ActivitiesPage from "./screens/ActivitiesPage";
 import store from "./store";
 import { Provider } from "react-redux";
 import RegisterActivities from "./screens/RegisterActivities";
+import UserContacts from "./screens/UserContacts";
 import hamburger from "./assets/Hamburger_icon.png";
 import AniActivitiesPage from "./screens/AniActivitiesPage";
 import Menu from "./screens/Menu";
 import { me } from "./store/auth";
+
 
 const Stack = createStackNavigator();
 const RootStack = createStackNavigator();
