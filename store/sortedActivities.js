@@ -13,47 +13,80 @@ const TOKEN = "token";
 
 const SET_SORTED_ACTIVITIES = "SET_SORTED_ACTIVITIES";
 const EDIT_SORTED_ACTIVITIES = "EDIT_SORTED_ACTIVITIES";
+const DELETE_STATE = "DELETE_STATE";
 
 const sortUserActivities = (mood, activities, userActiv) => {
   let moodId = mood.id;
-  let newArr = [];
-  let newArr2 = [];
   let activitiesArr = [];
 
   for (let i = 0; i < activities.length; i++) {
-    let newObj = { ...activities[i] };
+    let newObj = {
+      ...activities[i],
+    };
     newObj.currentActivity = false;
     newObj.mood = mood.name;
     newObj.queensAddress = `${newObj["id"]}-${moodId}`;
     activitiesArr.push(newObj);
   }
-  if (userActiv[0]) {
-    for (let z = 0; z < userActiv.length; z++) {
-      if (userActiv[z].moodId === moodId) {
-        newArr.push(userActiv[z]);
-      }
-    }
 
-    for (let z = 0; z < newArr.length; z++) {
-      for (let j = 0; j < activitiesArr.length; j++) {
-        if (activitiesArr[j].id === newArr[z].activityId) {
-          if (!newArr2.includes(activitiesArr[j])) {
-            activitiesArr[j].currentActivity = true;
-            newArr2.push(activitiesArr[j]);
-          }
+  for (let z = 0; z < userActiv.length; z++) {
+    if (userActiv[z].moodId === moodId) {
+      for (let m = 0; m < activitiesArr.length; m++) {
+        if (activitiesArr[m].id === userActiv[z].activityId) {
+          activitiesArr[m].currentActivity = true;
         }
-      }
-    }
-
-    for (let m = 0; m < activitiesArr.length; m++) {
-      if (!newArr2.includes(activitiesArr[m])) {
-        activitiesArr[m].currentActivity = false;
-        newArr2.push(activitiesArr[m]);
       }
     }
   }
 
-  return newArr2;
+  activitiesArr.sort(function (x, y) {
+    return x.currentActivity === y.currentActivity
+      ? 0
+      : x.currentActivity
+      ? -1
+      : 1;
+  });
+
+  return activitiesArr;
+  // let moodId = mood.id;
+  // let newArr = [];
+  // let newArr2 = [];
+  // let activitiesArr = [];
+
+  // for (let i = 0; i < activities.length; i++) {
+  //   let newObj = { ...activities[i] };
+  //   newObj.currentActivity = false;
+  //   newObj.mood = mood.name;
+  //   newObj.queensAddress = `${newObj["id"]}-${moodId}`;
+  //   activitiesArr.push(newObj);
+  // }
+  // if (userActiv[0]) {
+  //   for (let z = 0; z < userActiv.length; z++) {
+  //     if (userActiv[z].moodId === moodId) {
+  //       newArr.push(userActiv[z]);
+  //     }
+  //   }
+
+  //   for (let z = 0; z < newArr.length; z++) {
+  //     for (let j = 0; j < activitiesArr.length; j++) {
+  //       if (activitiesArr[j].id === newArr[z].activityId) {
+  //         if (!newArr2.includes(activitiesArr[j])) {
+  //           activitiesArr[j].currentActivity = true;
+  //           newArr2.push(activitiesArr[j]);
+  //         }
+  //       }
+  //     }
+  //   }
+
+  //   for (let m = 0; m < activitiesArr.length; m++) {
+  //     if (!newArr2.includes(activitiesArr[m])) {
+  //       activitiesArr[m].currentActivity = false;
+  //       newArr2.push(activitiesArr[m]);
+  //     }
+  //   }
+  // }
+
+  // return newArr2;
 };
 
 let sortedActivitiesArr = [];
@@ -76,10 +109,9 @@ export const editMoodActivities = (activity) => {
   };
 };
 
-export const addedActivities = (activities) => {
+export const clear = () => {
   return {
-    type: ADDED,
-    activities,
+    type: DELETE_STATE,
   };
 };
 
@@ -104,11 +136,22 @@ export const getActivitiesAndMoods = (userId) => async (dispatch) => {
 
 export const addUserActivities = (id, activities) => async (dispatch) => {
   try {
-    await axios.delete(`${location}/api/userActivities/${id}`);
-    await axios.post(`${location}/api/userActivities`, {
-      activities,
-      id,
-    });
+    const token = await SecureStore.getItemAsync(TOKEN);
+
+    if (token) {
+      await axios.post(
+        `${location}/api/userActivities`,
+        {
+          activities,
+          id,
+        },
+        {
+          headers: {
+            authorization: token,
+          },
+        }
+      );
+    }
   } catch (err) {
     console.log(err);
   }
@@ -128,8 +171,10 @@ export default function (state = [], action) {
           }
         }
       }
-
       return newState;
+    case DELETE_STATE:
+      sortedActivitiesArr = [];
+      return [];
     default:
       return state;
   }

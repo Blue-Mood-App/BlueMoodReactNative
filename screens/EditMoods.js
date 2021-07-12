@@ -16,6 +16,7 @@ import {
   getActivitiesAndMoods,
   editMoodActivities,
   addUserActivities,
+  clear,
 } from "../store/sortedActivities";
 import SideSwipe from "react-native-sideswipe";
 import circle from "../assets/circle.png";
@@ -24,16 +25,14 @@ const EditMoods = ({ navigation }) => {
   const [index, setIndex] = useState(0);
   const user = useSelector((state) => state.auth);
   const sortedActivities = useSelector((state) => state.sortedActivities);
-  const [allClickedActivities, setClickedActivities] = useState([]);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getActivitiesAndMoods(user.id));
+    return () => dispatch(clear());
   }, []);
 
   const handleClick = (element, currentActivity, queensAddress) => {
-    setClickedActivities([...allClickedActivities, element]);
     dispatch(editMoodActivities(queensAddress));
   };
 
@@ -48,7 +47,10 @@ const EditMoods = ({ navigation }) => {
         currentActivities.push(trueCurrentActivities);
       }
     });
-    dispatch(addUserActivities(user.Id, currentActivities.flat()));
+
+    console.log(sortedActivities.length, "in component");
+    dispatch(addUserActivities(userId, currentActivities.flat()));
+    navigation.navigate("Select Mood");
   };
 
   const Item = (currentObj) => {
