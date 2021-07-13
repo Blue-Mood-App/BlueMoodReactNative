@@ -68,7 +68,7 @@ export const authenticateRegister =
     }
   };
 
-export const logout = async () => {
+export const logOut = async () => {
   await SecureStore.deleteItemAsync(TOKEN);
   //history.push() we're going to need a method to send us to home page after login
   return {

@@ -1,67 +1,133 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
-import { Alert, Button, StyleSheet, Text, TextInput, View } from "react-native";
+import { FormBuilder } from "react-native-paper-form-builder";
+import { useForm } from "react-hook-form";
+import { Alert, StyleSheet, Text, ScrollView, View } from "react-native";
+import { Button, TextInput } from "react-native-paper";
 import { authenticateRegister } from "../store/auth";
 
 export default function Register({ navigation }) {
+  const { control, setFocus, handleSubmit } = useForm({
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+    mode: "onChange",
+  });
+
   const dispatch = useDispatch();
-
-  const [firstName, setfirstName] = useState("");
-  const [lastName, setlastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-
-  const handleSubmit = () => {
-    if (password === confirmPassword) {
-      dispatch(authenticateRegister(firstName, lastName, email, password));
-      navigation.navigate("Register Activities");
-      Alert.alert(
-        `Hi ${firstName},`,
-        "please help us personalize your profile and give you exactly what you need to perfect your day!"
-      );
-    } else {
-      alert("Password doesn't match");
-    }
-  };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Register</Text>
-      <View>
-        <TextInput
-          placeholder="First Name"
-          onChangeText={(evt) => setfirstName(evt)}
-        ></TextInput>
-        <TextInput
-          placeholder="Last Name"
-          onChangeText={(evt) => setlastName(evt)}
-        ></TextInput>
-        <TextInput
-          placeholder="Email"
-          autoCapitalize="none"
-          textContentType="emailAddress"
-          onChangeText={(evt) => setEmail(evt)}
-        ></TextInput>
-        <TextInput
-          placeholder="Password"
-          textContentType="password"
-          autoCapitalize="none"
-          onChangeText={(evt) => setPassword(evt)}
-        ></TextInput>
-        <TextInput
-          placeholder="Confirm Password"
-          textContentType="password"
-          autoCapitalize="none"
-          onChangeText={(evt) => setConfirmPassword(evt)}
-        ></TextInput>
+      <ScrollView contentContainerStyle={styles.scrollViewStyle}>
+        <Text style={styles.text}>Register</Text>
+        <FormBuilder
+          control={control}
+          setFocus={setFocus}
+          formConfigArray={[
+            {
+              type: "text",
+              name: "firstName",
 
+              rules: {
+                required: {
+                  value: true,
+                  message: "First name is required",
+                },
+              },
+              textInputProps: {
+                label: "First Name",
+                left: <TextInput.Icon name={"account"} />,
+              },
+            },
+            {
+              type: "text",
+              name: "lastName",
+
+              rules: {
+                required: {
+                  value: true,
+                  message: "Last name is required",
+                },
+              },
+              textInputProps: {
+                label: "Last Name",
+                left: <TextInput.Icon name={"account"} />,
+              },
+            },
+            {
+              type: "email",
+              name: "email",
+
+              rules: {
+                required: {
+                  value: true,
+                  message: "Email is required",
+                },
+              },
+              textInputProps: {
+                label: "Email",
+                left: <TextInput.Icon name={"email"} />,
+              },
+            },
+            {
+              type: "password",
+              name: "password",
+
+              rules: {
+                required: {
+                  value: true,
+                  message: "Password is required",
+                },
+              },
+              textInputProps: {
+                label: "Password",
+                left: <TextInput.Icon name={"lock"} />,
+              },
+            },
+            {
+              type: "password",
+              name: "confirmPassword",
+
+              rules: {
+                required: {
+                  value: true,
+                  message: "Please confirm your password",
+                },
+              },
+              textInputProps: {
+                label: "Confirm password",
+                left: <TextInput.Icon name={"lock"} />,
+              },
+            },
+          ]}
+        />
         <Button
-          title="Next"
-          onPress={() => handleSubmit()}
+          mode={"contained"}
+          onPress={handleSubmit((data) => {
+            const { firstName, lastName, email, password, confirmPassword } =
+              data;
+            if (password === confirmPassword) {
+              dispatch(
+                authenticateRegister(firstName, lastName, email, password)
+              );
+              navigation.navigate("Register Activities");
+              Alert.alert(
+                `Hi ${firstName},`,
+                "please help us personalize your profile anWd give you exactly what you need to perfect your day!"
+              );
+            } else {
+              alert("Password doesn't match");
+            }
+          })}
           style={styles.btn}
-        ></Button>
-      </View>
+        >
+          Next
+        </Button>
+      </ScrollView>
     </View>
   );
 }
@@ -69,14 +135,17 @@ export default function Register({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
+  },
+  scrollViewStyle: {
+    flex: 1,
+    padding: 15,
     justifyContent: "center",
   },
   text: {
-    fontSize: 23,
-    marginHorizontal: 13,
-    marginBottom: 30,
+    fontSize: 40,
+    textAlign: "center",
+    marginBottom: 32,
+    fontWeight: "700",
   },
   btn: {
     marginVertical: 8,

@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
 import { authenticateLogin } from "../store/auth";
 import { useDispatch } from "react-redux";
-import Hamburger from "./Navbar.js";
+import Hamburger from "./Navbar"
+import { Header } from "react-native-elements";
 
 export default function Home({ navigation }) {
   const dispatch = useDispatch();
@@ -42,6 +43,10 @@ export default function Home({ navigation }) {
       <Button
         title="Profile"
         onPress={() => navigation.navigate("Profile")}
+        ></Button>
+        <Button>
+        title="User Contacts"
+        onPress={() => navigation.navigate("User Contacts")}
       ></Button>
     </View>
   );
