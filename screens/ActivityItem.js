@@ -7,23 +7,24 @@ import {
   StyleSheet,
   Text,
   TouchableWithoutFeedback,
+  View
+  
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchPlaces } from "../store/places";
 import hamburger from "../assets/Hamburger_icon.png";
-import LottiveView from 'lottie-react-native';
-
+import octopus from "../assets/octopus.json";
+import LottieView from "lottie-react-native"
 
 const { width: screenWidth } = Dimensions.get("window");
 const width = screenWidth - 25;
 export const WIDTH = width + 16;
 
-
 export default function ActivityItem(props) {
   const dispatch = useDispatch();
   const location = useSelector((state) => state.location);
   // state = {
-    //   navigationAnimation: new Animated.Value(0),
+  //   navigationAnimation: new Animated.Value(0),
   // };
 
   const [navigationAnimation, setNavigationAnimation] = useState(
@@ -59,36 +60,9 @@ export default function ActivityItem(props) {
 
   return (
     <Animated.View style={styles.container}>
-      <Animated.Image
-        source={hamburger}
-        resizeMode="contain"
-        style={[
-          styles.image,
-          {
-            width: navigationAnimation.interpolate({
-              inputRange: [0, 1],
-              outputRange: [width - 25, 100],
-              extrapolate: "clamp",
-            }),
-            height: navigationAnimation.interpolate({
-              inputRange: [0, 1],
-              outputRange: [width - 25, 100],
-              extrapolate: "clamp",
-            }),
-          },
-          {
-            transform: [
-              {
-                scale: animatedValue.interpolate({
-                  inputRange: [itemIndex - 1, itemIndex, itemIndex + 1],
-                  outputRange: [1, 1.25, 1],
-                  extrapolate: "clamp",
-                }),
-              },
-            ],
-          },
-        ]}
-      />
+      <View style={styles.lottieView}>
+        <LottieView source={octopus} autoPlay loop></LottieView>
+      </View>
       <TouchableWithoutFeedback style={styles.wrapper} onPress={onNavigate}>
         <Animated.Text
           style={[
@@ -125,9 +99,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
     letterSpacing: 1.2,
-    color: 'black',
+    color: "black",
     backgroundColor: "transparent",
-    alignSelf: 'center',
-    paddingRight: 24
+    alignSelf: "center",
+    paddingRight: 24,
+  },
+  lottieView: {
+    width: "100%",
+    height: "100%",
   },
 });
