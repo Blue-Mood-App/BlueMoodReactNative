@@ -7,9 +7,6 @@ import {
   ScrollView,
   SafeAreaView,
   Button,
-  Alert,
-  TouchableOpacity,
-  Image,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -18,11 +15,10 @@ import {
   addUserActivities,
   clear,
 } from "../store/sortedActivities";
-import SideSwipe from "react-native-sideswipe";
 import circle from "../assets/circle.png";
+import SideSwipeCarousel from "./SideSwipe";
 
 const EditMoods = ({ navigation }) => {
-  const [index, setIndex] = useState(0);
   const user = useSelector((state) => state.auth);
   const sortedActivities = useSelector((state) => state.sortedActivities);
   const dispatch = useDispatch();
@@ -32,9 +28,9 @@ const EditMoods = ({ navigation }) => {
     return () => dispatch(clear());
   }, []);
 
-  const handleClick = (element, currentActivity, queensAddress) => {
-    dispatch(editMoodActivities(queensAddress));
-  };
+  // const handleClick = (element, currentActivity, queensAddress) => {
+  //   dispatch(editMoodActivities(queensAddress));
+  // };
 
   const handleSubmit = (userId) => {
     let currentActivities = [];
@@ -52,37 +48,37 @@ const EditMoods = ({ navigation }) => {
     navigation.navigate("Select Mood");
   };
 
-  const Item = (currentObj) => {
-    const { allObj, currentActivity, queensAddress, id, name } = currentObj;
+  // const Item = (currentObj) => {
+  //   const { allObj, currentActivity, queensAddress, id, name } = currentObj;
 
-    return (
-      <TouchableOpacity
-        onPress={() => handleClick(allObj, currentActivity, queensAddress)}
-        style={styles.container}
-      >
-        {currentActivity ? (
-          <Image style={styles.selectedImage} source={circle} />
-        ) : (
-          <Image style={styles.image} source={circle} />
-        )}
-        <Text style={styles.text}>{name}</Text>
-      </TouchableOpacity>
-    );
-  };
+  //   return (
+  //     <TouchableOpacity
+  //       onPress={() => handleClick(allObj, currentActivity, queensAddress)}
+  //       style={styles.container}
+  //     >
+  //       {currentActivity ? (
+  //         <Image style={styles.selectedImage} source={circle} />
+  //       ) : (
+  //         <Image style={styles.image} source={circle} />
+  //       )}
+  //       <Text style={styles.text}>{name}</Text>
+  //     </TouchableOpacity>
+  //   );
+  // };
 
-  const renderItem = (currObj) => {
-    const { item } = currObj;
-    return (
-      <Item
-        allObj={currObj}
-        currentActivity={item.currentActivity}
-        queensAddress={item.queensAddress}
-        id={item.id}
-        name={item.name}
-        image={circle}
-      />
-    );
-  };
+  // const renderItem = (currObj) => {
+  //   const { item } = currObj;
+  //   return (
+  //     <Item
+  //       allObj={currObj}
+  //       currentActivity={item.currentActivity}
+  //       queensAddress={item.queensAddress}
+  //       id={item.id}
+  //       name={item.name}
+  //       image={circle}
+  //     />
+  //   );
+  // };
 
   return (
     <SafeAreaView>
@@ -93,13 +89,14 @@ const EditMoods = ({ navigation }) => {
             return (
               <View key={idx}>
                 <Text style={styles.text1}>{`when I am ${el[0].mood}...`}</Text>
-                <SideSwipe
+                <SideSwipeCarousel currentRow={el} />
+                {/* <SideSwipe
                   index={index}
                   data={el}
                   renderItem={renderItem}
                   itemWidth={el.length * 10}
                   onIndexChange={(index) => setIndex(index)}
-                />
+                /> */}
               </View>
             );
           })}
@@ -113,37 +110,8 @@ const styles = StyleSheet.create({
     fontSize: 17,
     padding: 10,
   },
-  title: {
-    textAlign: "center",
-    paddingTop: 15,
-    fontSize: 20,
-  },
   contentContainer: {
     paddingVertical: 20,
-  },
-  container: {
-    backgroundColor: "transparent",
-    padding: 16,
-    margin: 6,
-  },
-  text: {
-    fontSize: 13,
-    width: 60,
-    textAlign: "center",
-  },
-  image: {
-    width: 55,
-    height: 55,
-    borderWidth: 5,
-    borderRadius: 32,
-    borderColor: "#8AB0AB",
-  },
-  selectedImage: {
-    width: 55,
-    height: 55,
-    borderWidth: 5,
-    borderRadius: 32,
-    borderColor: "#EC7505",
   },
 });
 
