@@ -10,6 +10,7 @@ export default function Home({ navigation }) {
 
   return (
     <View style={styles.homeContainer}>
+      <Hamburger />
       <Text>Welcome to BlueMood</Text>
 
       <Button

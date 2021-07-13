@@ -20,14 +20,16 @@ import ActivitiesPage from "./screens/ActivitiesPage";
 import LoggedOut from "./screens/LoggedOut";
 import store from "./store";
 import { Provider } from "react-redux";
+import Hamburger from "./screens/Navbar";
+import RegisterActivities from "./screens/RegisterActivities";
+import EditProfile from "./screens/EditProfile";
+import EditMoods from "./screens/EditMoods";
 import RegisterActivities from "./screens/RegisterActivities";
 import UserContacts from "./screens/UserContacts";
 import hamburger from "./assets/Hamburger_icon.png";
 import AniActivitiesPage from "./screens/AniActivitiesPage";
 import Menu from "./screens/Menu";
 import { me } from "./store/auth";
-
-
 
 const Stack = createStackNavigator();
 const RootStack = createStackNavigator();
@@ -88,6 +90,8 @@ const Main = ({ navigation }) => {
       <Stack.Screen name="User Contacts" component={UserContacts} />
       <Stack.Screen name="Select Activity" component={ActivitiesPage} />
       <Stack.Screen name="Select Activity Ani" component={AniActivitiesPage} />
+      <Stack.Screen name="Select Activity" component={ActivitiesPage} />
+      <Stack.Screen name="Profile" component={EditMoods} />
     </Stack.Navigator>
   );
 };
@@ -95,6 +99,7 @@ const Main = ({ navigation }) => {
 export default function App() {
   return (
     <Provider store={store}>
+      <Hamburger style={styles.container} />
       <NavigationContainer>
         <RootStack.Navigator mode="modal" headerMode="none">
           <RootStack.Screen
