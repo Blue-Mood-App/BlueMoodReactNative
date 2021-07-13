@@ -14,7 +14,7 @@ export default function Menu({ navigation }) {
 
   return auth.id ? (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => navigation.goBack()}>
+      <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
         <Text> Profile </Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={handleLogout}>
