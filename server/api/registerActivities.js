@@ -33,7 +33,7 @@ router.post("/", async function (req, res, next) {
 router.delete("/:activityId/:userId/:moodId", async function (req, res, next) {
   try {
     const { activityId, userId, moodId } = req.params;
-    console.log(req.params);
+
     await UserActivity.destroy({
       where: {
         activityId,
@@ -51,7 +51,7 @@ router.delete("/:activityId/:userId/:moodId", async function (req, res, next) {
 router.delete("/:activityId/:userId/:moodId", async function (req, res, next) {
   try {
     const { activityId, userId, moodId } = req.params;
-    console.log(req.params);
+
     await UserActivity.destroy({
       where: {
         activityId,
@@ -70,11 +70,14 @@ router.put("/:userId", async function (req, res, next) {
   const { agreedToMeet, contacts } = req.body;
   const { userId } = req.params;
   try {
-    await User.update({ agreedToMeet, contactList: contacts }, { where: { id: userId }});
+    await User.update(
+      { agreedToMeet, contactList: contacts },
+      { where: { id: userId } }
+    );
     res.sendStatus(200);
   } catch (err) {
-    console.error(err)
+    console.error(err);
   }
-})
+});
 
 module.exports = router;

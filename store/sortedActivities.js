@@ -48,45 +48,6 @@ const sortUserActivities = (mood, activities, userActiv) => {
   });
 
   return activitiesArr;
-  // let moodId = mood.id;
-  // let newArr = [];
-  // let newArr2 = [];
-  // let activitiesArr = [];
-
-  // for (let i = 0; i < activities.length; i++) {
-  //   let newObj = { ...activities[i] };
-  //   newObj.currentActivity = false;
-  //   newObj.mood = mood.name;
-  //   newObj.queensAddress = `${newObj["id"]}-${moodId}`;
-  //   activitiesArr.push(newObj);
-  // }
-  // if (userActiv[0]) {
-  //   for (let z = 0; z < userActiv.length; z++) {
-  //     if (userActiv[z].moodId === moodId) {
-  //       newArr.push(userActiv[z]);
-  //     }
-  //   }
-
-  //   for (let z = 0; z < newArr.length; z++) {
-  //     for (let j = 0; j < activitiesArr.length; j++) {
-  //       if (activitiesArr[j].id === newArr[z].activityId) {
-  //         if (!newArr2.includes(activitiesArr[j])) {
-  //           activitiesArr[j].currentActivity = true;
-  //           newArr2.push(activitiesArr[j]);
-  //         }
-  //       }
-  //     }
-  //   }
-
-  //   for (let m = 0; m < activitiesArr.length; m++) {
-  //     if (!newArr2.includes(activitiesArr[m])) {
-  //       activitiesArr[m].currentActivity = false;
-  //       newArr2.push(activitiesArr[m]);
-  //     }
-  //   }
-  // }
-
-  // return newArr2;
 };
 
 let sortedActivitiesArr = [];

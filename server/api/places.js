@@ -24,7 +24,6 @@ Once a user picks an activity, we need to find this activity in the table, grab 
 
     const mapData = await data.json();
 
-    // console.log(blue('in route', mapData))
     res.send(mapData);
   } catch (error) {
     console.error(error);

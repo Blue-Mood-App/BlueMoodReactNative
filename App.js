@@ -24,7 +24,6 @@ import Hamburger from "./screens/Navbar";
 import RegisterActivities from "./screens/RegisterActivities";
 import EditProfile from "./screens/EditProfile";
 import EditMoods from "./screens/EditMoods";
-import RegisterActivities from "./screens/RegisterActivities";
 import UserContacts from "./screens/UserContacts";
 import hamburger from "./assets/Hamburger_icon.png";
 import AniActivitiesPage from "./screens/AniActivitiesPage";
@@ -40,26 +39,26 @@ const Main = ({ navigation }) => {
 
   useEffect(() => {
     dispatch(me());
-    return () => {
-    };
+    return () => {};
   }, []);
 
-  console.log(auth)
-
   return (
-  <Stack.Navigator>
- { !auth.id ? (
-      <Stack.Screen
-        name="Home"
-        options={{
-          headerRight: () => (
-            <TouchableOpacity onPress={() => navigation.navigate("Menu")}>
-              <Image style={styles.icon} source={hamburger} />
-            </TouchableOpacity>
-          ),
-        }}
-        component={Home}
-      /> ) : <></>}
+    <Stack.Navigator>
+      {!auth.id ? (
+        <Stack.Screen
+          name="Home"
+          options={{
+            headerRight: () => (
+              <TouchableOpacity onPress={() => navigation.navigate("Menu")}>
+                <Image style={styles.icon} source={hamburger} />
+              </TouchableOpacity>
+            ),
+          }}
+          component={Home}
+        />
+      ) : (
+        <></>
+      )}
       <Stack.Screen
         name="Select Mood"
         component={MoodsPage}
@@ -72,7 +71,7 @@ const Main = ({ navigation }) => {
         }}
       />
       <Stack.Screen name="Where to go" component={ActivitiesMap} />
-      { auth.id ? (
+      {auth.id ? (
         <Stack.Screen
           name="Home"
           options={{
@@ -83,14 +82,16 @@ const Main = ({ navigation }) => {
             ),
           }}
           component={Home}
-        /> ) : <></>}
+        />
+      ) : (
+        <></>
+      )}
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Register" component={Register} />
       <Stack.Screen name="Register Activities" component={RegisterActivities} />
       <Stack.Screen name="User Contacts" component={UserContacts} />
       <Stack.Screen name="Select Activity" component={ActivitiesPage} />
       <Stack.Screen name="Select Activity Ani" component={AniActivitiesPage} />
-      <Stack.Screen name="Select Activity" component={ActivitiesPage} />
       <Stack.Screen name="Profile" component={EditMoods} />
     </Stack.Navigator>
   );

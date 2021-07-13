@@ -48,7 +48,6 @@ const EditMoods = ({ navigation }) => {
       }
     });
 
-    console.log(sortedActivities.length, "in component");
     dispatch(addUserActivities(userId, currentActivities.flat()));
     navigation.navigate("Select Mood");
   };

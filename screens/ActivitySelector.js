@@ -54,7 +54,6 @@ const ActivitySelector = ({ activities, moodId }) => {
     return <Item id={item.id} name={item.name} image={circle} />;
   };
 
-  console.log(selectedActivities, "state");
   return (
     <SideSwipe
       index={index}
