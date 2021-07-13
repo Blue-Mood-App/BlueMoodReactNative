@@ -8,6 +8,9 @@ const Activity = db.define("activity", {
   searchQuery: {
     type: Sequelize.STRING,
   },
+  image: {
+    type: Sequelize.STRING,
+  },
 });
 
 module.exports = Activity;

@@ -34,7 +34,7 @@ export default function ActivityItem(props) {
   // componentWillMount = () => {
   //   Image.prefetch(this.props.image);
   // };
-  const { searchQuery, name } = props.activity;
+  const { searchQuery, name, image} = props.activity;
 
   const {
     animatedValue,
