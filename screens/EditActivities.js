@@ -4,43 +4,41 @@ import { StyleSheet, Text, TouchableOpacity, Image } from "react-native";
 import SideSwipe from "react-native-sideswipe";
 import circle from "../assets/circle.png";
 import { setFavActivity, deleteFavActivity } from "../store/registration";
-import {
-  useFonts,
-  OpenSansCondensed_300Light,
-  OpenSansCondensed_700Bold,
-} from "@expo-google-fonts/open-sans-condensed";
 
 const ActivitySelector = ({ activities, moodId }) => {
-  let [fontsLoaded] = useFonts({
-    OpenSansCondensed_300Light,
-    OpenSansCondensed_700Bold,
-  });
-
   const [index, setIndex] = useState(0);
   const [selectedActivities, setSelectedActivities] = useState({});
+  const [allActivities, setAllActivities] = useState(activities);
+  const [usersLoadedActivity, setUserLoadedActivity] = useState([]);
 
   //accessing user data
   const user = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const { id: userId } = user;
 
-  const handleClick = (activityId) => {
-    if (!selectedActivities[activityId]) {
-      setSelectedActivities({ ...selectedActivities, [activityId]: true });
-      dispatch(setFavActivity(activityId, userId, moodId));
-    } else {
-      setSelectedActivities({ ...selectedActivities, [activityId]: false });
-      dispatch(deleteFavActivity(activityId, userId, moodId));
-    }
+  const handleClick = (currentActivity, queensAddress) => {
+    setAllActivities(activities);
+    // console.log(allActivities, "in child component");
+    // if (!selectedActivities[currentActivity]) {
+    //   setSelectedActivities({ ...selectedActivities, [currentActivity]: true });
+    //   dispatch(setFavActivity(currentActivity, userId, moodId));
+    // } else {
+    //   setSelectedActivities({
+    //     ...selectedActivities,
+    //     [currentActivity]: false,
+    //   });
+    //   //dispatch delete thunk
+    //   dispatch(deleteFavActivity(currentActivity, userId, moodId));
+    // }
   };
 
-  const Item = ({ id, name }) => {
+  const Item = ({ currentActivity, queensAddress, id, name }) => {
     return (
       <TouchableOpacity
-        onPress={() => handleClick(id)}
+        onPress={() => handleClick(currentActivity, queensAddress)}
         style={styles.container}
       >
-        {selectedActivities[id] ? (
+        {currentActivity ? (
           <Image style={styles.selectedImage} source={circle} />
         ) : (
           <Image style={styles.image} source={circle} />
@@ -51,10 +49,19 @@ const ActivitySelector = ({ activities, moodId }) => {
   };
 
   const renderItem = ({ item }) => {
-    return <Item id={item.id} name={item.name} image={circle} />;
+    return (
+      <Item
+        currentActivity={item.currentActivity}
+        queensAddress={item.queensAddress}
+        id={item.id}
+        name={item.name}
+        image={circle}
+      />
+    );
   };
 
-  console.log(selectedActivities, "state");
+  
+
   return (
     <SideSwipe
       index={index}
@@ -68,18 +75,14 @@ const ActivitySelector = ({ activities, moodId }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "transparent",
-    paddingHorizontal: 5,
-    marginHorizontal: 14,
-    alignItems: "center",
+    padding: 16,
+    margin: 6,
   },
   text: {
-    fontSize: 16,
-    width: 65,
+    fontSize: 13,
+    width: 60,
     textAlign: "center",
-    letterSpacing: 1.4,
-    fontFamily: "OpenSansCondensed_300Light",
   },
   image: {
     width: 55,

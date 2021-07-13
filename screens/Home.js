@@ -10,6 +10,7 @@ export default function Home({ navigation }) {
 
   return (
     <View style={styles.homeContainer}>
+      <Hamburger />
       <Text>Welcome to BlueMood</Text>
       <Button
         title="Go to Activities Map Demo"
@@ -40,6 +41,10 @@ export default function Home({ navigation }) {
         onPress={() => navigation.navigate("Select Activity")}
       ></Button>
       <Button
+        title="Profile"
+        onPress={() => navigation.navigate("Profile")}
+        ></Button>
+        <Button>
         title="User Contacts"
         onPress={() => navigation.navigate("User Contacts")}
       ></Button>
