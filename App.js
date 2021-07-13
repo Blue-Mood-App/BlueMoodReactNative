@@ -17,6 +17,7 @@ import Login from "./screens/Login";
 import Register from "./screens/Register";
 import MoodsPage from "./screens/MoodsPage";
 import ActivitiesPage from "./screens/ActivitiesPage";
+import LoggedOut from "./screens/LoggedOut";
 import store from "./store";
 import { Provider } from "react-redux";
 import RegisterActivities from "./screens/RegisterActivities";
@@ -25,6 +26,7 @@ import hamburger from "./assets/Hamburger_icon.png";
 import AniActivitiesPage from "./screens/AniActivitiesPage";
 import Menu from "./screens/Menu";
 import { me } from "./store/auth";
+
 
 
 const Stack = createStackNavigator();
@@ -40,34 +42,50 @@ const Main = ({ navigation }) => {
     };
   }, []);
 
+  console.log(auth)
+
   return (
-    <Stack.Navigator initialRouteName="Home">
+  <Stack.Navigator>
+ { !auth.id ? (
       <Stack.Screen
         name="Home"
         options={{
           headerRight: () => (
-            <TouchableOpacity onPress={() => navigation.navigate("MyModal")}>
+            <TouchableOpacity onPress={() => navigation.navigate("Menu")}>
               <Image style={styles.icon} source={hamburger} />
             </TouchableOpacity>
           ),
         }}
         component={Home}
-      />
-      <Stack.Screen name="Where to go" component={ActivitiesMap} />
-      <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="Register" component={Register} />
+      /> ) : <></>}
       <Stack.Screen
         name="Select Mood"
         component={MoodsPage}
         options={{
           headerRight: () => (
-            <TouchableOpacity onPress={() => navigation.navigate("MyModal")}>
+            <TouchableOpacity onPress={() => navigation.navigate("Menu")}>
               <Image style={styles.icon} source={hamburger} />
             </TouchableOpacity>
           ),
         }}
       />
+      <Stack.Screen name="Where to go" component={ActivitiesMap} />
+      { auth.id ? (
+        <Stack.Screen
+          name="Home"
+          options={{
+            headerRight: () => (
+              <TouchableOpacity onPress={() => navigation.navigate("Menu")}>
+                <Image style={styles.icon} source={hamburger} />
+              </TouchableOpacity>
+            ),
+          }}
+          component={Home}
+        /> ) : <></>}
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Register" component={Register} />
       <Stack.Screen name="Register Activities" component={RegisterActivities} />
+      <Stack.Screen name="User Contacts" component={UserContacts} />
       <Stack.Screen name="Select Activity" component={ActivitiesPage} />
       <Stack.Screen name="Select Activity Ani" component={AniActivitiesPage} />
     </Stack.Navigator>
@@ -84,7 +102,8 @@ export default function App() {
             component={Main}
             options={{ headerShown: false }}
           />
-          <RootStack.Screen name="MyModal" component={Menu} />
+          <RootStack.Screen name="Menu" component={Menu} />
+          <RootStack.Screen name="Logged Out" component={LoggedOut} />
         </RootStack.Navigator>
       </NavigationContainer>
     </Provider>
