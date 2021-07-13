@@ -12,41 +12,14 @@ export default function Home({ navigation }) {
     <View style={styles.homeContainer}>
       <Hamburger />
       <Text>Welcome to BlueMood</Text>
+
       <Button
-        title="Go to Activities Map Demo"
-        onPress={() => navigation.navigate("Where to go")}
-        style={styles.btn}
-      ></Button>
-      <Button
-        title="Go to Login"
+        title="Log In"
         onPress={() => navigation.navigate("Login")}
-        style={styles.btn}
       ></Button>
       <Button
-        title="Test auth"
-        onPress={() =>
-          dispatch(authenticateLogin("yagna@email.com", "abc", "login"))
-        }
-      ></Button>
-      <Button
-        title="Select Mood"
+        title="Try It Out"
         onPress={() => navigation.navigate("Select Mood")}
-      ></Button>
-      <Button
-        title="Go to Register Activities"
-        onPress={() => navigation.navigate("Register Activities")}
-      ></Button>
-      <Button
-        title="Select Activity"
-        onPress={() => navigation.navigate("Select Activity")}
-      ></Button>
-      <Button
-        title="Profile"
-        onPress={() => navigation.navigate("Profile")}
-        ></Button>
-        <Button>
-        title="User Contacts"
-        onPress={() => navigation.navigate("User Contacts")}
       ></Button>
     </View>
   );
