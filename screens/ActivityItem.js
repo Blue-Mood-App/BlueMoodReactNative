@@ -15,6 +15,7 @@ import { fetchPlaces } from "../store/places";
 import hamburger from "../assets/Hamburger_icon.png";
 import octopus from "../assets/octopus.json";
 import LottieView from "lottie-react-native"
+import animationPaths from "../scripts/animationPaths";
 
 const { width: screenWidth } = Dimensions.get("window");
 const width = screenWidth - 25;
@@ -34,7 +35,8 @@ export default function ActivityItem(props) {
   // componentWillMount = () => {
   //   Image.prefetch(this.props.image);
   // };
-  const { searchQuery, name, image} = props.activity;
+  const { searchQuery, name } = props.activity;
+
 
   const {
     animatedValue,
@@ -44,8 +46,9 @@ export default function ActivityItem(props) {
   } = props;
 
   const onNavigate = () => {
-    dispatch(fetchPlaces(searchQuery, location));
-    navigation.navigate("Where to go");
+    //dispatch(fetchPlaces(searchQuery, location));
+    //navigation.navigate("Where to go");
+    console.log(name);
 
     // Animated.timing(navigationAnimation, {
     //   toValue: 1,
@@ -61,7 +64,7 @@ export default function ActivityItem(props) {
   return (
     <Animated.View style={styles.container}>
       <View style={styles.lottieView}>
-        <LottieView source={octopus} autoPlay loop></LottieView>
+        <LottieView source={animationPaths[searchQuery]} autoPlay loop></LottieView>
       </View>
       <TouchableWithoutFeedback style={styles.wrapper} onPress={onNavigate}>
         <Animated.Text
