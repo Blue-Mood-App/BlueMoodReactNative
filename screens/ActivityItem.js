@@ -64,7 +64,7 @@ export default function ActivityItem(props) {
   return (
     <Animated.View style={styles.container}>
       <View style={styles.lottieView}>
-        <LottieView source={animationPaths[searchQuery]} autoPlay loop></LottieView>
+        <LottieView source={animationPaths[searchQuery]} autoPlay loop style={styles.image}></LottieView>
       </View>
       <TouchableWithoutFeedback style={styles.wrapper} onPress={onNavigate}>
         <Animated.Text
@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     overflow: "visible",
     alignItems: "flex-start",
+    backgroundColor: "#E5FFF9",
     marginRight: 16,
   },
   image: {
