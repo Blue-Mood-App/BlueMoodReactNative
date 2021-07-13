@@ -84,7 +84,6 @@ const Main = ({ navigation }) => {
 export default function App() {
   return (
     <Provider store={store}>
-      <Hamburger style={styles.container} />
       <NavigationContainer>
         <RootStack.Navigator mode="modal" headerMode="none">
           <RootStack.Screen
