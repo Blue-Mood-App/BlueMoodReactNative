@@ -28,6 +28,7 @@ export default function MoodsPage({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.text}>How you feeling today?</Text>
       <TouchableOpacity
         style={styles.btnSpacing}
         onPress={() => handleSubmit(1)}
@@ -97,8 +98,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "lightgreen",
   },
+  text: {
+    fontSize: 30,
+    marginBottom: 20,
+  },
   icon: {
     height: 100,
     width: 100,
+    marginVertical: 5,
   },
 });
