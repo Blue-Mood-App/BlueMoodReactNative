@@ -46,9 +46,8 @@ export default function ActivityItem(props) {
   } = props;
 
   const onNavigate = () => {
-    //dispatch(fetchPlaces(searchQuery, location));
-    //navigation.navigate("Where to go");
-    console.log(name);
+    dispatch(fetchPlaces(searchQuery, location));
+    navigation.navigate("Where to go");
 
     // Animated.timing(navigationAnimation, {
     //   toValue: 1,
@@ -95,8 +94,8 @@ const styles = StyleSheet.create({
     marginRight: 16,
   },
   image: {
-    width: width - 25,
-    height: width - 25,
+    display: "flex",
+    flex: 1,
     marginBottom: 36,
   },
 

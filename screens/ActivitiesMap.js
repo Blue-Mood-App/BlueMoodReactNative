@@ -1,12 +1,18 @@
-import React from "react";
-import { Alert, Dimensions, StyleSheet, Text, View } from "react-native";
+import React, { useCallback } from "react";
+import { Dimensions, StyleSheet, Text, View } from "react-native";
 import { useSelector } from "react-redux";
 import MapView, { Callout, Marker } from "react-native-maps";
 import MarkerCallout from "./MarkerCallout";
+import * as Linking from 'expo-linking';
 
 export default function ActivitiesMap() {
   const location = useSelector((state) => state.location);
   const places = useSelector((state) => state.places);
+
+  const handleClick = async (link) => {
+    console.log(link);
+    Linking.openURL(link);
+  };
 
   return !places.businesses || !location ? (
     <Text>loading...</Text>
@@ -24,25 +30,33 @@ export default function ActivitiesMap() {
         showsPointsOfInterest={false}
       >
         {places.businesses.map((place) => {
-          const { id, name, coordinates, image_url, distance, url } = place;
+          const lat = location.coords.latitude;
+          const lng = location.coords.longitude;
+          const { id, name, coordinates, image_url, url } = place;
+          const destLat = coordinates.latitude
+          const destLng = coordinates.longitude
+          const mapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${lat}+${lng}&destination=${destLat}+${destLng}`;
+
           return (
             <Marker
               key={id}
               coordinate={{
                 latitude: coordinates.latitude,
                 longitude: coordinates.longitude,
-              }}
-            >
+              }}>
               <Callout
                 style={styles.callout}
-                onPress={() => Alert.alert("Pending feature")}
+                onPress={() => handleClick(mapsUrl)}
               >
+
                 <MarkerCallout
                   name={name}
                   imageUrl={image_url}
                   url={url}
+                  location={location}
                   cat="Coffee Shop"
                 />
+
               </Callout>
             </Marker>
           );
@@ -53,6 +67,13 @@ export default function ActivitiesMap() {
 }
 
 const styles = StyleSheet.create({
+  callout: {
+    height: 250,
+    width: 150,
+    margin: 0,
+    padding: 0,
+    overflow: "hidden",
+  },
   container: {
     flex: 1,
     backgroundColor: "#fff",
@@ -67,12 +88,5 @@ const styles = StyleSheet.create({
   map: {
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height,
-  },
-  callout: {
-    height: 250,
-    width: 150,
-    margin: 0,
-    padding: 0,
-    overflow: "hidden",
   },
 });

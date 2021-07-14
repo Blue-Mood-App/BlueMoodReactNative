@@ -32,7 +32,7 @@
     "expo-secure-store": "~10.2.0",
     "expo-splash-screen": "~0.11.2",
     "expo-status-bar": "~1.0.4",
-    "expo-updates": "~0.8.0",
+    "expo-updates": "~0.8.1",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
@@ -59,7 +59,7 @@
     "react-native-screens": "~3.4.0",
     "react-native-sideswipe": "^1.5.0",
     "react-native-ui-lib": "^5.27.0",
-    "react-native-unimodules": "~0.14.3",
+    "react-native-unimodules": "~0.14.5",
     "react-native-web": "~0.13.12",
     "react-navigation-header-buttons": "^7.0.1",
     "react-redux": "^7.2.4",
@@ -67,7 +67,8 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
-    "sequelize": "^6.6.4"
+    "sequelize": "^6.6.4",
+    "expo-linking": "~2.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"
