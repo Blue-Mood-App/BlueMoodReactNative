@@ -34,5 +34,19 @@ router.get("/:moodId", requireToken, async function (req, res, next) {
     console.log(error);
   }
 });
+router.get("/demo/:moodId", async function (req, res, next) {
+  try {
+    const activities = await UserActivity.findAll({
+      where: {
+        userId: 1,
+        moodId: +req.params.moodId,
+      },
+      include: [Activity],
+    });
+    res.send(activities);
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 module.exports = router;

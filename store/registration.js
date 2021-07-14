@@ -70,6 +70,8 @@ export const deleteFavActivity = (activityId, userId, moodId) => async () => {
   }
 };
 
+//delete unselected favorite activites thunk goes here
+
 //update contact list thunk goes here
 export const setContactList = (agreedToMeet, contacts, userId) => async () => {
   try {
