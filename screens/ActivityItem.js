@@ -7,14 +7,13 @@ import {
   StyleSheet,
   Text,
   TouchableWithoutFeedback,
-  View
-  
+  View,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchPlaces } from "../store/places";
 import hamburger from "../assets/Hamburger_icon.png";
 import octopus from "../assets/octopus.json";
-import LottieView from "lottie-react-native"
+import LottieView from "lottie-react-native";
 import animationPaths from "../scripts/animationPaths";
 
 const { width: screenWidth } = Dimensions.get("window");
@@ -39,7 +38,6 @@ export default function ActivityItem(props) {
   } = props;
 
   const onNavigate = () => {
-
     dispatch(fetchPlaces(searchQuery, location));
     navigation.navigate("Where to go");
     Animated.timing(navigationAnimation, {
@@ -48,20 +46,24 @@ export default function ActivityItem(props) {
       useNativeDriver: false,
       easing: Easing.out(Easing.quad),
     }).start(() => {
-      navigation.navigate("Where to go")
-      });
-      setTimeout(() => navigationAnimation.setValue(0));
+      navigation.navigate("Where to go");
+    });
+    setTimeout(() => navigationAnimation.setValue(0));
   };
 
   return (
     <Animated.View style={styles.container}>
-      <View style={styles.polaroidWrapper} >
-      <View>
-        <LottieView source={animationPaths[searchQuery]}  autoPlay loop style={styles.image} ></LottieView>
+      <View style={styles.polaroidWrapper}>
+        <View>
+          <LottieView
+            source={animationPaths[searchQuery]}
+            autoPlay
+            loop
+            style={styles.image}
+          ></LottieView>
         </View>
-        </View>
-        
-     
+      </View>
+
       <TouchableWithoutFeedback style={styles.wrapper} onPress={onNavigate}>
         <Animated.Text
           style={[
@@ -83,44 +85,37 @@ export default function ActivityItem(props) {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center", 
+    alignItems: "center",
     alignSelf: "center",
     width: width,
-    position: 'relative',
+    position: "relative",
     justifyContent: "space-around",
     overflow: "visible",
     backgroundColor: "#E5FFF9",
     marginRight: 16,
   },
   image: {
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
     maxWidth: 350,
-    overflow: 'hidden',
+    overflow: "hidden",
     justifyContent: "center",
   },
   polaroidWrapper: {
-    flexDirection: "row", 
+    flexDirection: "row",
     height: "70%",
     flexWrap: "wrap",
-    overflow: 'hidden',
+    overflow: "hidden",
     width: "100%",
     borderWidth: 20,
     borderBottomWidth: 100,
- },
+  },
   title: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 0,
-    color: 'white',
+    color: "white",
     fontSize: 30,
     paddingBottom: 50,
     letterSpacing: 1.2,
-    // color: "white",
-    // alignSelf: "center",
-    // width: "100%",
-    // position: 'absolute',
-    // top: '100%',
-    // margin: 50,
-    // textAlign: "center", 
   },
 });
