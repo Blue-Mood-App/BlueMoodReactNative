@@ -27,7 +27,7 @@ export default function MarkerCallout(props) {
         <Text style={styles.calloutImgContainer}>
           <Image
             defaultSource={placeholder}
-            source={{uri: imageUrl }}
+            source={{uri: imageUrl ? imageUrl : null}}
             style={styles.calloutImg}
             resizeMethod="scale"
           />
@@ -35,12 +35,12 @@ export default function MarkerCallout(props) {
         <Text style={styles.calloutTitle}>
           {name}
         </Text>
-        <CalloutSubview onPress={() => handleDirectionsClick(mapsUrl)}>
+        <CalloutSubview onPress={() => handleDirectionsClick(detailsUrl)}>
           <Button mode="text">
             <Ionicons name="information-circle" size={24} color="#4D4DFF" />
           </Button>
         </CalloutSubview>
-        <CalloutSubview onPress={() => handleDetailsClick(detailsUrl)}>
+        <CalloutSubview onPress={() => handleDetailsClick(mapsUrl)}>
           <Button mode="text">
             <FontAwesome5 name="directions" size={21} color="#4D4DFF" />
           </Button>
@@ -60,37 +60,39 @@ const styles = StyleSheet.create({
     alignContent: "center",
     overflow: "hidden",
     backgroundColor: '#FEFCFD',
-    borderRadius: 13,
     paddingHorizontal: 8,
     paddingVertical: 8,
     borderColor: "#F0F0F0",
+    borderRadius: 13,
     borderWidth: 3,
   },
-  calloutImgContainer: {
-    marginTop: 0,
+  calloutTitle: {
+    fontSize: 13,
+    color: "#333333",
+    flexBasis: "100%",
     marginBottom: 8,
-    padding: 0,
-    alignSelf: "flex-start",
-    height: 150,
-    width: "100%",
-    backgroundColor: "#EAEAEA",
+  },
+  calloutTxt: {
+    fontSize: 10,
+    color: "#999999",
+    flexBasis: "100%",
+  },
+  calloutImgContainer: {
+      marginTop: 0,
+      marginBottom: 8,
+      padding: 0,
+      alignSelf: "flex-start",
+      height: 150,
+      width: "100%",
+      backgroundColor: "#EAEAEA",
+      borderRadius: 13,
+      overflow: "hidden",
   },
   calloutImg: {
-    width: "100%",
-    height: 150,
-    resizeMode: "cover",
-},
-    calloutTitle: {
-      fontSize: 13,
-      color: "#333333",
-      flexBasis: "100%",
-      marginBottom: 8,
-    },
-    calloutTxt: {
-      fontSize: 10,
-      color: "#999999",
-      flexBasis: "100%",
-    },
+      width: 125,
+      height: 150,
+      borderRadius: 13,
+  },
     calloutIcons: {
       color: "#666",
       width: "45%",
