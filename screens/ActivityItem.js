@@ -15,6 +15,11 @@ import hamburger from "../assets/Hamburger_icon.png";
 import octopus from "../assets/octopus.json";
 import LottieView from "lottie-react-native";
 import animationPaths from "../scripts/animationPaths";
+import { AppLoading } from "expo";
+import {
+  useFonts,
+  PatrickHandSC_400Regular,
+} from "@expo-google-fonts/patrick-hand-sc";
 
 const { width: screenWidth } = Dimensions.get("window");
 const width = screenWidth - 25;
@@ -23,6 +28,9 @@ export const WIDTH = width + 16;
 export default function ActivityItem(props) {
   const dispatch = useDispatch();
   const location = useSelector((state) => state.location);
+  let [fontsLoaded] = useFonts({
+    PatrickHandSC_400Regular,
+  });
 
   const [navigationAnimation, setNavigationAnimation] = useState(
     new Animated.Value(0)
@@ -76,7 +84,7 @@ export default function ActivityItem(props) {
             },
           ]}
         >
-          {name.toUpperCase()}
+          {name}
         </Animated.Text>
       </TouchableWithoutFeedback>
     </Animated.View>
@@ -117,5 +125,6 @@ const styles = StyleSheet.create({
     fontSize: 30,
     paddingBottom: 50,
     letterSpacing: 1.2,
+    fontFamily: "PatrickHandSC_400Regular",
   },
 });
