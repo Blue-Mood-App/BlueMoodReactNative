@@ -72,7 +72,7 @@ export default function ActivityItem(props) {
         </View>
       </View>
 
-      <TouchableWithoutFeedback style={styles.wrapper} onPress={onNavigate}>
+      <TouchableWithoutFeedback onPress={onNavigate}>
         <Animated.Text
           style={[
             styles.title,
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
   image: {
     width: "100%",
     height: "100%",
-    maxWidth: 310,
+    maxWidth: "100%",
     overflow: "hidden",
     justifyContent: "center",
   },
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 0,
     color: "white",
-    fontSize: 30,
+    fontSize: 38,
     paddingBottom: 20,
     letterSpacing: 1.2,
     fontFamily: "PatrickHandSC_400Regular",

@@ -42,7 +42,10 @@ export default function UserContacts({ navigation }) {
           <Button onPress={() => setModalVisible(!modalVisible)}>Close </Button>
         </View>
       </Modal>
-      <ScrollView contentContainerStyle={styles.scrollViewStyle}>
+      <ScrollView
+        contentContainerStyle={styles.scrollViewStyle}
+        vertical={true}
+      >
         <Text style={styles.titleText}>
           Would you like to share your contacts?{" "}
           <Feather

@@ -22,7 +22,10 @@ export default function Register({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollViewStyle}>
+      <ScrollView
+        contentContainerStyle={styles.scrollViewStyle}
+        vertical={true}
+      >
         <Text style={styles.text}>Register</Text>
         <FormBuilder
           control={control}
