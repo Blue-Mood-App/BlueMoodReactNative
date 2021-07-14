@@ -10,7 +10,6 @@ export default function ActivitiesMap() {
   const places = useSelector((state) => state.places);
 
   const handleClick = async (link) => {
-    console.log(link);
     Linking.openURL(link);
   };
 
@@ -54,7 +53,6 @@ export default function ActivitiesMap() {
                   imageUrl={image_url}
                   url={url}
                   location={location}
-                  cat="Coffee Shop"
                 />
 
               </Callout>

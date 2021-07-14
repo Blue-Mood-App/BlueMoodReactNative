@@ -4,7 +4,7 @@ import { Button } from 'react-native-paper';
 import placeholder from "../assets/coffee.png";
 
 const MarkerCallout = props => {
-    const { name, cat, imageUrl } = props;
+    const { name, imageUrl } = props;
 
     return (
         <View style={styles.calloutContainer}>
@@ -16,9 +16,6 @@ const MarkerCallout = props => {
                     resizeMethod="scale"
                     resizeMode="center"
                     />
-            </Text>
-            <Text style={styles.calloutTxt}>
-                {cat}
             </Text>
             <Text style={styles.calloutTitle}>
                 {name}
