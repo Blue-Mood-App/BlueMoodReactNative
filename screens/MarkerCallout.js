@@ -1,15 +1,16 @@
 import React from 'react';
-import { Button, Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
+import { Button } from 'react-native-paper';
 import placeholder from "../assets/coffee.png";
 
 const MarkerCallout = props => {
-    const { name, cat, url, imageUrl } = props;
+    const { name, cat, imageUrl } = props;
 
     return (
         <View style={styles.calloutContainer}>
             <Text style={styles.calloutImgContainer}>
                 <Image
-                    defaultSource={{placeholder}}
+                    defaultSource={placeholder}
                     source={{uri: imageUrl ? imageUrl : null}}
                     style={styles.calloutImg}
                     resizeMethod="scale"
@@ -22,7 +23,7 @@ const MarkerCallout = props => {
             <Text style={styles.calloutTitle}>
                 {name}
             </Text>
-            <Button title="Visit"/>
+            <Button style={{width: "100%", color: "#666"}} icon="directions" mode="outlined">Visit</Button>
         </View>
     )
 };

@@ -11,7 +11,9 @@ export default function ActivityPage({ navigation }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const activities = useSelector((state) => state.activities);
 
-  return !activities.length ? <Text>loading...</Text> : (
+  return !activities.length ? (
+    <Text>loading...</Text>
+  ) : (
     <View style={styles.container}>
       <SideSwipe
         data={activities}

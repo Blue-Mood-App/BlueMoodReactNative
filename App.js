@@ -29,6 +29,7 @@ import { AntDesign, Feather } from '@expo/vector-icons';
 import AniActivitiesPage from "./screens/AniActivitiesPage";
 import Menu from "./screens/Menu";
 import { me } from "./store/auth";
+import Animations from './screens/Animation'
 
 const { width }= Dimensions.get("window")
 

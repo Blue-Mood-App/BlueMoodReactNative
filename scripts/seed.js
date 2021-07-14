@@ -21,7 +21,7 @@ async function seed() {
   console.log(users)
 
   const activitiesCall = await fetch(
-    "https://spreadsheets.google.com/feeds/list/1FOJOP5FwnfP6xDrBp7eUWLqFZlDZL_0yxC3V35MgzrY/2/public/values?alt=json"
+    "https://spreadsheets.google.com/feeds/list/1QZ2L7CA0waqeGUUmU6aTpO76LnNh0vvmPF1gAE3A3WE/2/public/values?alt=json"
   );
   const activitiesJson = await activitiesCall.json();
   activities = googleJSONCleaner(activitiesJson.feed.entry);
