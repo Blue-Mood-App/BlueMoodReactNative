@@ -117,7 +117,7 @@ export default function Register({ navigation }) {
               navigation.navigate("Register Activities");
               Alert.alert(
                 `Hi ${firstName},`,
-                "please help us personalize your profile anWd give you exactly what you need to perfect your day!"
+                "please help us personalize your profile and give you exactly what you need to perfect your day!"
               );
             } else {
               alert("Password doesn't match");
