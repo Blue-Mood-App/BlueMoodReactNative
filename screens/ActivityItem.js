@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
   image: {
     width: "100%",
     height: "100%",
-    maxWidth: 350,
+    maxWidth: 310,
     overflow: "hidden",
     justifyContent: "center",
   },
