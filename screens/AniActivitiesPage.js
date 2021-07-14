@@ -56,9 +56,9 @@ export default function ActivityPage({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: "#FFE0B5",
+    // backgroundColor: "#F28482",
     // backgroundColor: "#EBE0D6",
-    backgroundColor: "#EDDBD4",
+    //backgroundColor: "#EDDBD4",
   },
   loading: {
     flex: 1,

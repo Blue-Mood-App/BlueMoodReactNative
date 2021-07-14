@@ -71,7 +71,6 @@ export default function ActivityItem(props) {
           ></LottieView>
         </View>
       </View>
-
       <TouchableWithoutFeedback onPress={onNavigate}>
         <Animated.Text
           style={[
