@@ -37,9 +37,9 @@ const RegisterActivities = ({ navigation }) => {
 
   return (
     <SafeAreaView>
-      <Text style={styles.title}>Tell us more about you...</Text>
-
+      {/* <Text style={styles.title}>Tell us more about you...</Text> */}
       <ScrollView contentContainerStyle={styles.contentContainer}>
+        <Text style={styles.title}>Tell us more about you...</Text>
         {moods.map((mood) => {
           return (
             <View key={mood.id} style={styles.moodsSpacing}>
@@ -52,12 +52,16 @@ const RegisterActivities = ({ navigation }) => {
             </View>
           );
         })}
-        <Button
-          style={styles.btn}
-          onPress={() => navigation.navigate("User Contacts")}
-        >
-          Next
-        </Button>
+        <View style={styles.buttonContainer}>
+          <Button
+            mode={"contained"}
+            color="black"
+            style={styles.btn}
+            onPress={() => navigation.navigate("User Contacts")}
+          >
+            Next
+          </Button>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -87,6 +91,14 @@ const styles = StyleSheet.create({
 
   btn: {
     marginTop: 20,
+    marginVertical: 8,
+    paddingVertical: 5,
+    paddingHorizontal: 16,
+    borderRadius: 25,
+  },
+  buttonContainer: {
+    display: "flex",
+    alignItems: "center",
   },
 });
 

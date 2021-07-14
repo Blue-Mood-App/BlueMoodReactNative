@@ -6,6 +6,7 @@ import { FormBuilder } from "react-native-paper-form-builder";
 import { useForm } from "react-hook-form";
 import { setContactList } from "../store/registration";
 import { Feather } from "@expo/vector-icons";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 export default function UserContacts({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -42,88 +43,90 @@ export default function UserContacts({ navigation }) {
           <Button onPress={() => setModalVisible(!modalVisible)}>Close </Button>
         </View>
       </Modal>
-      <ScrollView
-        contentContainerStyle={styles.scrollViewStyle}
-        vertical={true}
-      >
-        <Text style={styles.titleText}>
-          Would you like to share your contacts?{" "}
-          <Feather
-            name="info"
-            size={18}
-            color="black"
-            style={styles.infoIcon}
-            onPress={() => (setModalVisible(true), setModalText("contacts"))}
-          />
-        </Text>
-
-        <FormBuilder
-          control={control}
-          setFocus={setFocus}
-          formConfigArray={[
-            {
-              type: "text",
-              name: "contactOne",
-
-              textInputProps: {
-                label: "Contact Name",
-              },
-            },
-            {
-              type: "text",
-              name: "contactTwo",
-
-              textInputProps: {
-                label: "Contact Name",
-              },
-            },
-            {
-              type: "text",
-              name: "contactThree",
-
-              textInputProps: {
-                label: "Contact Name",
-              },
-            },
-          ]}
-        />
-        <View>
+      <KeyboardAwareScrollView style={{ flex: 1 }}>
+        <View style={styles.textContainer}>
           <Text style={styles.titleText}>
-            Would you like to connect with other members near you?{" "}
+            Would you like to share your contacts?{" "}
             <Feather
               name="info"
-              size={20}
+              size={18}
               color="black"
-              onPress={() => (
-                setModalVisible(true), setModalText("permission")
-              )}
+              style={styles.infoIcon}
+              onPress={() => (setModalVisible(true), setModalText("contacts"))}
             />
           </Text>
+          <FormBuilder
+            control={control}
+            setFocus={setFocus}
+            formConfigArray={[
+              {
+                type: "text",
+                name: "contactOne",
+
+                textInputProps: {
+                  label: "Contact Name",
+                },
+              },
+              {
+                type: "text",
+                name: "contactTwo",
+
+                textInputProps: {
+                  label: "Contact Name",
+                },
+              },
+              {
+                type: "text",
+                name: "contactThree",
+
+                textInputProps: {
+                  label: "Contact Name",
+                },
+              },
+            ]}
+          />
+          <View>
+            <Text style={styles.titleText}>
+              Would you like to connect with other members near you?{" "}
+              <Feather
+                name="info"
+                size={20}
+                color="black"
+                onPress={() => (
+                  setModalVisible(true), setModalText("permission")
+                )}
+              />
+            </Text>
+          </View>
+          <RadioButton.Group
+            onValueChange={(value) => setAgreedToMeet(value)}
+            value={agreedToMeet}
+          >
+            <RadioButton.Item label="Of course" value="true" />
+            <RadioButton.Item label="Not now" value="false" />
+          </RadioButton.Group>
+          <View style={styles.buttonContainer}>
+            <Button
+              style={styles.btn}
+              mode={"contained"}
+              color="black"
+              onPress={handleSubmit((data) => {
+                const { contactOne, contactTwo, contactThree } = data;
+                dispatch(
+                  setContactList(
+                    agreedToMeet,
+                    [contactOne, contactTwo, contactThree],
+                    userId
+                  )
+                );
+                navigation.navigate("Select Mood");
+              })}
+            >
+              Submit
+            </Button>
+          </View>
         </View>
-        <RadioButton.Group
-          onValueChange={(value) => setAgreedToMeet(value)}
-          value={agreedToMeet}
-        >
-          <RadioButton.Item label="Of course" value="true" />
-          <RadioButton.Item label="Not now" value="false" />
-        </RadioButton.Group>
-        <Button
-          style={styles.btn}
-          onPress={handleSubmit((data) => {
-            const { contactOne, contactTwo, contactThree } = data;
-            dispatch(
-              setContactList(
-                agreedToMeet,
-                [contactOne, contactTwo, contactThree],
-                userId
-              )
-            );
-            navigation.navigate("Select Mood");
-          })}
-        >
-          Submit
-        </Button>
-      </ScrollView>
+      </KeyboardAwareScrollView>
     </View>
   );
 }
@@ -131,13 +134,15 @@ export default function UserContacts({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
     justifyContent: "center",
-    padding: 20,
   },
   text: {
     fontSize: 18,
+  },
+  textContainer: {
+    flex: 1,
+    padding: 15,
+    justifyContent: "center",
   },
   titleText: {
     fontSize: 18,
@@ -150,6 +155,14 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   btn: {
-    marginTop: 20,
+    marginBottom: 10,
+    marginVertical: 8,
+    paddingVertical: 5,
+    paddingHorizontal: 16,
+    borderRadius: 25,
+  },
+  buttonContainer: {
+    display: "flex",
+    alignItems: "center",
   },
 });
