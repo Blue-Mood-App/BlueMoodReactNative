@@ -34,11 +34,18 @@ export default function UserContacts({ navigation }) {
         onRequestClose={() => setModalVisible(!modalVisible)}
       >
         <View style={styles.container}>
-          <Text>{modalText === "contacts" ? "hello" : "world"}</Text>
+          <Text style={styles.text}>
+            {modalText === "contacts"
+              ? "Having a tough day and feel like chatting with your loved ones? Share the names of your favorite people, and we'll make sure to remind you to contact them when life is being unfair to you."
+              : "Hey! Why not join our connect program? Our connect program will connect you with other Blue Mood users who want to make new friends just like you. We will suggest users living in the same area as you, and you can then start a chat with them."}
+          </Text>
           <Button onPress={() => setModalVisible(!modalVisible)}>Close </Button>
         </View>
       </Modal>
-      <ScrollView contentContainerStyle={styles.scrollViewStyle}>
+      <ScrollView
+        contentContainerStyle={styles.scrollViewStyle}
+        vertical={true}
+      >
         <Text style={styles.titleText}>
           Would you like to share your contacts?{" "}
           <Feather
@@ -59,7 +66,7 @@ export default function UserContacts({ navigation }) {
               name: "contactOne",
 
               textInputProps: {
-                label: "Contact One",
+                label: "Contact Name",
               },
             },
             {
@@ -67,7 +74,7 @@ export default function UserContacts({ navigation }) {
               name: "contactTwo",
 
               textInputProps: {
-                label: "Contact Two",
+                label: "Contact Name",
               },
             },
             {
@@ -75,7 +82,7 @@ export default function UserContacts({ navigation }) {
               name: "contactThree",
 
               textInputProps: {
-                label: "Contact Three",
+                label: "Contact Name",
               },
             },
           ]}
@@ -85,7 +92,7 @@ export default function UserContacts({ navigation }) {
             Would you like to connect with other members near you?{" "}
             <Feather
               name="info"
-              size={18}
+              size={20}
               color="black"
               onPress={() => (
                 setModalVisible(true), setModalText("permission")

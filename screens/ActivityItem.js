@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Animated,
   Dimensions,
@@ -7,15 +7,19 @@ import {
   StyleSheet,
   Text,
   TouchableWithoutFeedback,
-  View
-  
+  View,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchPlaces } from "../store/places";
 import hamburger from "../assets/Hamburger_icon.png";
 import octopus from "../assets/octopus.json";
-import LottieView from "lottie-react-native"
+import LottieView from "lottie-react-native";
 import animationPaths from "../scripts/animationPaths";
+import { AppLoading } from "expo";
+import {
+  useFonts,
+  PatrickHandSC_400Regular,
+} from "@expo-google-fonts/patrick-hand-sc";
 
 const { width: screenWidth } = Dimensions.get("window");
 const width = screenWidth - 25;
@@ -24,19 +28,15 @@ export const WIDTH = width + 16;
 export default function ActivityItem(props) {
   const dispatch = useDispatch();
   const location = useSelector((state) => state.location);
-  // state = {
-  //   navigationAnimation: new Animated.Value(0),
-  // };
+  let [fontsLoaded] = useFonts({
+    PatrickHandSC_400Regular,
+  });
 
   const [navigationAnimation, setNavigationAnimation] = useState(
     new Animated.Value(0)
   );
 
-  // componentWillMount = () => {
-  //   Image.prefetch(this.props.image);
-  // };
   const { searchQuery, name } = props.activity;
-
 
   const {
     animatedValue,
@@ -48,24 +48,31 @@ export default function ActivityItem(props) {
   const onNavigate = () => {
     dispatch(fetchPlaces(searchQuery, location));
     navigation.navigate("Where to go");
+    Animated.timing(navigationAnimation, {
+      toValue: 1,
+      duration: 350,
+      useNativeDriver: false,
+      easing: Easing.out(Easing.quad),
+    }).start(() => {
+      navigation.navigate("Where to go");
+    });
+    setTimeout(() => navigationAnimation.setValue(0));
 
-    // Animated.timing(navigationAnimation, {
-    //   toValue: 1,
-    //   duration: 350,
-    //   useNativeDriver: false,
-    //   easing: Easing.out(Easing.quad),
-    // }).start(() => {
-    //   navigation.navigate("Where to go")
-    //   });
-    //   setTimeout(() => navigationAnimation.setValue(0));
   };
 
   return (
     <Animated.View style={styles.container}>
-      <View style={styles.lottieView}>
-        <LottieView source={animationPaths[searchQuery]} autoPlay loop style={styles.image}></LottieView>
+      <View style={styles.polaroidWrapper}>
+        <View>
+          <LottieView
+            source={animationPaths[searchQuery]}
+            autoPlay
+            loop
+            style={styles.image}
+          ></LottieView>
+        </View>
       </View>
-      <TouchableWithoutFeedback style={styles.wrapper} onPress={onNavigate}>
+      <TouchableWithoutFeedback onPress={onNavigate}>
         <Animated.Text
           style={[
             styles.title,
@@ -77,7 +84,9 @@ export default function ActivityItem(props) {
             },
           ]}
         >
-          {name.toUpperCase()}
+          {name}
+          {"\n"}
+          <Text style={styles.clickText}>Click me!</Text>
         </Animated.Text>
       </TouchableWithoutFeedback>
     </Animated.View>
@@ -86,29 +95,50 @@ export default function ActivityItem(props) {
 
 const styles = StyleSheet.create({
   container: {
+    alignItems: "center",
+    alignSelf: "center",
     width: width,
+    position: "relative",
     justifyContent: "space-around",
     overflow: "visible",
-    alignItems: "flex-start",
     backgroundColor: "#E5FFF9",
     marginRight: 16,
+    shadowColor: "#525252",
+    shadowOffset: {
+      width: 10,
+      height: 20,
+    },
+    shadowOpacity: 0.95,
+    shadowRadius: 5.94,
   },
   image: {
-    display: "flex",
-    flex: 1,
-    marginBottom: 36,
-  },
-
-  title: {
-    fontSize: 32,
-    letterSpacing: 1.2,
-    color: "black",
-    backgroundColor: "transparent",
-    alignSelf: "center",
-    paddingRight: 24,
-  },
-  lottieView: {
     width: "100%",
     height: "100%",
+    maxWidth: "100%",
+    overflow: "hidden",
+    justifyContent: "center",
+  },
+  polaroidWrapper: {
+    flexDirection: "row",
+    height: "70%",
+    flexWrap: "wrap",
+    overflow: "hidden",
+    width: "100%",
+    borderWidth: 20,
+    borderBottomWidth: 100,
+  },
+  title: {
+    position: "absolute",
+    bottom: 0,
+    color: "white",
+    fontSize: 38,
+    paddingBottom: 20,
+    letterSpacing: 1.2,
+    fontFamily: "PatrickHandSC_400Regular",
+    textAlign: "center",
+  },
+  clickText: {
+    fontFamily: "PatrickHandSC_400Regular",
+    fontSize: 20,
   },
 });

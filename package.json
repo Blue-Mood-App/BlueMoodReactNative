@@ -14,6 +14,7 @@
     "@expo-google-fonts/architects-daughter": "^0.2.0",
     "@expo-google-fonts/ibm-plex-serif": "^0.2.0",
     "@expo-google-fonts/open-sans-condensed": "^0.2.0",
+    "@expo-google-fonts/patrick-hand-sc": "^0.2.0",
     "@expo/vector-icons": "^12.0.5",
     "@googlemaps/js-api-loader": "^1.12.1",
     "@material-ui/core": "^4.12.1",

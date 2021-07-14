@@ -22,7 +22,10 @@ export default function Register({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollViewStyle}>
+      <ScrollView
+        contentContainerStyle={styles.scrollViewStyle}
+        vertical={true}
+      >
         <Text style={styles.text}>Register</Text>
         <FormBuilder
           control={control}
@@ -117,7 +120,7 @@ export default function Register({ navigation }) {
               navigation.navigate("Register Activities");
               Alert.alert(
                 `Hi ${firstName},`,
-                "please help us personalize your profile anWd give you exactly what you need to perfect your day!"
+                "please help us personalize your profile and give you exactly what you need to perfect your day!"
               );
             } else {
               alert("Password doesn't match");
