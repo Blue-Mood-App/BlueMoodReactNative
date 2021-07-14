@@ -43,7 +43,7 @@ router.get("/demo/:moodId", async function (req, res, next) {
       },
       include: [Activity],
     });
-    res.send(activities);
+    res.sendstatus(202).send(activities);
   } catch (error) {
     console.log(error);
   }
