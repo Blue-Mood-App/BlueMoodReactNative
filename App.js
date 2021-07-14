@@ -8,6 +8,7 @@ import {
   Image,
   Text,
   Button,
+  Dimensions
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -20,14 +21,17 @@ import ActivitiesPage from "./screens/ActivitiesPage";
 import LoggedOut from "./screens/LoggedOut";
 import store from "./store";
 import { Provider } from "react-redux";
-import Hamburger from "./screens/Navbar";
 import RegisterActivities from "./screens/RegisterActivities";
 import EditMoods from "./screens/EditMoods";
 import UserContacts from "./screens/UserContacts";
 import hamburger from "./assets/Hamburger_icon.png";
+import { AntDesign, Feather } from '@expo/vector-icons';
 import AniActivitiesPage from "./screens/AniActivitiesPage";
 import Menu from "./screens/Menu";
 import { me } from "./store/auth";
+
+const { width }= Dimensions.get("window")
+
 
 const Stack = createStackNavigator();
 const RootStack = createStackNavigator();
@@ -35,6 +39,12 @@ const RootStack = createStackNavigator();
 const Main = ({ navigation }) => {
   const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+
+ const menuButton = () => (
+    <TouchableOpacity onPress={() => navigation.navigate("Menu")}>
+    <Feather style={styles.icon}name="menu" size={30} color="white" />
+    </TouchableOpacity>
+  )
 
   useEffect(() => {
     dispatch(me());
@@ -47,11 +57,12 @@ const Main = ({ navigation }) => {
         <Stack.Screen
           name="Home"
           options={{
-            headerRight: () => (
-              <TouchableOpacity onPress={() => navigation.navigate("Menu")}>
-                <Image style={styles.icon} source={hamburger} />
-              </TouchableOpacity>
-            ),
+            title: null,
+            headerStyle: {
+              shadowColor: 'transparent',
+              backgroundColor: '#3C91E6'
+            },
+            headerRight: () => menuButton(),
           }}
           component={Home}
         />
@@ -62,20 +73,33 @@ const Main = ({ navigation }) => {
         name="Select Mood"
         component={MoodsPage}
         options={{
-          headerRight: () => (
-            <TouchableOpacity onPress={() => navigation.navigate("Menu")}>
-              <Image style={styles.icon} source={hamburger} />
-            </TouchableOpacity>
-          ),
+          headerStyle: {
+            shadowColor: 'transparent',
+            backgroundColor: 'lightgreen'
+          },
+          headerRight: () => menuButton(),
+          headerLeft: false,
         }}
       />
-      <Stack.Screen name="Where to go" component={ActivitiesMap} />
+      <Stack.Screen name="Where to go" component={ActivitiesMap} options={{
+        headerStyle: {
+          shadowColor: 'transparent',
+          backgroundColor: 'transparent'
+        },
+        headerBackTitleVisible: false,
+        headerBackImage: () => <AntDesign name="arrowleft" size={30} color="black" />
+      }} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Register" component={Register} />
       <Stack.Screen name="Register Activities" component={RegisterActivities} />
       <Stack.Screen name="User Contacts" component={UserContacts} />
-      <Stack.Screen name="Select Activity" component={ActivitiesPage} />
-      <Stack.Screen name="Select Activity Ani" component={AniActivitiesPage} />
+      <Stack.Screen name="Select Activity" component={AniActivitiesPage} options={{
+        headerStyle: {
+          shadowColor: 'transparent',
+          backgroundColor: 'transparent'
+        },
+        headerBackTitleVisible: false,
+        headerBackImage: () => <AntDesign name="arrowleft" size={30} color="black" /> }} />
       <Stack.Screen name="Profile" component={EditMoods} />
     </Stack.Navigator>
   );
@@ -108,5 +132,6 @@ const styles = StyleSheet.create({
   icon: {
     width: 25,
     height: 25,
+    marginRight: 10
   },
 });

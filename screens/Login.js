@@ -62,7 +62,7 @@ export default function Login({ navigation }) {
           onPress={handleSubmit((data) => {
             const { email, password } = data;
             dispatch(authenticateLogin(email, password));
-            navigation.navigate("Home");
+            navigation.navigate("Select Mood");
           })}
           style={styles.btn}
         >
