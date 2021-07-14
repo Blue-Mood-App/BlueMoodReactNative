@@ -13,6 +13,10 @@ import {
 export default function SideSwipeCarousel(props) {
   const [index, setIndex] = useState(0);
   const dispatch = useDispatch();
+  let [fontsLoaded] = useFonts({
+    OpenSansCondensed_300Light,
+    OpenSansCondensed_700Bold,
+  });
 
   const handleClick = (element, currentActivity, queensAddress) => {
     dispatch(editMoodActivities(queensAddress));
@@ -80,10 +84,11 @@ let styles = StyleSheet.create({
     alignItems: "center",
   },
   text: {
-    fontSize: 13,
-    width: 60,
+    fontSize: 16,
+    width: 65,
     textAlign: "center",
-    // fontFamily: "OpenSansCondensed_300Light",
+    letterSpacing: 1.4,
+    fontFamily: "OpenSansCondensed_300Light",
   },
   image: {
     width: 55,
