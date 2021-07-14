@@ -20,6 +20,10 @@ const EditMoods = ({ navigation }) => {
   const sortedActivities = useSelector((state) => state.sortedActivities);
   const dispatch = useDispatch();
 
+  let [fontsLoaded] = useFonts({
+    OpenSansCondensed_300Light,
+    OpenSansCondensed_700Bold,
+  });
   useEffect(() => {
     dispatch(getActivitiesAndMoods(user.id));
     return () => dispatch(clear());
@@ -68,13 +72,13 @@ const styles = StyleSheet.create({
     letterSpacing: 1.3,
     marginBottom: 8,
     padding: 10,
-    // fontFamily: "OpenSansCondensed_700Bold",
+    fontFamily: "OpenSansCondensed_700Bold",
   },
   title: {
     textAlign: "center",
     paddingTop: 7,
     fontSize: 20,
-    // fontFamily: "OpenSansCondensed_700Bold",
+    fontFamily: "OpenSansCondensed_700Bold",
   },
   contentContainer: {
     paddingVertical: 20,
