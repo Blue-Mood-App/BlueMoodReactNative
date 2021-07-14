@@ -118,7 +118,7 @@ export default function UserContacts({ navigation }) {
                 userId
               )
             );
-            navigation.navigate("Home");
+            navigation.navigate("Select Mood");
           })}
         >
           Submit

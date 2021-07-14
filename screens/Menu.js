@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { TouchableOpacity, StyleSheet, View, Text, Button } from "react-native";
-import { fetchActivity } from "../store/activities";
+import React from "react";
+import { TouchableOpacity, StyleSheet, View, Text } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { logOut } from "../store/auth";
+import { Button } from "react-native-paper";
 
 export default function Menu({ navigation }) {
   const dispatch = useDispatch();
@@ -10,25 +10,38 @@ export default function Menu({ navigation }) {
 
   const handleLogout = () => {
     dispatch(logOut());
-    navigation.goBack();
+    navigation.navigate("Logged Out");
   };
 
-  return (
+  return auth.id ? (
     <View style={styles.container}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Text> Profile </Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={handleLogout}>
-          <Text> Log Out </Text>
-        </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-        <Text> Log In </Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-        <Text> Sign Up </Text>
-      </TouchableOpacity>
+      <Button color='white' onPress={() => navigation.navigate("Profile")} style={styles.btn}>
+      <Text style={styles.text}>Profile</Text>
+      </Button>
+      <Button color='white' onPress={handleLogout} style={styles.btn}>
+      <Text style={styles.text}>Log Out</Text>
+      </Button>
 
-      <Button onPress={() => navigation.goBack()} title="Dismiss" />
+      <Button color='white' onPress={() => navigation.goBack()} style={styles.dismiss}>
+        Dismiss
+      </Button>
+    </View>
+  ) : (
+    <View style={styles.container}>
+      <Button  color='white' onPress={() => navigation.navigate("Login")} style={styles.btn}>
+      <Text style={styles.text}>Log in</Text>
+      </Button>
+      <Button color='white'
+        onPress={() => navigation.navigate("Register")}
+        style={styles.btn}
+      >
+      <Text style={styles.text}>Sign Up</Text>
+      </Button>
+
+      <Button color='white'  onPress={() => navigation.goBack()} style={styles.dismiss}>
+        Dismiss
+      </Button>
+
     </View>
   );
 }
@@ -38,9 +51,16 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: '#f28482'
   },
   text: {
-    fontSize: 23,
-    padding: 20,
+    fontSize: 40,
   },
+  btn: {
+    marginTop: 20,
+  },
+  dismiss: {
+    position:'absolute',
+    bottom: 100
+  }
 });

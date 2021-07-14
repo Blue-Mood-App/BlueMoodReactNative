@@ -28,10 +28,10 @@ export const fetchActivity = (moodId) => async (dispatch) => {
           authorization: token,
         },
       });
-
       dispatch(getActivity(data));
     } else {
-      console.log("not logged in");
+      const { data } = await axios.get(`${location}/api/activities/demo/${moodId}`)
+      dispatch(getActivity(data))
     }
   } catch (error) {}
 };

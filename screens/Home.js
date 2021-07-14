@@ -1,59 +1,50 @@
 import React, { useEffect } from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { authenticateLogin } from "../store/auth";
 import { useDispatch } from "react-redux";
-import Hamburger from "./Navbar"
-import { Header } from "react-native-elements";
+import { Button } from "react-native-paper";
 
 export default function Home({ navigation }) {
   const dispatch = useDispatch();
 
   return (
-    <View style={styles.homeContainer}>
-      <Text>Welcome to BlueMood</Text>
+    <View style={styles.container}>
       <Button
-        title="Go to Activities Map Demo"
-        onPress={() => navigation.navigate("Where to go")}
-        style={styles.btn}
-      ></Button>
-      <Button
-        title="Go to Login"
+        color="white"
         onPress={() => navigation.navigate("Login")}
-        style={styles.btn}
-      ></Button>
+        style={styles.login}
+      >
+        <Text style={styles.text}>Log In</Text>
+      </Button>
       <Button
-        title="Test auth"
-        onPress={() =>
-          dispatch(authenticateLogin("yagna@email.com", "abc", "login"))
-        }
-      ></Button>
-      <Button
-        title="Select Mood"
+        color="white"
         onPress={() => navigation.navigate("Select Mood")}
-      ></Button>
-      <Button
-        title="Go to Register Activities"
-        onPress={() => navigation.navigate("Register Activities")}
-      ></Button>
-      <Button
-        title="Select Activity"
-        onPress={() => navigation.navigate("Select Activity")}
-      ></Button>
-      <Button
-        title="Animations"
-        onPress={() => navigation.navigate("Animations")}
-      ></Button>
+        style={styles.try}
+      >
+        <Text style={styles.text}>Try It Out</Text>
+      </Button>
     </View>
   );
 }
 
+
+
 const styles = StyleSheet.create({
-  homeContainer: {
+  container: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: '#3c91e6'
   },
-  btn: {
-    marginVertical: 8,
+  text: {
+    fontSize: 40,
   },
+  login: {
+    position:'absolute',
+    bottom: 160
+  },
+  try: {
+    position:'absolute',
+    bottom: 100
+  }
 });

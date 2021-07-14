@@ -10,7 +10,7 @@ import {
   OpenSansCondensed_700Bold,
 } from "@expo-google-fonts/open-sans-condensed";
 
-const ActivitySelector = ({ activities, moodId }) => {
+const ActivitySelector = ({ activities, moodId, moodName }) => {
   let [fontsLoaded] = useFonts({
     OpenSansCondensed_300Light,
     OpenSansCondensed_700Bold,
@@ -18,6 +18,19 @@ const ActivitySelector = ({ activities, moodId }) => {
 
   const [index, setIndex] = useState(0);
   const [selectedActivities, setSelectedActivities] = useState({});
+
+  let background;
+  if (moodName === "sad") {
+    background = styles.blueBackground;
+  } else if (moodName === "happy") {
+    background = styles.greenBackground;
+  } else if (moodName === "excited") {
+    background = styles.yellowBackground;
+  } else if (moodName === "calm") {
+    background = styles.lightblueBackground;
+  } else {
+    background = styles.redBackground;
+  }
 
   //accessing user data
   const user = useSelector((state) => state.auth);
@@ -35,23 +48,24 @@ const ActivitySelector = ({ activities, moodId }) => {
   };
 
   const Item = ({ id, name }) => {
-    return (
-      <TouchableOpacity
-        onPress={() => handleClick(id)}
-        style={styles.container}
-      >
-        {selectedActivities[id] ? (
-          <Image style={styles.selectedImage} source={circle} />
-        ) : (
-          <Image style={styles.image} source={circle} />
-        )}
-        <Text style={styles.text}>{name}</Text>
-      </TouchableOpacity>
-    );
+    if (moodId)
+      return (
+        <TouchableOpacity
+          onPress={() => handleClick(id)}
+          style={styles.container}
+        >
+          {selectedActivities[id] ? (
+            <Image style={[styles.selectedImage, background]} />
+          ) : (
+            <Image style={styles.image} />
+          )}
+          <Text style={styles.text}>{name}</Text>
+        </TouchableOpacity>
+      );
   };
 
   const renderItem = ({ item }) => {
-    return <Item id={item.id} name={item.name} image={circle} />;
+    return <Item id={item.id} mood={item.moodId} name={item.name} />;
   };
 
   return (
@@ -83,16 +97,30 @@ const styles = StyleSheet.create({
   image: {
     width: 55,
     height: 55,
-    borderWidth: 5,
+    borderWidth: 3,
     borderRadius: 32,
-    borderColor: "#8AB0AB",
+    borderColor: "gray",
   },
   selectedImage: {
     width: 55,
     height: 55,
-    borderWidth: 5,
+    borderWidth: 3,
     borderRadius: 32,
-    borderColor: "#EC7505",
+  },
+  blueBackground: {
+    backgroundColor: "#3c91e6",
+  },
+  redBackground: {
+    backgroundColor: "#F28482",
+  },
+  greenBackground: {
+    backgroundColor: "#6eb29e",
+  },
+  yellowBackground: {
+    backgroundColor: "#ffc15e",
+  },
+  lightblueBackground: {
+    backgroundColor: "#E0FFFF",
   },
 });
 

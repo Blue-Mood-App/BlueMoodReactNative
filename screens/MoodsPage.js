@@ -9,12 +9,11 @@ import calm from '../assets/icons/calm.png'
 import sad from '../assets/icons/sad.png'
 import depressed from '../assets/icons/depressed.png'
 
-
 export default function MoodsPage({navigation}) {
   const dispatch = useDispatch();
   const handleSubmit = (val) => {
     dispatch(fetchActivity(val));
-    navigation.navigate('Select Activity Ani')
+    navigation.navigate('Select Activity')
   };
 
   useEffect(() => {
