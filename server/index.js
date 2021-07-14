@@ -3,6 +3,8 @@ const app = express();
 const path = require("path");
 const morgan = require("morgan");
 const cors = require("cors");
+const result = require('dotenv').config()
+//console.log(process.env.Y_KEY)
 
 app.use(morgan("dev"));
 app.use(cors());
