@@ -70,7 +70,8 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
-    "sequelize": "^6.6.4"
+    "sequelize": "^6.6.4",
+    "expo-linear-gradient": "~9.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"

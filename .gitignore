@@ -48,6 +48,7 @@ build/
 local.properties
 *.iml
 *.hprof
+.env
 
 # node.js
 #

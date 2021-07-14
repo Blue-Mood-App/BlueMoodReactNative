@@ -1,11 +1,14 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View, Dimensions } from "react-native";
 import { Button, TextInput } from "react-native-paper";
 import { FormBuilder } from "react-native-paper-form-builder";
 import { useForm } from "react-hook-form";
 import { authenticateLogin } from "../store/auth";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { LinearGradient } from "expo-linear-gradient";
+
+const { height } = Dimensions.get("window");
 
 export default function Login({ navigation }) {
   const { control, setFocus, handleSubmit } = useForm({
@@ -20,66 +23,73 @@ export default function Login({ navigation }) {
 
   return (
     <KeyboardAwareScrollView style={styles.container}>
-      <Text style={styles.text}>Sign in</Text>
-      <View style={styles.scrollViewStyle}>
-        <FormBuilder
-          control={control}
-          setFocus={setFocus}
-          formConfigArray={[
-            {
-              type: "email",
-              name: "email",
+      <LinearGradient
+        start={{ x: 0, y: 0 }}
+        end={{ x: 0.4, y: 1.9 }}
+        colors={["#eaf9d9", "#8edce6"]}
+        style={styles.background}
+      >
+        <Text style={styles.text}>Sign in</Text>
+        <View style={styles.scrollViewStyle}>
+          <FormBuilder
+            control={control}
+            setFocus={setFocus}
+            formConfigArray={[
+              {
+                type: "email",
+                name: "email",
 
-              rules: {
-                required: {
-                  value: true,
-                  message: "Email is required",
+                rules: {
+                  required: {
+                    value: true,
+                    message: "Email is required",
+                  },
+                },
+                textInputProps: {
+                  label: "Email",
+                  left: <TextInput.Icon name={"email"} />,
                 },
               },
-              textInputProps: {
-                label: "Email",
-                left: <TextInput.Icon name={"email"} />,
-              },
-            },
-            {
-              type: "password",
-              name: "password",
+              {
+                type: "password",
+                name: "password",
 
-              rules: {
-                required: {
-                  value: true,
-                  message: "Password is required",
+                rules: {
+                  required: {
+                    value: true,
+                    message: "Password is required",
+                  },
+                },
+                textInputProps: {
+                  label: "Password",
+                  left: <TextInput.Icon name={"lock"} />,
                 },
               },
-              textInputProps: {
-                label: "Password",
-                left: <TextInput.Icon name={"lock"} />,
-              },
-            },
-          ]}
-        />
-        <View style={styles.buttonContainer}>
-          <Button
-            mode={"contained"}
-            color="black"
-            onPress={handleSubmit((data) => {
-              const { email, password } = data;
-              dispatch(authenticateLogin(email, password));
-              navigation.navigate("Select Mood");
-            })}
-            style={styles.btn}
+            ]}
+          />
+          <View style={styles.buttonContainer}>
+            <Button
+              mode={"contained"}
+              color="black"
+              onPress={handleSubmit((data) => {
+                const { email, password } = data;
+                dispatch(authenticateLogin(email, password));
+                navigation.navigate("Select Mood");
+              })}
+              style={styles.btn}
+            >
+              Login
+            </Button>
+          </View>
+          <Text style={styles.txtFirst}>First Time?</Text>
+          <Text
+            style={styles.txtRegister}
+            onPress={() => navigation.navigate("Register")}
           >
-            Login
-          </Button>
+            Register
+          </Text>
         </View>
-        <Text style={styles.txtFirst}>First Time?</Text>
-        <Text
-          style={styles.txtRegister}
-          onPress={() => navigation.navigate("Register")}
-        >
-          Register
-        </Text>
-      </View>
+      </LinearGradient>
     </KeyboardAwareScrollView>
   );
 }
@@ -91,7 +101,7 @@ const styles = StyleSheet.create({
   scrollViewStyle: {
     flex: 1,
     padding: 18,
-    justifyContent: "center",
+    justifyContent: "flex-start",
   },
   text: {
     fontSize: 40,
@@ -121,5 +131,11 @@ const styles = StyleSheet.create({
   buttonContainer: {
     display: "flex",
     alignItems: "center",
+  },
+  background: {
+    paddingLeft: 15,
+    paddingRight: 15,
+    borderRadius: 5,
+    height: height,
   },
 });
