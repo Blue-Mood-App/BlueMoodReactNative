@@ -44,7 +44,11 @@ const RegisterActivities = ({ navigation }) => {
           return (
             <View key={mood.id} style={styles.moodsSpacing}>
               <Text style={styles.text}>{`when I am ${mood.name}...`}</Text>
-              <ActivitySelector activities={activities} moodId={mood.id} />
+              <ActivitySelector
+                moodName={mood.name}
+                activities={activities}
+                moodId={mood.id}
+              />
             </View>
           );
         })}
