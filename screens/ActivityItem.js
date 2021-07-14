@@ -85,6 +85,8 @@ export default function ActivityItem(props) {
           ]}
         >
           {name}
+          {"\n"}
+          <Text style={styles.clickText}>Click me!</Text>
         </Animated.Text>
       </TouchableWithoutFeedback>
     </Animated.View>
@@ -101,6 +103,13 @@ const styles = StyleSheet.create({
     overflow: "visible",
     backgroundColor: "#E5FFF9",
     marginRight: 16,
+    shadowColor: "#525252",
+    shadowOffset: {
+      width: 10,
+      height: 20,
+    },
+    shadowOpacity: 0.95,
+    shadowRadius: 5.94,
   },
   image: {
     width: "100%",
@@ -123,8 +132,13 @@ const styles = StyleSheet.create({
     bottom: 0,
     color: "white",
     fontSize: 30,
-    paddingBottom: 50,
+    paddingBottom: 20,
     letterSpacing: 1.2,
     fontFamily: "PatrickHandSC_400Regular",
+    textAlign: "center",
+  },
+  clickText: {
+    fontFamily: "PatrickHandSC_400Regular",
+    fontSize: 20,
   },
 });
