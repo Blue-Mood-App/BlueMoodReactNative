@@ -1,25 +1,37 @@
 import React from "react";
-import { TouchableOpacity, StyleSheet, View, Text, Button } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
-import { logOut } from "../store/auth";
+import { TouchableOpacity, StyleSheet, View, Text } from "react-native";
+import { Button } from "react-native-paper";
 
 export default function LoggedOut({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text>You are now logged out!</Text>
-      <Button onPress={() => navigation.navigate("Home")} title="Dismiss" />
+    <Button color='white' onPress={() => navigation.navigate('Home')} style={styles.btn}>
+      <Text style={styles.text}>goodbye for now</Text>
+      </Button>
+      <Button color='white'  onPress={() => navigation.navigate('Home')} style={styles.dismiss}>
+        Dismiss
+      </Button>
   </View>
   )
 }
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: '#f28482'
   },
   text: {
-    fontSize: 23,
-    padding: 20,
+    fontSize: 40,
+    color: 'white'
   },
+  btn: {
+    marginTop: 20,
+  },
+  dismiss: {
+    position:'absolute',
+    bottom: 100
+  }
 });
