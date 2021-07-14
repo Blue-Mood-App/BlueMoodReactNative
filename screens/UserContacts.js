@@ -30,7 +30,6 @@ export default function UserContacts({ navigation }) {
     <View style={styles.container}>
       <Modal
         animationType="slide"
-        transparent={true}
         visible={modalVisible}
         onRequestClose={() => setModalVisible(!modalVisible)}
       >
@@ -45,7 +44,10 @@ export default function UserContacts({ navigation }) {
       </Modal>
       <KeyboardAwareScrollView style={{ flex: 1 }}>
         <View style={styles.textContainer}>
-          <Text style={styles.titleText}>
+          <Text
+            style={styles.titleText}
+            onPress={() => (setModalVisible(true), setModalText("contacts"))}
+          >
             Would you like to share your contacts?{" "}
             <Feather
               name="info"
@@ -86,7 +88,12 @@ export default function UserContacts({ navigation }) {
             ]}
           />
           <View>
-            <Text style={styles.titleText}>
+            <Text
+              style={styles.titleText}
+              onPress={() => (
+                setModalVisible(true), setModalText("permission")
+              )}
+            >
               Would you like to connect with other members near you?{" "}
               <Feather
                 name="info"

@@ -37,9 +37,8 @@ const RegisterActivities = ({ navigation }) => {
 
   return (
     <SafeAreaView>
-      {/* <Text style={styles.title}>Tell us more about you...</Text> */}
+      <Text style={styles.title}>Tell us more about you...</Text>
       <ScrollView contentContainerStyle={styles.contentContainer}>
-        <Text style={styles.title}>Tell us more about you...</Text>
         {moods.map((mood) => {
           return (
             <View key={mood.id} style={styles.moodsSpacing}>
