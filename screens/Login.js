@@ -5,6 +5,7 @@ import { Button, TextInput } from "react-native-paper";
 import { FormBuilder } from "react-native-paper-form-builder";
 import { useForm } from "react-hook-form";
 import { authenticateLogin } from "../store/auth";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 export default function Login({ navigation }) {
   const { control, setFocus, handleSubmit } = useForm({
@@ -18,9 +19,9 @@ export default function Login({ navigation }) {
   const dispatch = useDispatch();
 
   return (
-    <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollViewStyle}>
-        <Text style={styles.text}>Sign in</Text>
+    <KeyboardAwareScrollView style={styles.container}>
+      <Text style={styles.text}>Sign in</Text>
+      <View style={styles.scrollViewStyle}>
         <FormBuilder
           control={control}
           setFocus={setFocus}
@@ -57,17 +58,20 @@ export default function Login({ navigation }) {
             },
           ]}
         />
-        <Button
-          mode={"contained"}
-          onPress={handleSubmit((data) => {
-            const { email, password } = data;
-            dispatch(authenticateLogin(email, password));
-            navigation.navigate("Select Mood");
-          })}
-          style={styles.btn}
-        >
-          Login
-        </Button>
+        <View style={styles.buttonContainer}>
+          <Button
+            mode={"contained"}
+            color="black"
+            onPress={handleSubmit((data) => {
+              const { email, password } = data;
+              dispatch(authenticateLogin(email, password));
+              navigation.navigate("Select Mood");
+            })}
+            style={styles.btn}
+          >
+            Login
+          </Button>
+        </View>
         <Text style={styles.txtFirst}>First Time?</Text>
         <Text
           style={styles.txtRegister}
@@ -75,8 +79,8 @@ export default function Login({ navigation }) {
         >
           Register
         </Text>
-      </ScrollView>
-    </View>
+      </View>
+    </KeyboardAwareScrollView>
   );
 }
 
@@ -86,13 +90,14 @@ const styles = StyleSheet.create({
   },
   scrollViewStyle: {
     flex: 1,
-    padding: 15,
+    padding: 18,
     justifyContent: "center",
   },
   text: {
     fontSize: 40,
     textAlign: "center",
     marginBottom: 32,
+    marginTop: "30%",
     fontWeight: "700",
   },
   txtFirst: {
@@ -109,5 +114,12 @@ const styles = StyleSheet.create({
   },
   btn: {
     marginVertical: 8,
+    paddingVertical: 5,
+    paddingHorizontal: 16,
+    borderRadius: 25,
+  },
+  buttonContainer: {
+    display: "flex",
+    alignItems: "center",
   },
 });

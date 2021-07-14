@@ -2,9 +2,14 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { FormBuilder } from "react-native-paper-form-builder";
 import { useForm } from "react-hook-form";
-import { Alert, StyleSheet, Text, ScrollView, View } from "react-native";
+import { Alert, StyleSheet, Text, View } from "react-native";
 import { Button, TextInput } from "react-native-paper";
 import { authenticateRegister } from "../store/auth";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import {
+  useFonts,
+  PatrickHandSC_400Regular,
+} from "@expo-google-fonts/patrick-hand-sc";
 
 export default function Register({ navigation }) {
   const { control, setFocus, handleSubmit } = useForm({
@@ -19,14 +24,14 @@ export default function Register({ navigation }) {
   });
 
   const dispatch = useDispatch();
+  const [fontsLoaded] = useFonts({
+    PatrickHandSC_400Regular,
+  });
 
   return (
-    <View style={styles.container}>
-      <ScrollView
-        contentContainerStyle={styles.scrollViewStyle}
-        vertical={true}
-      >
-        <Text style={styles.text}>Register</Text>
+    <KeyboardAwareScrollView style={styles.container}>
+      <Text style={styles.text}>Register</Text>
+      <View style={styles.scrollViewStyle}>
         <FormBuilder
           control={control}
           setFocus={setFocus}
@@ -108,30 +113,33 @@ export default function Register({ navigation }) {
             },
           ]}
         />
-        <Button
-          mode={"contained"}
-          onPress={handleSubmit((data) => {
-            const { firstName, lastName, email, password, confirmPassword } =
-              data;
-            if (password === confirmPassword) {
-              dispatch(
-                authenticateRegister(firstName, lastName, email, password)
-              );
-              navigation.navigate("Register Activities");
-              Alert.alert(
-                `Hi ${firstName},`,
-                "please help us personalize your profile and give you exactly what you need to perfect your day!"
-              );
-            } else {
-              alert("Password doesn't match");
-            }
-          })}
-          style={styles.btn}
-        >
-          Next
-        </Button>
-      </ScrollView>
-    </View>
+        <View style={styles.buttonContainer}>
+          <Button
+            mode={"contained"}
+            color="black"
+            onPress={handleSubmit((data) => {
+              const { firstName, lastName, email, password, confirmPassword } =
+                data;
+              if (password === confirmPassword) {
+                dispatch(
+                  authenticateRegister(firstName, lastName, email, password)
+                );
+                navigation.navigate("Register Activities");
+                Alert.alert(
+                  `Hi ${firstName},`,
+                  "please help us personalize your profile and give you exactly what you need to perfect your day!"
+                );
+              } else {
+                alert("Password doesn't match");
+              }
+            })}
+            style={styles.btn}
+          >
+            Next
+          </Button>
+        </View>
+      </View>
+    </KeyboardAwareScrollView>
   );
 }
 
@@ -141,16 +149,24 @@ const styles = StyleSheet.create({
   },
   scrollViewStyle: {
     flex: 1,
-    padding: 15,
+    padding: 18,
     justifyContent: "center",
   },
   text: {
     fontSize: 40,
     textAlign: "center",
-    marginBottom: 32,
+    marginTop: "20%",
     fontWeight: "700",
   },
   btn: {
-    marginVertical: 8,
+    marginVertical: 10,
+    paddingVertical: 5,
+    paddingHorizontal: 18,
+    borderRadius: 25,
+    marginHorizontal: "auto",
+  },
+  buttonContainer: {
+    display: "flex",
+    alignItems: "center",
   },
 });
