@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Animated,
   Dimensions,
@@ -24,19 +24,12 @@ export const WIDTH = width + 16;
 export default function ActivityItem(props) {
   const dispatch = useDispatch();
   const location = useSelector((state) => state.location);
-  // state = {
-  //   navigationAnimation: new Animated.Value(0),
-  // };
 
   const [navigationAnimation, setNavigationAnimation] = useState(
     new Animated.Value(0)
   );
 
-  // componentWillMount = () => {
-  //   Image.prefetch(this.props.image);
-  // };
   const { searchQuery, name } = props.activity;
-
 
   const {
     animatedValue,
@@ -46,26 +39,29 @@ export default function ActivityItem(props) {
   } = props;
 
   const onNavigate = () => {
-    //dispatch(fetchPlaces(searchQuery, location));
-    //navigation.navigate("Where to go");
-    console.log(name);
 
-    // Animated.timing(navigationAnimation, {
-    //   toValue: 1,
-    //   duration: 350,
-    //   useNativeDriver: false,
-    //   easing: Easing.out(Easing.quad),
-    // }).start(() => {
-    //   navigation.navigate("Where to go")
-    //   });
-    //   setTimeout(() => navigationAnimation.setValue(0));
+    dispatch(fetchPlaces(searchQuery, location));
+    navigation.navigate("Where to go");
+    Animated.timing(navigationAnimation, {
+      toValue: 1,
+      duration: 350,
+      useNativeDriver: false,
+      easing: Easing.out(Easing.quad),
+    }).start(() => {
+      navigation.navigate("Where to go")
+      });
+      setTimeout(() => navigationAnimation.setValue(0));
   };
 
   return (
     <Animated.View style={styles.container}>
-      <View style={styles.lottieView}>
-        <LottieView source={animationPaths[searchQuery]} autoPlay loop style={styles.image}></LottieView>
-      </View>
+      <View style={styles.polaroidWrapper} >
+      <View>
+        <LottieView source={animationPaths[searchQuery]}  autoPlay loop style={styles.image} ></LottieView>
+        </View>
+        </View>
+        
+     
       <TouchableWithoutFeedback style={styles.wrapper} onPress={onNavigate}>
         <Animated.Text
           style={[
@@ -87,29 +83,44 @@ export default function ActivityItem(props) {
 
 const styles = StyleSheet.create({
   container: {
+    alignItems: "center", 
+    alignSelf: "center",
     width: width,
+    position: 'relative',
     justifyContent: "space-around",
     overflow: "visible",
-    alignItems: "flex-start",
     backgroundColor: "#E5FFF9",
     marginRight: 16,
   },
   image: {
-    width: width - 25,
-    height: width - 25,
-    marginBottom: 36,
+    width: '100%',
+    height: '100%',
+    maxWidth: 350,
+    overflow: 'hidden',
+    justifyContent: "center",
   },
-
-  title: {
-    fontSize: 32,
-    letterSpacing: 1.2,
-    color: "black",
-    backgroundColor: "transparent",
-    alignSelf: "center",
-    paddingRight: 24,
-  },
-  lottieView: {
+  polaroidWrapper: {
+    flexDirection: "row", 
+    height: "70%",
+    flexWrap: "wrap",
+    overflow: 'hidden',
     width: "100%",
-    height: "100%",
+    borderWidth: 20,
+    borderBottomWidth: 100,
+ },
+  title: {
+    position: 'absolute',
+    bottom: 0,
+    color: 'white',
+    fontSize: 30,
+    paddingBottom: 50,
+    letterSpacing: 1.2,
+    // color: "white",
+    // alignSelf: "center",
+    // width: "100%",
+    // position: 'absolute',
+    // top: '100%',
+    // margin: 50,
+    // textAlign: "center", 
   },
 });

@@ -36,7 +36,7 @@ export default function ActivityPage({ navigation }) {
         itemWidth={WIDTH}
         threshold={WIDTH / 4}
         extractKey={(item) => item.activity.id.toString()}
-        contentOffset={24}
+        contentOffset={13}
         useNativeDriver={false}
         onIndexChange={(index) => setCurrentIndex(index)}
         renderItem={({ item, ...rest }) => (
@@ -50,8 +50,7 @@ export default function ActivityPage({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 5,
-    backgroundColor: "white",
+    backgroundColor: "#F6F3F5",
   },
   loading: {
     flex: 1,
