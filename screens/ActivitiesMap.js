@@ -3,13 +3,14 @@ import { Dimensions, StyleSheet, Text, View } from "react-native";
 import { useSelector } from "react-redux";
 import MapView, { Marker } from "react-native-maps";
 import MarkerCallout from "./MarkerCallout";
+import Loading from "./Loading";
 
 export default function ActivitiesMap() {
   const location = useSelector((state) => state.location);
   const places = useSelector((state) => state.places);
 
   return !places.businesses || !location ? (
-    <Text>loading...</Text>
+   <Loading />
   ) : (
     <View style={styles.container}>
       <MapView
@@ -50,7 +51,7 @@ export default function ActivitiesMap() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "grey",
     alignItems: "center",
     justifyContent: "center",
   },

@@ -15,21 +15,9 @@ const getPlaces = (places) => {
 
 export const fetchPlaces = (searchQuery, geo) => async (dispatch) => {
   try {
-    const token = await SecureStore.getItemAsync(TOKEN);
-    if (token) {
       const { data } = await axios.get(
-        `${location}/api/places/?searchQuery=${searchQuery}&lat=${geo.coords.latitude}&long=${geo.coords.longitude}`,
-        {
-          headers: {
-            authorization: token,
-          },
-        }
-      );
-
+        `${location}/api/places/?searchQuery=${searchQuery}&lat=${geo.coords.latitude}&long=${geo.coords.longitude}`)
       dispatch(getPlaces(data));
-    } else {
-      console.log("not logged in");
-    }
   } catch (error) {
     console.log(error);
   }
