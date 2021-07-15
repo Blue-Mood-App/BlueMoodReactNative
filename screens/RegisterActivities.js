@@ -17,8 +17,13 @@ import {
   OpenSansCondensed_300Light,
   OpenSansCondensed_700Bold,
 } from "@expo-google-fonts/open-sans-condensed";
-import AppLoading from "expo-app-loading";
+import { PatrickHandSC_400Regular } from "@expo-google-fonts/patrick-hand-sc";
 import { Button } from "react-native-paper";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { LinearGradient } from "expo-linear-gradient";
+import AppLoading from "expo-app-loading";
+
+const { height } = Dimensions.get("window");
 
 const RegisterActivities = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -26,6 +31,7 @@ const RegisterActivities = ({ navigation }) => {
   let [fontsLoaded] = useFonts({
     OpenSansCondensed_300Light,
     OpenSansCondensed_700Bold,
+    PatrickHandSC_400Regular,
   });
 
   useEffect(() => {
@@ -40,34 +46,40 @@ const RegisterActivities = ({ navigation }) => {
     return <AppLoading />;
   } else {
     return (
-      <SafeAreaView>
-        {/* <Text style={styles.title}>Tell us more about you...</Text> */}
-        <ScrollView contentContainerStyle={styles.contentContainer}>
-          <Text style={styles.title}>Tell us more about you...</Text>
-          {moods.map((mood) => {
-            return (
-              <View key={mood.id} style={styles.moodsSpacing}>
-                <Text style={styles.text}>{`when I am ${mood.name}...`}</Text>
-                <ActivitySelector
-                  moodName={mood.name}
-                  activities={activities}
-                  moodId={mood.id}
-                />
-              </View>
-            );
-          })}
-          <View style={styles.buttonContainer}>
-            <Button
-              mode={"contained"}
-              color="black"
-              style={styles.btn}
-              onPress={() => navigation.navigate("User Contacts")}
-            >
-              Next
-            </Button>
+      <KeyboardAwareScrollView style={{ flex: 1 }}>
+        <LinearGradient
+          start={{ x: 0.3, y: 1.4 }}
+          end={{ x: 0.4, y: 0.2 }}
+          colors={["#fffae2", "#fcd29f"]}
+          style={styles.background}
+        >
+          <View style={styles.contentContainer}>
+            <Text style={styles.title}>Tell us more about you...</Text>
+            {moods.map((mood) => {
+              return (
+                <View key={mood.id} style={styles.moodsSpacing}>
+                  <Text style={styles.text}>{`when I am ${mood.name}...`}</Text>
+                  <ActivitySelector
+                    moodName={mood.name}
+                    activities={activities}
+                    moodId={mood.id}
+                  />
+                </View>
+              );
+            })}
+            <View style={styles.buttonContainer}>
+              <Button
+                mode={"contained"}
+                color="black"
+                style={styles.btn}
+                onPress={() => navigation.navigate("User Contacts")}
+              >
+                Next
+              </Button>
+            </View>
           </View>
-        </ScrollView>
-      </SafeAreaView>
+        </LinearGradient>
+      </KeyboardAwareScrollView>
     );
   }
 };
@@ -78,17 +90,18 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     letterSpacing: 1.3,
     marginBottom: 8,
-    padding: 10,
+    padding: 2,
     fontFamily: "OpenSansCondensed_700Bold",
   },
   title: {
     textAlign: "center",
-    paddingTop: 7,
-    fontSize: 20,
-    // fontFamily: "OpenSansCondensed_700Bold",
+    paddingBottom: 3,
+    letterSpacing: 1.3,
+    fontSize: 30,
+    fontFamily: "PatrickHandSC_400Regular",
   },
   contentContainer: {
-    paddingVertical: 20,
+    paddingVertical: 15,
   },
   moodsSpacing: {
     marginBottom: -13,
@@ -104,6 +117,18 @@ const styles = StyleSheet.create({
   buttonContainer: {
     display: "flex",
     alignItems: "center",
+    shadowColor: "#525252",
+    shadowOffset: {
+      width: 7,
+      height: 7,
+    },
+    shadowOpacity: 0.85,
+    shadowRadius: 3.94,
+  },
+  background: {
+    paddingLeft: 15,
+    paddingRight: 15,
+    height: height,
   },
 });
 

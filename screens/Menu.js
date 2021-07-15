@@ -15,33 +15,49 @@ export default function Menu({ navigation }) {
 
   return auth.id ? (
     <View style={styles.container}>
-      <Button color='white' onPress={() => navigation.navigate("Profile")} style={styles.btn}>
-      <Text style={styles.text}>Profile</Text>
+      <Button
+        color="white"
+        onPress={() => navigation.navigate("Edit Activities")}
+        style={styles.btn}
+      >
+        <Text style={styles.text}>Edit Activities</Text>
       </Button>
-      <Button color='white' onPress={handleLogout} style={styles.btn}>
-      <Text style={styles.text}>Log Out</Text>
+      <Button color="white" onPress={handleLogout} style={styles.btn}>
+        <Text style={styles.text}>Log Out</Text>
       </Button>
 
-      <Button color='white' onPress={() => navigation.goBack()} style={styles.dismiss}>
+      <Button
+        color="white"
+        onPress={() => navigation.goBack()}
+        style={styles.dismiss}
+      >
         Dismiss
       </Button>
     </View>
   ) : (
     <View style={styles.container}>
-      <Button  color='white' onPress={() => navigation.navigate("Login")} style={styles.btn}>
-      <Text style={styles.text}>Log in</Text>
+      <Button
+        color="white"
+        onPress={() => navigation.navigate("Login")}
+        style={styles.btn}
+      >
+        <Text style={styles.text}>Log in</Text>
       </Button>
-      <Button color='white'
+      <Button
+        color="white"
         onPress={() => navigation.navigate("Register")}
         style={styles.btn}
       >
-      <Text style={styles.text}>Sign Up</Text>
+        <Text style={styles.text}>Sign Up</Text>
       </Button>
 
-      <Button color='white'  onPress={() => navigation.goBack()} style={styles.dismiss}>
+      <Button
+        color="white"
+        onPress={() => navigation.goBack()}
+        style={styles.dismiss}
+      >
         Dismiss
       </Button>
-
     </View>
   );
 }
@@ -51,7 +67,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: '#f28482'
+    backgroundColor: "#F5A5A3",
   },
   text: {
     fontSize: 40,
@@ -60,7 +76,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   dismiss: {
-    position:'absolute',
-    bottom: 100
-  }
+    position: "absolute",
+    bottom: 100,
+  },
 });

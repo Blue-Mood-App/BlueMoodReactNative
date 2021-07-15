@@ -1,12 +1,5 @@
 import axios from "axios";
-import Constants from "expo-constants";
-const { manifest } = Constants;
-
-const location = `http://${
-  typeof manifest.packagerOpts === "object" && manifest.packagerOpts.dev
-    ? manifest.debuggerHost.split(":")[0]
-    : ""
-}:1337`;
+import location from './serverInfo'
 
 GET_USERACTIVITIES = "GET_USERACTIVITIES";
 const getUserActivities = (activities) => ({

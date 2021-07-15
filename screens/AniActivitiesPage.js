@@ -5,14 +5,21 @@ import SideSwipe from "react-native-sideswipe"; // 1.3.0
 import LottieView from "lottie-react-native";
 import octopus from "../assets/octopus.json";
 import ActivityItem, { WIDTH } from "./ActivityItem";
+import {
+  useFonts,
+  PatrickHandSC_400Regular,
+} from "@expo-google-fonts/patrick-hand-sc";
 
 const { width } = Dimensions.get("window");
 
 export default function ActivityPage({ navigation }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const activities = useSelector((state) => state.activities);
+  let [fontsLoaded] = useFonts({
+    PatrickHandSC_400Regular,
+  });
 
-  return !activities.length ? (
+  return !activities.length && !fontsLoaded ? (
     <View style={styles.loading}>
       <View style={styles.lottieView}>
         <LottieView source={octopus} autoPlay loop></LottieView>
@@ -21,6 +28,7 @@ export default function ActivityPage({ navigation }) {
     </View>
   ) : (
     <View style={styles.container}>
+      <Text style={styles.textAll}>Choose Your Adventure </Text>
       <SideSwipe
         data={activities}
         style={{ flex: 1, width }}
@@ -41,9 +49,8 @@ export default function ActivityPage({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: "#F28482",
-    // backgroundColor: "#EBE0D6",
-    //backgroundColor: "#EDDBD4",
+    backgroundColor: "#EBF0FE",
+    borderTopColor: "#EBF0FE",
   },
   loading: {
     flex: 1,
@@ -73,5 +80,13 @@ const styles = StyleSheet.create({
     fontSize: 25,
     paddingBottom: 200,
     position: "absolute",
+  },
+  textAll: {
+    fontSize: 35,
+    fontFamily: "PatrickHandSC_400Regular",
+    textAlign: "center",
+    position: "absolute",
+    marginLeft: 40,
+    marginTop: 30,
   },
 });
