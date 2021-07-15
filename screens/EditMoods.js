@@ -29,6 +29,7 @@ const EditMoods = ({ navigation }) => {
   const user = useSelector((state) => state.auth);
   const sortedActivities = useSelector((state) => state.sortedActivities);
   const dispatch = useDispatch();
+  
 
   let [fontsLoaded] = useFonts({
     OpenSansCondensed_300Light,
@@ -77,9 +78,11 @@ const EditMoods = ({ navigation }) => {
             })}
           <View style={styles.buttonContainer}>
             <Button
+              id="disabledButton"
               mode={"contained"}
               color="black"
               style={styles.btn}
+              disabled={true}
               onPress={() => handleSubmit(user.id)}
             >
               Update
@@ -134,7 +137,6 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 15,
     borderRadius: 5,
-    height: height,
   },
 });
 
