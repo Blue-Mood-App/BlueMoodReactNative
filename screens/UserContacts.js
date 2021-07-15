@@ -51,7 +51,10 @@ export default function UserContacts({ navigation }) {
         colors={["#f19c79", "#f5ee9e", "#fff"]}
         style={{ flex: 1, backgroundColor: "#f19c79" }}
       >
-        <KeyboardAwareScrollView style={{ flex: 1 }}>
+        <KeyboardAwareScrollView
+          style={{ flex: 1 }}
+          showsVerticalScrollIndicator={false}
+        >
           <LinearGradient
             start={{ x: 0.5, y: 0 }}
             end={{ x: 0.9, y: 2.4 }}

@@ -51,7 +51,10 @@ const RegisterActivities = ({ navigation }) => {
         colors={["#fffae2", "#fcd29f"]}
         style={{ flex: 1, backgroundColor: "#fcd29f" }}
       >
-        <KeyboardAwareScrollView style={{ flex: 1 }}>
+        <KeyboardAwareScrollView
+          style={{ flex: 1 }}
+          showsVerticalScrollIndicator={false}
+        >
           <LinearGradient
             start={{ x: 0.3, y: 1.4 }}
             end={{ x: 0.4, y: 0.2 }}

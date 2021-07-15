@@ -45,7 +45,10 @@ export default function Register({ navigation }) {
         colors={["#f19c79", "#fff3b0"]}
         style={{ flex: 1, backgroundColor: "#f19c79" }}
       >
-        <KeyboardAwareScrollView style={styles.container}>
+        <KeyboardAwareScrollView
+          style={styles.container}
+          showsVerticalScrollIndicator={false}
+        >
           <LinearGradient
             start={{ x: 0, y: 0 }}
             end={{ x: 0.5, y: 2.4 }}
