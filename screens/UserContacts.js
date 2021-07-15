@@ -14,7 +14,7 @@ export default function UserContacts({ navigation }) {
   const [agreedToMeet, setAgreedToMeet] = useState(false);
   const user = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  const { id: userId } = user;
+  const { id: userId, usernameEmail, password } = user;
 
   //contacts
   const { control, setFocus, handleSubmit } = useForm({
@@ -119,6 +119,7 @@ export default function UserContacts({ navigation }) {
                     userId
                   )
                 );
+                dispatch(authenticateLogin(usernameEmail, password));
                 navigation.navigate("Select Mood");
               })}
             >
