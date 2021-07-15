@@ -47,20 +47,20 @@ export default function ActivityItem(props) {
 
   const onNavigate = () => {
     dispatch(fetchPlaces(searchQuery, location));
-    navigation.navigate("Where to go");
+    navigation.navigate("Map");
     Animated.timing(navigationAnimation, {
       toValue: 1,
       duration: 350,
       useNativeDriver: false,
       easing: Easing.out(Easing.quad),
     }).start(() => {
-      navigation.navigate("Where to go");
+      navigation.navigate("Map");
     });
     setTimeout(() => navigationAnimation.setValue(0));
   };
 
   if (!fontsLoaded) {
-    return <AppLoading />
+    return <AppLoading />;
   } else {
     return (
       <Animated.View style={styles.container}>

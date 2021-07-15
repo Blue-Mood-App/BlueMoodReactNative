@@ -73,7 +73,7 @@ const Main = ({ navigation }) => {
         }}
       />
       <Stack.Screen
-        name="Where to go"
+        name="Map"
         component={ActivitiesMap}
         options={{
           headerStyle: {
@@ -82,7 +82,12 @@ const Main = ({ navigation }) => {
           },
           headerBackTitleVisible: false,
           headerBackImage: () => (
-            <AntDesign name="arrowleft" size={30} color="black" />
+            <AntDesign
+              name="arrowleft"
+              style={{ marginLeft: 20 }}
+              size={30}
+              color="black"
+            />
           ),
         }}
       />
