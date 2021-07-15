@@ -22,7 +22,7 @@ export default function Home({ navigation }) {
       <View style={styles.container}>
         <LottieView style={styles.eye} source={eye} autoPlay loop></LottieView>
         <Text style={[styles.title, { top: 80 }]}>Blue</Text>
-        <Text style={[styles.title, { top: 290 }]}>Mood</Text>
+        <Text style={[styles.title, { top: 260 }]}>Mood</Text>
 
         <Button
           color="white"
@@ -56,12 +56,15 @@ const styles = StyleSheet.create({
   },
   eye: {
     position: "absolute",
-    top: -80,
+    height: 200,
+    width: 200,
+    top: 46,
   },
   title: {
     position: "absolute",
-    fontSize: 60,
+    fontSize: 80,
     color: "#fff",
+    fontFamily: "PatrickHandSC_400Regular",
   },
   login: {
     position: "absolute",
