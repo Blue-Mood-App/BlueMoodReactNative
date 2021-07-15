@@ -21,6 +21,7 @@ import {
   OpenSansCondensed_700Bold,
 } from "@expo-google-fonts/open-sans-condensed";
 import { Button } from "react-native-paper";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { LinearGradient } from "expo-linear-gradient";
 const { height } = Dimensions.get("window");
 
@@ -54,44 +55,42 @@ const EditMoods = ({ navigation }) => {
     navigation.navigate("Select Mood");
   };
 
-  if (!fontsLoaded) {
-    <AppLoading />;
-  } else {
-    return (
-      <SafeAreaView>
-        <LinearGradient
-          start={{ x: 1.4, y: 0.3 }}
-          end={{ x: 0.2, y: 0.4 }}
-          colors={["#fcd29f", "#fffae2"]}
-          style={styles.background}
-        >
-          <ScrollView contentContainerStyle={styles.contentContainer}>
-            {Array.isArray(sortedActivities) &&
-              sortedActivities.map((el, idx) => {
-                return (
-                  <View key={idx}>
-                    <Text
-                      style={styles.text1}
-                    >{`when I am ${el[0].mood}...`}</Text>
-                    <SideSwipeCarousel mood={el[0].mood} currentRow={el} />
-                  </View>
-                );
-              })}
-            <View style={styles.buttonContainer}>
-              <Button
-                mode={"contained"}
-                color="black"
-                style={styles.btn}
-                onPress={() => handleSubmit(user.id)}
-              >
-                Update
-              </Button>
-            </View>
-          </ScrollView>
-        </LinearGradient>
-      </SafeAreaView>
-    );
-  }
+  return (
+    <KeyboardAwareScrollView style={{ flex: 1 }}>
+      <LinearGradient
+        start={{ x: 0.3, y: 1.4 }}
+        end={{ x: 0.4, y: 0.2 }}
+        colors={["#fffae2", "#fcd29f"]}
+        style={styles.background}
+      >
+        <ScrollView contentContainerStyle={styles.contentContainer}>
+          {Array.isArray(sortedActivities) &&
+            sortedActivities.map((el, idx) => {
+              return (
+                <View key={idx}>
+                  <Text
+                    style={styles.text1}
+                  >{`when I am ${el[0].mood}...`}</Text>
+                  <SideSwipeCarousel mood={el[0].mood} currentRow={el} />
+                </View>
+              );
+            })}
+          <View style={styles.buttonContainer}>
+            <Button
+              id="disabledButton"
+              mode={"contained"}
+              color="black"
+              style={styles.btn}
+              disabled={true}
+              onPress={() => handleSubmit(user.id)}
+            >
+              Update
+            </Button>
+          </View>
+        </ScrollView>
+      </LinearGradient>
+    </KeyboardAwareScrollView>
+  );
 };
 
 const styles = StyleSheet.create({
@@ -137,7 +136,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 15,
     borderRadius: 5,
-    height: height,
+    //height: height,
   },
 });
 

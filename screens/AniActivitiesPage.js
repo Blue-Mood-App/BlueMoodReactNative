@@ -5,6 +5,7 @@ import SideSwipe from "react-native-sideswipe"; // 1.3.0
 import LottieView from "lottie-react-native";
 import octopus from "../assets/octopus.json";
 import ActivityItem, { WIDTH } from "./ActivityItem";
+import { AppLoading } from "expo";
 import {
   useFonts,
   PatrickHandSC_400Regular,
