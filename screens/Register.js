@@ -37,8 +37,8 @@ export default function Register({ navigation }) {
     <KeyboardAwareScrollView style={styles.container}>
       <LinearGradient
         start={{ x: 0, y: 0 }}
-        end={{ x: 2.4, y: 0.5 }}
-        colors={["#fff3b0", "#f19c79"]}
+        end={{ x: 0.5, y: 2.4 }}
+        colors={["#f19c79", "#fff3b0"]}
         style={styles.background}
       >
         <View style={styles.lottieContainer}>
@@ -206,7 +206,6 @@ const styles = StyleSheet.create({
   background: {
     paddingLeft: 15,
     paddingRight: 15,
-    borderRadius: 5,
     height: height,
   },
   image: {

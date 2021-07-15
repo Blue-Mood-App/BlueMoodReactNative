@@ -35,8 +35,8 @@ export default function Login({ navigation }) {
     <KeyboardAwareScrollView style={styles.container}>
       <LinearGradient
         start={{ x: 0, y: 0 }}
-        end={{ x: 0.4, y: 1.9 }}
-        colors={["#eaf9d9", "#8edce6"]}
+        end={{ x: 1.9, y: 0.4 }}
+        colors={["#8edce6", "#eaf9d9"]}
         style={styles.background}
       >
         <View style={styles.lottieContainer}>
@@ -163,7 +163,6 @@ const styles = StyleSheet.create({
   background: {
     paddingLeft: 15,
     paddingRight: 15,
-    borderRadius: 5,
     height: height,
   },
   image: {

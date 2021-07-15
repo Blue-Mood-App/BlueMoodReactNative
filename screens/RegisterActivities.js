@@ -42,9 +42,9 @@ const RegisterActivities = ({ navigation }) => {
   return (
     <KeyboardAwareScrollView style={{ flex: 1 }}>
       <LinearGradient
-        start={{ x: 1.4, y: 0.3 }}
-        end={{ x: 0.2, y: 0.4 }}
-        colors={["#fcd29f", "#fffae2"]}
+        start={{ x: 0.3, y: 1.4 }}
+        end={{ x: 0.4, y: 0.2 }}
+        colors={["#fffae2", "#fcd29f"]}
         style={styles.background}
       >
         <View style={styles.contentContainer}>
@@ -120,7 +120,6 @@ const styles = StyleSheet.create({
   background: {
     paddingLeft: 15,
     paddingRight: 15,
-    borderRadius: 5,
     height: height,
   },
 });
