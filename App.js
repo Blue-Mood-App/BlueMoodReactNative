@@ -76,6 +76,7 @@ const Main = ({ navigation }) => {
         name="Map"
         component={ActivitiesMap}
         options={{
+          title: null,
           headerStyle: {
             shadowColor: "transparent",
             backgroundColor: "transparent",
@@ -131,7 +132,7 @@ const Main = ({ navigation }) => {
           title: null,
           headerStyle: {
             shadowColor: "transparent",
-            backgroundColor: "#f19c79",
+            backgroundColor: "#fcd29f",
           },
         }}
       />
@@ -139,7 +140,7 @@ const Main = ({ navigation }) => {
         name="Select Activity"
         component={AniActivitiesPage}
         options={{
-          title: "",
+          title: null,
           headerStyle: {
             shadowColor: "transparent",
             backgroundColor: "#f6f0eb",
