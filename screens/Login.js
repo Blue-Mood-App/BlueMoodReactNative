@@ -9,10 +9,18 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { LinearGradient } from "expo-linear-gradient";
 import LottieView from "lottie-react-native";
 import clouds from "../assets/clouds.json";
+import {
+  useFonts,
+  BarlowCondensed_500Medium,
+} from "@expo-google-fonts/barlow-condensed";
 
 const { height } = Dimensions.get("window");
 
 export default function Login({ navigation }) {
+  let [fontsLoaded] = useFonts({
+    BarlowCondensed_500Medium,
+  });
+
   const { control, setFocus, handleSubmit } = useForm({
     defaultValues: {
       email: "",
@@ -115,12 +123,13 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
   },
   text: {
-    fontSize: 40,
+    fontSize: 50,
     textAlign: "center",
     marginBottom: 32,
     marginTop: 5,
     paddingHorizontal: 65,
     fontWeight: "700",
+    fontFamily: "BarlowCondensed_500Medium",
   },
   txtFirst: {
     fontSize: 15,
