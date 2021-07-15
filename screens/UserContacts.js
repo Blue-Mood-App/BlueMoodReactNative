@@ -154,11 +154,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    alignContent: "center",
-    paddingHorizontal: 32,
-    maxHeight: 300,
-    maxWidth: 500,
-    borderRadius: 13,
   },
   text: {
     fontSize: 18,
