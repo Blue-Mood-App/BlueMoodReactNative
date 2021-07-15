@@ -3,13 +3,14 @@ import { Dimensions, StyleSheet, Text, View } from "react-native";
 import { useSelector } from "react-redux";
 import MapView, { Marker } from "react-native-maps";
 import MarkerCallout from "./MarkerCallout";
+import Loading from "./Loading";
 
 export default function ActivitiesMap() {
   const location = useSelector((state) => state.location);
   const places = useSelector((state) => state.places);
 
   return !places.businesses || !location ? (
-    <Text>loading...</Text>
+    <Loading />
   ) : (
     <View style={styles.container}>
       <MapView
@@ -27,8 +28,8 @@ export default function ActivitiesMap() {
           const lat = location.coords.latitude;
           const lng = location.coords.longitude;
           const { id, name, coordinates, image_url, url } = place;
-          const destLat = coordinates.latitude
-          const destLng = coordinates.longitude
+          const destLat = coordinates.latitude;
+          const destLng = coordinates.longitude;
           const mapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${lat}+${lng}&destination=${destLat}+${destLng}`;
 
           return (
@@ -37,8 +38,14 @@ export default function ActivitiesMap() {
               coordinate={{
                 latitude: coordinates.latitude,
                 longitude: coordinates.longitude,
-              }}>
-              <MarkerCallout name={name} imageUrl={image_url} mapsUrl={mapsUrl} detailsUrl={url} />
+              }}
+            >
+              <MarkerCallout
+                name={name}
+                imageUrl={image_url}
+                mapsUrl={mapsUrl}
+                detailsUrl={url}
+              />
             </Marker>
           );
         })}

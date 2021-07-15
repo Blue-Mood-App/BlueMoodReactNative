@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { StyleSheet, Text, TouchableOpacity, Image } from "react-native";
 import SideSwipe from "react-native-sideswipe";
-import circle from "../assets/circle.png";
 import { setFavActivity, deleteFavActivity } from "../store/registration";
 import {
   useFonts,
   OpenSansCondensed_300Light,
   OpenSansCondensed_700Bold,
 } from "@expo-google-fonts/open-sans-condensed";
+import AppLoading from "expo-app-loading";
 
 const ActivitySelector = ({ activities, moodId, moodName }) => {
   let [fontsLoaded] = useFonts({
@@ -68,15 +68,19 @@ const ActivitySelector = ({ activities, moodId, moodName }) => {
     return <Item id={item.id} mood={item.moodId} name={item.name} />;
   };
 
-  return (
-    <SideSwipe
-      index={index}
-      data={activities}
-      renderItem={renderItem}
-      itemWidth={activities.length * 10}
-      onIndexChange={(index) => setIndex(index)}
-    />
-  );
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
+    return (
+      <SideSwipe
+        index={index}
+        data={activities}
+        renderItem={renderItem}
+        itemWidth={activities.length * 10}
+        onIndexChange={(index) => setIndex(index)}
+      />
+    );
+  }
 };
 
 const styles = StyleSheet.create({

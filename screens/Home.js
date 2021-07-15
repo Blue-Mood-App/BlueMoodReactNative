@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { authenticateLogin } from "../store/auth";
 import { useDispatch } from "react-redux";
 import { Button } from "react-native-paper";
+import LottieView from "lottie-react-native";
+import eye from "../assets/eye.json";
 import {
   useFonts,
   PatrickHandSC_400Regular,
@@ -14,12 +15,15 @@ export default function Home({ navigation }) {
   let [fontsLoaded] = useFonts({
     PatrickHandSC_400Regular,
   });
-
   if (!fontsLoaded) {
     return <AppLoading />;
   } else {
     return (
       <View style={styles.container}>
+        <LottieView style={styles.eye} source={eye} autoPlay loop></LottieView>
+        <Text style={[styles.title, { top: 80 }]}>Blue</Text>
+        <Text style={[styles.title, { top: 290 }]}>Mood</Text>
+
         <Button
           color="white"
           onPress={() => navigation.navigate("Login")}
@@ -27,14 +31,6 @@ export default function Home({ navigation }) {
         >
           <Text style={styles.text}>Log In</Text>
         </Button>
-
-        {/* <Button
-          color="white"
-          onPress={() => navigation.navigate("Contacts page")}
-          style={styles.contacts}
-        >
-          <Text style={styles.text}>Contact</Text>
-        </Button> */}
         <Button
           color="white"
           onPress={() => navigation.navigate("Select Mood")}
@@ -58,14 +54,23 @@ const styles = StyleSheet.create({
     fontSize: 40,
     fontFamily: "PatrickHandSC_400Regular",
   },
+  eye: {
+    position: "absolute",
+    top: -80,
+  },
+  title: {
+    position: "absolute",
+    fontSize: 60,
+    color: "#fff",
+  },
   login: {
     position: "absolute",
     bottom: 160,
   },
-  contacts: {
-    position: "absolute",
-    bottom: 300,
-  },
+  //contacts: {
+  //  position: "absolute",
+  //  bottom: 300,
+  //},
   try: {
     position: "absolute",
     bottom: 100,

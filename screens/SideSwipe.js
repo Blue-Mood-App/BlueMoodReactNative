@@ -9,6 +9,7 @@ import {
   OpenSansCondensed_300Light,
   OpenSansCondensed_700Bold,
 } from "@expo-google-fonts/open-sans-condensed";
+import AppLoading from "expo-app-loading";
 
 export default function SideSwipeCarousel(props) {
   const [index, setIndex] = useState(0);
@@ -64,15 +65,20 @@ export default function SideSwipeCarousel(props) {
       />
     );
   };
-  return (
-    <SideSwipe
-      index={index}
-      data={props.currentRow}
-      renderItem={renderItem}
-      itemWidth={props.currentRow.length * 10}
-      onIndexChange={(index) => setIndex(index)}
-    />
-  );
+
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
+    return (
+      <SideSwipe
+        index={index}
+        data={props.currentRow}
+        renderItem={renderItem}
+        itemWidth={props.currentRow.length * 10}
+        onIndexChange={(index) => setIndex(index)}
+      />
+    );
+  }
 }
 
 let styles = StyleSheet.create({

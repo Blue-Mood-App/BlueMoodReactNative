@@ -26,6 +26,7 @@ import {
   useFonts,
   PatrickHandSC_400Regular,
 } from "@expo-google-fonts/patrick-hand-sc";
+import AppLoading from "expo-app-loading";
 
 const { height } = Dimensions.get("window");
 const { width } = Dimensions.get("window");
@@ -44,73 +45,77 @@ export default function MoodsPage({ navigation }) {
     dispatch(getLocation());
   }, []);
 
-  return (
-    <View style={styles.container}>
-      <LinearGradient
-        start={{ x: 0.9, y: 0 }}
-        end={{ x: 2.4, y: 0.5 }}
-        colors={["#bdb2ff", "#80ffdb"]}
-        style={styles.background}
-      >
-        <Text style={styles.text}>How you feeling today?</Text>
-        <TouchableOpacity
-          style={styles.btnSpacing}
-          onPress={() => handleSubmit(1)}
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
+    return (
+      <View style={styles.container}>
+        <LinearGradient
+          start={{ x: 0.9, y: 0 }}
+          end={{ x: 2.4, y: 0.5 }}
+          colors={["#bdb2ff", "#80ffdb"]}
+          style={styles.background}
         >
-          <LottieView
-            style={styles.icon}
-            source={irritated}
-            autoPlay
-            loop
-          ></LottieView>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.btnSpacing}
-          onPress={() => handleSubmit(2)}
-        >
-          <LottieView
-            style={styles.icon}
-            source={sadFace}
-            autoPlay
-            loop
-          ></LottieView>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.btnSpacing}
-          onPress={() => handleSubmit(3)}
-        >
-          <LottieView
-            style={styles.icon}
-            source={content}
-            autoPlay
-            loop
-          ></LottieView>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.btnSpacing}
-          onPress={() => handleSubmit(4)}
-        >
-          <LottieView
-            style={styles.icon}
-            source={happyFace}
-            autoPlay
-            loop
-          ></LottieView>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.btnSpacing}
-          onPress={() => handleSubmit(5)}
-        >
-          <LottieView
-            style={styles.icon}
-            source={excitedFace}
-            autoPlay
-            loop
-          ></LottieView>
-        </TouchableOpacity>
-      </LinearGradient>
-    </View>
-  );
+          <Text style={styles.text}>How you feeling today?</Text>
+          <TouchableOpacity
+            style={styles.btnSpacing}
+            onPress={() => handleSubmit(1)}
+          >
+            <LottieView
+              style={styles.icon}
+              source={irritated}
+              autoPlay
+              loop
+            ></LottieView>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.btnSpacing}
+            onPress={() => handleSubmit(2)}
+          >
+            <LottieView
+              style={styles.icon}
+              source={sadFace}
+              autoPlay
+              loop
+            ></LottieView>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.btnSpacing}
+            onPress={() => handleSubmit(3)}
+          >
+            <LottieView
+              style={styles.icon}
+              source={content}
+              autoPlay
+              loop
+            ></LottieView>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.btnSpacing}
+            onPress={() => handleSubmit(4)}
+          >
+            <LottieView
+              style={styles.icon}
+              source={happyFace}
+              autoPlay
+              loop
+            ></LottieView>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.btnSpacing}
+            onPress={() => handleSubmit(5)}
+          >
+            <LottieView
+              style={styles.icon}
+              source={excitedFace}
+              autoPlay
+              loop
+            ></LottieView>
+          </TouchableOpacity>
+        </LinearGradient>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({

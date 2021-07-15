@@ -1,40 +1,35 @@
-import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
-import * as Linking from 'expo-linking';
-import { Button } from 'react-native-paper';
-import { Ionicons } from '@expo/vector-icons';
-import placeholder from "../assets/coffee.png";
-import { FontAwesome5 } from '@expo/vector-icons';
-import { Callout, CalloutSubview } from 'react-native-maps';
+import React from "react";
+import { Image, StyleSheet, Text, View } from "react-native";
+import * as Linking from "expo-linking";
+import { Button } from "react-native-paper";
+import { Ionicons } from "@expo/vector-icons";
+import placeholder from "../assets/placeholder.png";
+import { FontAwesome5 } from "@expo/vector-icons";
+import { Callout, CalloutSubview } from "react-native-maps";
 
 export default function MarkerCallout(props) {
-    const { detailsUrl, name, imageUrl, mapsUrl } = props;
+  const { detailsUrl, name, imageUrl, mapsUrl } = props;
 
-    const handleDirectionsClick = async (link) => {
-      Linking.openURL(link);
-    };
-  
-    const handleDetailsClick = async (yelp) => {
-      Linking.openURL(yelp);
-    };
+  const handleDirectionsClick = async (link) => {
+    Linking.openURL(link);
+  };
 
-    return (
-    <Callout
-      tooltip
-      style={styles.callout}
-    >
+  const handleDetailsClick = async (yelp) => {
+    Linking.openURL(yelp);
+  };
+
+  return (
+    <Callout tooltip style={styles.callout}>
       <View style={styles.calloutContainer}>
         <Text style={styles.calloutImgContainer}>
           <Image
             defaultSource={placeholder}
-            source={{uri: imageUrl ? imageUrl : null}}
+            source={{ uri: imageUrl ? imageUrl : null }}
             style={styles.calloutImg}
             resizeMethod="scale"
           />
         </Text>
-        <Text style={styles.calloutTitle}>
-          {name}
-        </Text>
+        <Text style={styles.calloutTitle}>{name}</Text>
         <CalloutSubview onPress={() => handleDirectionsClick(detailsUrl)}>
           <Button mode="text">
             <Ionicons name="information-circle" size={24} color="#4D4DFF" />
@@ -47,8 +42,8 @@ export default function MarkerCallout(props) {
         </CalloutSubview>
       </View>
     </Callout>
-    )
-};
+  );
+}
 
 const styles = StyleSheet.create({
   calloutContainer: {
@@ -59,7 +54,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignContent: "center",
     overflow: "hidden",
-    backgroundColor: '#FEFCFD',
+    backgroundColor: "#FEFCFD",
     paddingHorizontal: 8,
     paddingVertical: 8,
     borderColor: "#F0F0F0",
@@ -78,23 +73,23 @@ const styles = StyleSheet.create({
     flexBasis: "100%",
   },
   calloutImgContainer: {
-      marginTop: 0,
-      marginBottom: 8,
-      padding: 0,
-      alignSelf: "flex-start",
-      height: 150,
-      width: "100%",
-      backgroundColor: "#EAEAEA",
-      borderRadius: 13,
-      overflow: "hidden",
+    marginTop: 0,
+    marginBottom: 8,
+    padding: 0,
+    alignSelf: "flex-start",
+    height: 150,
+    width: 120,
+    backgroundColor: "#EAEAEA",
+    borderRadius: 13,
+    overflow: "hidden",
   },
   calloutImg: {
-      width: 125,
-      height: 150,
-      borderRadius: 13,
+    width: 120,
+    height: 150,
+    borderRadius: 13,
   },
-    calloutIcons: {
-      color: "#666",
-      width: "45%",
-    },
-  });
+  calloutIcons: {
+    color: "#666",
+    width: "45%",
+  },
+});

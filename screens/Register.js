@@ -13,6 +13,7 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import LottieView from "lottie-react-native";
 import octopus from "../assets/octopus2.json";
+import AppLoading from "expo-app-loading";
 
 const { height } = Dimensions.get("window");
 
@@ -34,139 +35,143 @@ export default function Register({ navigation }) {
 
   const dispatch = useDispatch();
 
-  return (
-    <KeyboardAwareScrollView style={styles.container}>
-      <LinearGradient
-        start={{ x: 0, y: 0 }}
-        end={{ x: 0.5, y: 2.4 }}
-        colors={["#f19c79", "#fff3b0"]}
-        style={styles.background}
-      >
-        <View style={styles.lottieContainer}>
-          <LottieView
-            source={octopus}
-            autoPlay
-            loop
-            style={styles.image}
-          ></LottieView>
-        </View>
-        <Text style={styles.text}>Register</Text>
-        <View style={styles.scrollViewStyle}>
-          <FormBuilder
-            control={control}
-            setFocus={setFocus}
-            formConfigArray={[
-              {
-                type: "text",
-                name: "firstName",
-
-                rules: {
-                  required: {
-                    value: true,
-                    message: "First name is required",
-                  },
-                },
-                textInputProps: {
-                  label: "First Name",
-                  left: <TextInput.Icon name={"account"} />,
-                },
-              },
-              {
-                type: "text",
-                name: "lastName",
-
-                rules: {
-                  required: {
-                    value: true,
-                    message: "Last name is required",
-                  },
-                },
-                textInputProps: {
-                  label: "Last Name",
-                  left: <TextInput.Icon name={"account"} />,
-                },
-              },
-              {
-                type: "email",
-                name: "email",
-
-                rules: {
-                  required: {
-                    value: true,
-                    message: "Email is required",
-                  },
-                },
-                textInputProps: {
-                  label: "Email",
-                  left: <TextInput.Icon name={"email"} />,
-                },
-              },
-              {
-                type: "password",
-                name: "password",
-
-                rules: {
-                  required: {
-                    value: true,
-                    message: "Password is required",
-                  },
-                },
-                textInputProps: {
-                  label: "Password",
-                  left: <TextInput.Icon name={"lock"} />,
-                },
-              },
-              {
-                type: "password",
-                name: "confirmPassword",
-
-                rules: {
-                  required: {
-                    value: true,
-                    message: "Please confirm your password",
-                  },
-                },
-                textInputProps: {
-                  label: "Confirm password",
-                  left: <TextInput.Icon name={"lock"} />,
-                },
-              },
-            ]}
-          />
-          <View style={styles.buttonContainer}>
-            <Button
-              mode={"contained"}
-              color="black"
-              onPress={handleSubmit((data) => {
-                const {
-                  firstName,
-                  lastName,
-                  email,
-                  password,
-                  confirmPassword,
-                } = data;
-                if (password === confirmPassword) {
-                  dispatch(
-                    authenticateRegister(firstName, lastName, email, password)
-                  );
-                  navigation.navigate("Register Activities");
-                  Alert.alert(
-                    `Hi ${firstName},`,
-                    "please help us personalize your profile and give you exactly what you need to perfect your day!"
-                  );
-                } else {
-                  alert("Password doesn't match");
-                }
-              })}
-              style={styles.btn}
-            >
-              Next
-            </Button>
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
+    return (
+      <KeyboardAwareScrollView style={styles.container}>
+        <LinearGradient
+          start={{ x: 0, y: 0 }}
+          end={{ x: 0.5, y: 2.4 }}
+          colors={["#f19c79", "#fff3b0"]}
+          style={styles.background}
+        >
+          <View style={styles.lottieContainer}>
+            <LottieView
+              source={octopus}
+              autoPlay
+              loop
+              style={styles.image}
+            ></LottieView>
           </View>
-        </View>
-      </LinearGradient>
-    </KeyboardAwareScrollView>
-  );
+          <Text style={styles.text}>Register</Text>
+          <View style={styles.scrollViewStyle}>
+            <FormBuilder
+              control={control}
+              setFocus={setFocus}
+              formConfigArray={[
+                {
+                  type: "text",
+                  name: "firstName",
+
+                  rules: {
+                    required: {
+                      value: true,
+                      message: "First name is required",
+                    },
+                  },
+                  textInputProps: {
+                    label: "First Name",
+                    left: <TextInput.Icon name={"account"} />,
+                  },
+                },
+                {
+                  type: "text",
+                  name: "lastName",
+
+                  rules: {
+                    required: {
+                      value: true,
+                      message: "Last name is required",
+                    },
+                  },
+                  textInputProps: {
+                    label: "Last Name",
+                    left: <TextInput.Icon name={"account"} />,
+                  },
+                },
+                {
+                  type: "email",
+                  name: "email",
+
+                  rules: {
+                    required: {
+                      value: true,
+                      message: "Email is required",
+                    },
+                  },
+                  textInputProps: {
+                    label: "Email",
+                    left: <TextInput.Icon name={"email"} />,
+                  },
+                },
+                {
+                  type: "password",
+                  name: "password",
+
+                  rules: {
+                    required: {
+                      value: true,
+                      message: "Password is required",
+                    },
+                  },
+                  textInputProps: {
+                    label: "Password",
+                    left: <TextInput.Icon name={"lock"} />,
+                  },
+                },
+                {
+                  type: "password",
+                  name: "confirmPassword",
+
+                  rules: {
+                    required: {
+                      value: true,
+                      message: "Please confirm your password",
+                    },
+                  },
+                  textInputProps: {
+                    label: "Confirm password",
+                    left: <TextInput.Icon name={"lock"} />,
+                  },
+                },
+              ]}
+            />
+            <View style={styles.buttonContainer}>
+              <Button
+                mode={"contained"}
+                color="black"
+                onPress={handleSubmit((data) => {
+                  const {
+                    firstName,
+                    lastName,
+                    email,
+                    password,
+                    confirmPassword,
+                  } = data;
+                  if (password === confirmPassword) {
+                    dispatch(
+                      authenticateRegister(firstName, lastName, email, password)
+                    );
+                    navigation.navigate("Register Activities");
+                    Alert.alert(
+                      `Hi ${firstName},`,
+                      "please help us personalize your profile and give you exactly what you need to perfect your day!"
+                    );
+                  } else {
+                    alert("Password doesn't match");
+                  }
+                })}
+                style={styles.btn}
+              >
+                Next
+              </Button>
+            </View>
+          </View>
+        </LinearGradient>
+      </KeyboardAwareScrollView>
+    );
+  }
 }
 
 const styles = StyleSheet.create({

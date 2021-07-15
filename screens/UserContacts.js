@@ -17,7 +17,7 @@ export default function UserContacts({ navigation }) {
   const [agreedToMeet, setAgreedToMeet] = useState(false);
   const user = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  const { id: userId } = user;
+  const { id: userId, usernameEmail, password } = user;
 
   //contacts
   const { control, setFocus, handleSubmit } = useForm({
@@ -154,6 +154,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
+    alignContent: "center",
+    paddingHorizontal: 32,
+    maxHeight: 300,
+    maxWidth: 500,
+    borderRadius: 13,
   },
   text: {
     fontSize: 18,

@@ -21,7 +21,6 @@ import Menu from "./screens/Menu";
 import Contacts from "./screens/Contacts";
 import { me } from "./store/auth";
 
-
 const { width } = Dimensions.get("window");
 
 const Stack = createStackNavigator();
