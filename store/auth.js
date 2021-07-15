@@ -2,12 +2,8 @@ import axios from "axios";
 import * as SecureStore from "expo-secure-store";
 import Constants from "expo-constants";
 const { manifest } = Constants;
+import location from './serverInfo'
 
-const location = `http://${
-  typeof manifest.packagerOpts === "object" && manifest.packagerOpts.dev
-    ? manifest.debuggerHost.split(":")[0]
-    : ""
-}:1337`;
 const TOKEN = "token";
 
 /**

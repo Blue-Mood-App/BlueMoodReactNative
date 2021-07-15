@@ -1,13 +1,10 @@
 import axios from "axios";
 import * as SecureStore from "expo-secure-store";
+import location from './serverInfo'
 import Constants from "expo-constants";
 const { manifest } = Constants;
 
-const location = `http://${
-  typeof manifest.packagerOpts === "object" && manifest.packagerOpts.dev
-    ? manifest.debuggerHost.split(":")[0]
-    : ""
-}:1337`;
+
 const TOKEN = "token";
 
 const GET_ACTIVITY = "GET_ACTIVITY";
@@ -21,6 +18,7 @@ const getActivity = (activity) => {
 
 export const fetchActivity = (moodId) => async (dispatch) => {
   try {
+    console.log(manifest)
     const token = await SecureStore.getItemAsync(TOKEN);
     if (token) {
       const { data } = await axios.get(`${location}/api/activities/${moodId}`, {
