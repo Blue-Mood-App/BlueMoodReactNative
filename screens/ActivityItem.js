@@ -15,7 +15,7 @@ import hamburger from "../assets/Hamburger_icon.png";
 import octopus from "../assets/octopus.json";
 import LottieView from "lottie-react-native";
 import animationPaths from "../scripts/animationPaths";
-import { AppLoading } from "expo";
+import AppLoading from "expo-app-loading";
 import {
   useFonts,
   PatrickHandSC_400Regular,
@@ -60,37 +60,41 @@ export default function ActivityItem(props) {
 
   };
 
-  return (
-    <Animated.View style={styles.container}>
-      <View style={styles.polaroidWrapper}>
-        <View>
-          <LottieView
-            source={animationPaths[searchQuery]}
-            autoPlay
-            loop
-            style={styles.image}
-          ></LottieView>
+  if (!fontsLoaded) {
+    return <AppLoading />
+  } else {
+    return (
+      <Animated.View style={styles.container}>
+        <View style={styles.polaroidWrapper}>
+          <View>
+            <LottieView
+              source={animationPaths[searchQuery]}
+              autoPlay
+              loop
+              style={styles.image}
+            ></LottieView>
+          </View>
         </View>
-      </View>
-      <TouchableWithoutFeedback onPress={onNavigate}>
-        <Animated.Text
-          style={[
-            styles.title,
-            {
-              opacity: animatedValue.interpolate({
-                inputRange: [itemIndex - 1, itemIndex, itemIndex + 1],
-                outputRange: [0, 1, 0],
-              }),
-            },
-          ]}
-        >
-          {name}
-          {"\n"}
-          <Text style={styles.clickText}>Click me!</Text>
-        </Animated.Text>
-      </TouchableWithoutFeedback>
-    </Animated.View>
-  );
+        <TouchableWithoutFeedback onPress={onNavigate}>
+          <Animated.Text
+            style={[
+              styles.title,
+              {
+                opacity: animatedValue.interpolate({
+                  inputRange: [itemIndex - 1, itemIndex, itemIndex + 1],
+                  outputRange: [0, 1, 0],
+                }),
+              },
+            ]}
+          >
+            {name}
+            {"\n"}
+            <Text style={styles.clickText}>Click me!</Text>
+          </Animated.Text>
+        </TouchableWithoutFeedback>
+      </Animated.View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({

@@ -1,18 +1,12 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { Dimensions, StyleSheet, Text, View } from "react-native";
 import { useSelector } from "react-redux";
-import MapView, { Callout, Marker } from "react-native-maps";
+import MapView, { Marker } from "react-native-maps";
 import MarkerCallout from "./MarkerCallout";
-import * as Linking from 'expo-linking';
 
 export default function ActivitiesMap() {
   const location = useSelector((state) => state.location);
   const places = useSelector((state) => state.places);
-
-  const handleClick = async (link) => {
-    console.log(link);
-    Linking.openURL(link);
-  };
 
   return !places.businesses || !location ? (
     <Text>loading...</Text>
@@ -44,20 +38,7 @@ export default function ActivitiesMap() {
                 latitude: coordinates.latitude,
                 longitude: coordinates.longitude,
               }}>
-              <Callout
-                style={styles.callout}
-                onPress={() => handleClick(mapsUrl)}
-              >
-
-                <MarkerCallout
-                  name={name}
-                  imageUrl={image_url}
-                  url={url}
-                  location={location}
-                  cat="Coffee Shop"
-                />
-
-              </Callout>
+              <MarkerCallout name={name} imageUrl={image_url} mapsUrl={mapsUrl} detailsUrl={url} />
             </Marker>
           );
         })}
@@ -67,13 +48,6 @@ export default function ActivitiesMap() {
 }
 
 const styles = StyleSheet.create({
-  callout: {
-    height: 250,
-    width: 150,
-    margin: 0,
-    padding: 0,
-    overflow: "hidden",
-  },
   container: {
     flex: 1,
     backgroundColor: "#fff",
