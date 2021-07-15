@@ -18,7 +18,9 @@ import UserContacts from "./screens/UserContacts";
 import { AntDesign, Feather } from "@expo/vector-icons";
 import AniActivitiesPage from "./screens/AniActivitiesPage";
 import Menu from "./screens/Menu";
+import Contacts from "./screens/Contacts";
 import { me } from "./store/auth";
+
 
 const { width } = Dimensions.get("window");
 
@@ -156,7 +158,19 @@ const Main = ({ navigation }) => {
           ),
         }}
       />
-      <Stack.Screen name="Edit Activities" component={EditMoods} />
+      <Stack.Screen
+        name="Edit Activities"
+        component={EditMoods}
+        options={{
+          title: null,
+          headerStyle: {
+            shadowColor: "transparent",
+            backgroundColor: "#fcd29f",
+          },
+        }}
+      />
+
+      <Stack.Screen name="Contacts page" component={Contacts} />
     </Stack.Navigator>
   );
 };

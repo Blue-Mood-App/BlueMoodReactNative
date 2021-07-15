@@ -21,6 +21,7 @@ import {
   OpenSansCondensed_700Bold,
 } from "@expo-google-fonts/open-sans-condensed";
 import { Button } from "react-native-paper";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { LinearGradient } from "expo-linear-gradient";
 const { height } = Dimensions.get("window");
 
@@ -55,11 +56,11 @@ const EditMoods = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView>
+    <KeyboardAwareScrollView style={{ flex: 1 }}>
       <LinearGradient
-        start={{ x: 1.4, y: 0.3 }}
-        end={{ x: 0.2, y: 0.4 }}
-        colors={["#fcd29f", "#fffae2"]}
+        start={{ x: 0.3, y: 1.4 }}
+        end={{ x: 0.4, y: 0.2 }}
+        colors={["#fffae2", "#fcd29f"]}
         style={styles.background}
       >
         <ScrollView contentContainerStyle={styles.contentContainer}>
@@ -86,7 +87,7 @@ const EditMoods = ({ navigation }) => {
           </View>
         </ScrollView>
       </LinearGradient>
-    </SafeAreaView>
+    </KeyboardAwareScrollView>
   );
 };
 
