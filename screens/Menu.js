@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#f28482",
+    backgroundColor: "#F5A5A3",
   },
   text: {
     fontSize: 40,

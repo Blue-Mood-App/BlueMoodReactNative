@@ -9,10 +9,18 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { LinearGradient } from "expo-linear-gradient";
 import LottieView from "lottie-react-native";
 import clouds from "../assets/clouds.json";
+import {
+  useFonts,
+  PatrickHandSC_400Regular,
+} from "@expo-google-fonts/patrick-hand-sc";
 
 const { height } = Dimensions.get("window");
 
 export default function Login({ navigation }) {
+  const [fontsLoaded] = useFonts({
+    PatrickHandSC_400Regular,
+  });
+
   const { control, setFocus, handleSubmit } = useForm({
     defaultValues: {
       email: "",
@@ -26,9 +34,9 @@ export default function Login({ navigation }) {
   return (
     <KeyboardAwareScrollView style={styles.container}>
       <LinearGradient
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1.9, y: 0.4 }}
-        colors={["#8edce6", "#eaf9d9"]}
+        start={{ x: 0.9, y: 0.9 }}
+        end={{ x: 1.2, y: 0.5 }}
+        colors={["#eaf9d9", "#8edce6"]}
         style={styles.background}
       >
         <View style={styles.lottieContainer}>
@@ -115,12 +123,12 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
   },
   text: {
-    fontSize: 40,
+    fontSize: 62,
     textAlign: "center",
-    marginBottom: 32,
+    marginBottom: 10,
     marginTop: 5,
     paddingHorizontal: 65,
-    fontWeight: "700",
+    fontFamily: "PatrickHandSC_400Regular",
   },
   txtFirst: {
     fontSize: 15,
@@ -161,6 +169,6 @@ const styles = StyleSheet.create({
   },
   lottieContainer: {
     flex: 1,
-    marginBottom: -300,
+    marginBottom: -310,
   },
 });

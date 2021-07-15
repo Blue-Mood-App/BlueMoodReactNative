@@ -67,8 +67,8 @@ const Main = ({ navigation }) => {
         options={{
           title: "",
           headerStyle: {
-            shadowColor: "transparent",
-            backgroundColor: "lightgreen",
+            shadowColor: "#bdb2ff",
+            backgroundColor: "#bdb2ff",
           },
           headerRight: () => menuButton(),
           headerLeft: false,
@@ -134,7 +134,7 @@ const Main = ({ navigation }) => {
           title: null,
           headerStyle: {
             shadowColor: "transparent",
-            backgroundColor: "#fcd29f",
+            backgroundColor: "#f19c79",
           },
         }}
       />
@@ -145,7 +145,7 @@ const Main = ({ navigation }) => {
           title: null,
           headerStyle: {
             shadowColor: "transparent",
-            backgroundColor: "#f6f0eb",
+            backgroundColor: "#EBF0FE",
           },
           headerBackTitleVisible: false,
           headerBackImage: () => (
