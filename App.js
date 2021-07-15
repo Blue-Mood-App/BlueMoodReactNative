@@ -63,6 +63,7 @@ const Main = ({ navigation }) => {
         name="Select Mood"
         component={MoodsPage}
         options={{
+          title: "",
           headerStyle: {
             shadowColor: "transparent",
             backgroundColor: "lightgreen",
@@ -93,6 +94,7 @@ const Main = ({ navigation }) => {
         name="Select Activity"
         component={AniActivitiesPage}
         options={{
+          title: "",
           headerStyle: {
             shadowColor: "transparent",
             backgroundColor: "transparent",
