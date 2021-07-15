@@ -27,24 +27,22 @@ export default function Home({ navigation }) {
   );
 }
 
-
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: '#3c91e6'
+    backgroundColor: "#3c91e6",
   },
   text: {
     fontSize: 40,
   },
   login: {
-    position:'absolute',
-    bottom: 160
+    position: "absolute",
+    bottom: 160,
   },
   try: {
-    position:'absolute',
-    bottom: 100
-  }
+    position: "absolute",
+    bottom: 100,
+  },
 });

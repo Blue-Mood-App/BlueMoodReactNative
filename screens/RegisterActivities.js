@@ -17,6 +17,7 @@ import {
   OpenSansCondensed_300Light,
   OpenSansCondensed_700Bold,
 } from "@expo-google-fonts/open-sans-condensed";
+import { PatrickHandSC_400Regular } from "@expo-google-fonts/patrick-hand-sc";
 import { Button } from "react-native-paper";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { LinearGradient } from "expo-linear-gradient";
@@ -29,6 +30,7 @@ const RegisterActivities = ({ navigation }) => {
   let [fontsLoaded] = useFonts({
     OpenSansCondensed_300Light,
     OpenSansCondensed_700Bold,
+    PatrickHandSC_400Regular,
   });
 
   useEffect(() => {
@@ -83,14 +85,15 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     letterSpacing: 1.3,
     marginBottom: 8,
-    padding: 5,
+    padding: 2,
     fontFamily: "OpenSansCondensed_700Bold",
   },
   title: {
     textAlign: "center",
-    paddingBottom: 7,
-    fontSize: 20,
-    // fontFamily: "OpenSansCondensed_700Bold",
+    paddingBottom: 3,
+    letterSpacing: 1.3,
+    fontSize: 30,
+    fontFamily: "PatrickHandSC_400Regular",
   },
   contentContainer: {
     paddingVertical: 15,

@@ -132,7 +132,7 @@ const Main = ({ navigation }) => {
           title: null,
           headerStyle: {
             shadowColor: "transparent",
-            backgroundColor: "#fcd29f",
+            backgroundColor: "#f19c79",
           },
         }}
       />
