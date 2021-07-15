@@ -7,6 +7,8 @@ import { useForm } from "react-hook-form";
 import { authenticateLogin } from "../store/auth";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { LinearGradient } from "expo-linear-gradient";
+import LottieView from "lottie-react-native";
+import clouds from "../assets/clouds.json";
 
 const { height } = Dimensions.get("window");
 
@@ -29,6 +31,14 @@ export default function Login({ navigation }) {
         colors={["#eaf9d9", "#8edce6"]}
         style={styles.background}
       >
+        <View style={styles.lottieContainer}>
+          <LottieView
+            source={clouds}
+            autoPlay
+            loop
+            style={styles.image}
+          ></LottieView>
+        </View>
         <Text style={styles.text}>Sign in</Text>
         <View style={styles.scrollViewStyle}>
           <FormBuilder
@@ -100,14 +110,16 @@ const styles = StyleSheet.create({
   },
   scrollViewStyle: {
     flex: 1,
-    padding: 18,
+    display: "flex",
+    paddingVertical: 5,
     justifyContent: "flex-start",
   },
   text: {
     fontSize: 40,
     textAlign: "center",
     marginBottom: 32,
-    marginTop: "30%",
+    marginTop: 5,
+    paddingHorizontal: 65,
     fontWeight: "700",
   },
   txtFirst: {
@@ -118,7 +130,7 @@ const styles = StyleSheet.create({
     color: "#666",
   },
   txtRegister: {
-    fontSize: 15,
+    fontSize: 16.5,
     textAlign: "center",
     color: "#3369ea",
   },
@@ -131,11 +143,25 @@ const styles = StyleSheet.create({
   buttonContainer: {
     display: "flex",
     alignItems: "center",
+    shadowColor: "#525252",
+    shadowOffset: {
+      width: 7,
+      height: 7,
+    },
+    shadowOpacity: 0.95,
+    shadowRadius: 3.94,
   },
   background: {
     paddingLeft: 15,
     paddingRight: 15,
     borderRadius: 5,
     height: height,
+  },
+  image: {
+    marginTop: -38,
+  },
+  lottieContainer: {
+    flex: 1,
+    marginBottom: -300,
   },
 });

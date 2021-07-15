@@ -11,6 +11,8 @@ import {
   PatrickHandSC_400Regular,
 } from "@expo-google-fonts/patrick-hand-sc";
 import { LinearGradient } from "expo-linear-gradient";
+import LottieView from "lottie-react-native";
+import octopus from "../assets/octopus2.json";
 
 const { height } = Dimensions.get("window");
 
@@ -39,6 +41,14 @@ export default function Register({ navigation }) {
         colors={["#fff3b0", "#f19c79"]}
         style={styles.background}
       >
+        <View style={styles.lottieContainer}>
+          <LottieView
+            source={octopus}
+            autoPlay
+            loop
+            style={styles.image}
+          ></LottieView>
+        </View>
         <Text style={styles.text}>Register</Text>
         <View style={styles.scrollViewStyle}>
           <FormBuilder
@@ -164,14 +174,15 @@ const styles = StyleSheet.create({
   },
   scrollViewStyle: {
     flex: 1,
-    padding: 18,
+    paddingHorizontal: 5,
+    paddingTop: 5,
     justifyContent: "flex-start",
   },
   text: {
     fontSize: 40,
     textAlign: "center",
-    marginTop: "20%",
-    marginBottom: 20,
+    // marginTop: "20%",
+    // marginBottom: 20,
     fontWeight: "700",
   },
   btn: {
@@ -179,16 +190,30 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     paddingHorizontal: 18,
     borderRadius: 25,
-    marginHorizontal: "auto",
+    // marginHorizontal: "auto",
   },
   buttonContainer: {
     display: "flex",
     alignItems: "center",
+    shadowColor: "#525252",
+    shadowOffset: {
+      width: 7,
+      height: 7,
+    },
+    shadowOpacity: 0.95,
+    shadowRadius: 3.94,
   },
   background: {
     paddingLeft: 15,
     paddingRight: 15,
     borderRadius: 5,
     height: height,
+  },
+  image: {
+    marginTop: -80,
+  },
+  lottieContainer: {
+    flex: 1,
+    marginBottom: -350,
   },
 });

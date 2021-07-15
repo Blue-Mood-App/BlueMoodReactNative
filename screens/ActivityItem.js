@@ -57,7 +57,6 @@ export default function ActivityItem(props) {
       navigation.navigate("Where to go");
     });
     setTimeout(() => navigationAnimation.setValue(0));
-
   };
 
   return (
