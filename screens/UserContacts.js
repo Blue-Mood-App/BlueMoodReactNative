@@ -47,9 +47,9 @@ export default function UserContacts({ navigation }) {
       </Modal>
       <KeyboardAwareScrollView style={{ flex: 1 }}>
         <LinearGradient
-          start={{ x: 0, y: 0.5 }}
-          end={{ x: 2.4, y: 0.9 }}
-          colors={["#f5ee9e", "#f19c79", "#fff"]}
+          start={{ x: 0.5, y: 0 }}
+          end={{ x: 0.9, y: 2.4 }}
+          colors={["#f19c79", "#f5ee9e", "#fff"]}
           style={styles.background}
         >
           <View style={styles.textContainer}>
@@ -194,7 +194,6 @@ const styles = StyleSheet.create({
   background: {
     paddingLeft: 15,
     paddingRight: 15,
-    borderRadius: 5,
     height: height,
   },
 });

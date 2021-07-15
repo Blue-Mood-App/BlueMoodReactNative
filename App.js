@@ -91,10 +91,50 @@ const Main = ({ navigation }) => {
           ),
         }}
       />
-      <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="Register" component={Register} />
-      <Stack.Screen name="Register Activities" component={RegisterActivities} />
-      <Stack.Screen name="User Contacts" component={UserContacts} />
+      <Stack.Screen
+        name="Login"
+        component={Login}
+        options={{
+          title: null,
+          headerStyle: {
+            shadowColor: "transparent",
+            backgroundColor: "#8edce6",
+          },
+        }}
+      />
+      <Stack.Screen
+        name="Register"
+        component={Register}
+        options={{
+          title: null,
+          headerStyle: {
+            shadowColor: "transparent",
+            backgroundColor: "#f19c79",
+          },
+        }}
+      />
+      <Stack.Screen
+        name="Register Activities"
+        component={RegisterActivities}
+        options={{
+          title: null,
+          headerStyle: {
+            shadowColor: "transparent",
+            backgroundColor: "#fcd29f",
+          },
+        }}
+      />
+      <Stack.Screen
+        name="User Contacts"
+        component={UserContacts}
+        options={{
+          title: null,
+          headerStyle: {
+            shadowColor: "transparent",
+            backgroundColor: "#f19c79",
+          },
+        }}
+      />
       <Stack.Screen
         name="Select Activity"
         component={AniActivitiesPage}
