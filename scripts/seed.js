@@ -18,8 +18,6 @@ async function seed() {
   const usersJson = await usersCall.json();
   users = googleJSONCleaner(usersJson.feed.entry);
 
-  console.log(users)
-
   const activitiesCall = await fetch(
     "https://spreadsheets.google.com/feeds/list/1QZ2L7CA0waqeGUUmU6aTpO76LnNh0vvmPF1gAE3A3WE/2/public/values?alt=json"
   );
@@ -71,6 +69,8 @@ async function runSeed() {
   }
 }
 
-runSeed();
+if (module === require.main) {
+  runSeed()
+}
 
 module.exports = seed;
