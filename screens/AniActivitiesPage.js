@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     fontFamily: "PatrickHandSC_400Regular",
     textAlign: "center",
     position: "absolute",
-    marginLeft: 40,
+    marginLeft: 38,
     marginTop: 30,
   },
 });

@@ -80,7 +80,7 @@ const Main = ({ navigation }) => {
           title: null,
           headerStyle: {
             shadowColor: "transparent",
-            backgroundColor: "transparent",
+            backgroundColor: "#f28482",
           },
           headerBackTitleVisible: false,
           headerBackImage: () => (
