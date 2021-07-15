@@ -30,7 +30,7 @@ export default function UserContacts({ navigation }) {
     <View style={styles.container}>
       <Modal
         animationType="slide"
-        transparent={true}
+        transparent={false}
         visible={modalVisible}
         onRequestClose={() => setModalVisible(!modalVisible)}
       >
@@ -135,6 +135,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
+    alignContent: "center",
+    paddingHorizontal: 32,
+    maxHeight: 300,
+    maxWidth: 500,
   },
   text: {
     fontSize: 18,

@@ -17,6 +17,7 @@ import {
   OpenSansCondensed_300Light,
   OpenSansCondensed_700Bold,
 } from "@expo-google-fonts/open-sans-condensed";
+import AppLoading from "expo-app-loading";
 import { Button } from "react-native-paper";
 
 const RegisterActivities = ({ navigation }) => {
@@ -35,36 +36,40 @@ const RegisterActivities = ({ navigation }) => {
   const registration = useSelector((state) => state.registration);
   const { moods, activities } = registration;
 
-  return (
-    <SafeAreaView>
-      {/* <Text style={styles.title}>Tell us more about you...</Text> */}
-      <ScrollView contentContainerStyle={styles.contentContainer}>
-        <Text style={styles.title}>Tell us more about you...</Text>
-        {moods.map((mood) => {
-          return (
-            <View key={mood.id} style={styles.moodsSpacing}>
-              <Text style={styles.text}>{`when I am ${mood.name}...`}</Text>
-              <ActivitySelector
-                moodName={mood.name}
-                activities={activities}
-                moodId={mood.id}
-              />
-            </View>
-          );
-        })}
-        <View style={styles.buttonContainer}>
-          <Button
-            mode={"contained"}
-            color="black"
-            style={styles.btn}
-            onPress={() => navigation.navigate("User Contacts")}
-          >
-            Next
-          </Button>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
+    return (
+      <SafeAreaView>
+        {/* <Text style={styles.title}>Tell us more about you...</Text> */}
+        <ScrollView contentContainerStyle={styles.contentContainer}>
+          <Text style={styles.title}>Tell us more about you...</Text>
+          {moods.map((mood) => {
+            return (
+              <View key={mood.id} style={styles.moodsSpacing}>
+                <Text style={styles.text}>{`when I am ${mood.name}...`}</Text>
+                <ActivitySelector
+                  moodName={mood.name}
+                  activities={activities}
+                  moodId={mood.id}
+                />
+              </View>
+            );
+          })}
+          <View style={styles.buttonContainer}>
+            <Button
+              mode={"contained"}
+              color="black"
+              style={styles.btn}
+              onPress={() => navigation.navigate("User Contacts")}
+            >
+              Next
+            </Button>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    );
+  }
 };
 
 const styles = StyleSheet.create({

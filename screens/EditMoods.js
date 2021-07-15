@@ -6,7 +6,6 @@ import {
   addUserActivities,
   clear,
 } from "../store/sortedActivities";
-import circle from "../assets/circle.png";
 import SideSwipeCarousel from "./SideSwipe";
 import {
   useFonts,

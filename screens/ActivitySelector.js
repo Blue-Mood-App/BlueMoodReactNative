@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { StyleSheet, Text, TouchableOpacity, Image } from "react-native";
 import SideSwipe from "react-native-sideswipe";
-import circle from "../assets/circle.png";
 import { setFavActivity, deleteFavActivity } from "../store/registration";
 import {
   useFonts,
