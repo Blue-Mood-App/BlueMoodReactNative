@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
       width: 7,
       height: 7,
     },
-    shadowOpacity: 0.95,
+    shadowOpacity: 0.85,
     shadowRadius: 3.94,
   },
   background: {

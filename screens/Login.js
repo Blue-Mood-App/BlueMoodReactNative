@@ -148,8 +148,8 @@ const styles = StyleSheet.create({
       width: 7,
       height: 7,
     },
-    shadowOpacity: 0.95,
-    shadowRadius: 3.94,
+    shadowOpacity: 0.85,
+    shadowRadius: 5.94,
   },
   background: {
     paddingLeft: 15,
