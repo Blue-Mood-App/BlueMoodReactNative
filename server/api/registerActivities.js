@@ -8,7 +8,7 @@ router.get("/moods", async function (req, res, next) {
     const moods = await Mood.findAll();
     res.send(moods);
   } catch (err) {
-    console.error(err);
+    next(err);
   }
 });
 
@@ -17,7 +17,7 @@ router.get("/activities", async function (req, res, next) {
     const activities = await Activity.findAll();
     res.send(activities);
   } catch (err) {
-    console.error(err);
+    next(err);
   }
 });
 
@@ -26,7 +26,7 @@ router.post("/", async function (req, res, next) {
     await UserActivity.create(req.body);
     res.sendStatus(201);
   } catch (err) {
-    console.error(err);
+    next(err);
   }
 });
 
@@ -43,7 +43,7 @@ router.delete("/:activityId/:userId/:moodId", async function (req, res, next) {
     });
     res.sendStatus(200);
   } catch (err) {
-    console.error(err);
+    next(err);
   }
 });
 
@@ -61,7 +61,7 @@ router.delete("/:activityId/:userId/:moodId", async function (req, res, next) {
     });
     res.sendStatus(200);
   } catch (err) {
-    console.error(err);
+    next(err);
   }
 });
 
@@ -76,7 +76,7 @@ router.put("/:userId", async function (req, res, next) {
     );
     res.sendStatus(200);
   } catch (err) {
-    console.error(err);
+    next(err);
   }
 });
 

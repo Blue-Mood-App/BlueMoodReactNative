@@ -13,7 +13,7 @@ router.get("/:userId", async function (req, res, next) {
     });
     res.send(activities);
   } catch (err) {
-    console.log(err);
+    next(err);
   }
 });
 
@@ -36,7 +36,7 @@ router.post("/", requireToken, async function (req, res, next) {
     }
     res.sendStatus(201);
   } catch (err) {
-    console.log(err);
+    next(err);
   }
 });
 

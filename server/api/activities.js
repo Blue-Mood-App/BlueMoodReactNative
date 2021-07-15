@@ -15,7 +15,7 @@ router.get("/", async function (req, res, next) {
     */
     res.send("hi in activities");
   } catch (error) {
-    console.error(error);
+    next(error);
   }
 });
 
@@ -31,7 +31,7 @@ router.get("/:moodId", requireToken, async function (req, res, next) {
     });
     res.send(activities);
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 });
 router.get("/demo/:moodId", async function (req, res, next) {
@@ -43,9 +43,9 @@ router.get("/demo/:moodId", async function (req, res, next) {
       },
       include: [Activity],
     });
-    res.sendstatus(202).send(activities);
+    res.send(activities);
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 });
 

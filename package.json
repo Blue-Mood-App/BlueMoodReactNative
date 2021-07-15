@@ -8,7 +8,7 @@
     "eject": "expo eject",
     "start-dev": "JWT=shh nodemon server & expo start --clear",
     "start:dev-windows": "set JWT=shh&&expo start&&nodemon server",
-    "seed": "node ./scripts/seed.js"
+    "seed": "node scripts/seed.js"
   },
   "dependencies": {
     "@expo-google-fonts/architects-daughter": "^0.2.0",

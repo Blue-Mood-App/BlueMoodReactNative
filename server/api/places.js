@@ -15,7 +15,7 @@ Once a user picks an activity, we need to find this activity in the table, grab 
 
     res.send(mapData);
   } catch (error) {
-    console.error(error);
+    next(error);
   }
 });
 
