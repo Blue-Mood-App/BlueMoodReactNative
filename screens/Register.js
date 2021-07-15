@@ -17,6 +17,10 @@ import octopus from "../assets/octopus2.json";
 const { height } = Dimensions.get("window");
 
 export default function Register({ navigation }) {
+  const [fontsLoaded] = useFonts({
+    PatrickHandSC_400Regular,
+  });
+
   const { control, setFocus, handleSubmit } = useForm({
     defaultValues: {
       firstName: "",
@@ -29,9 +33,6 @@ export default function Register({ navigation }) {
   });
 
   const dispatch = useDispatch();
-  const [fontsLoaded] = useFonts({
-    PatrickHandSC_400Regular,
-  });
 
   return (
     <KeyboardAwareScrollView style={styles.container}>
@@ -179,11 +180,11 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
   },
   text: {
-    fontSize: 40,
+    fontSize: 56,
     textAlign: "center",
     // marginTop: "20%",
     // marginBottom: 20,
-    fontWeight: "700",
+    fontFamily: "PatrickHandSC_400Regular",
   },
   btn: {
     marginVertical: 10,
@@ -213,6 +214,6 @@ const styles = StyleSheet.create({
   },
   lottieContainer: {
     flex: 1,
-    marginBottom: -350,
+    marginBottom: -382,
   },
 });

@@ -115,7 +115,7 @@ export default function MoodsPage({ navigation }) {
 
 const styles = StyleSheet.create({
   btnSpacing: {
-    marginBottom: 20,
+    marginBottom: 7,
   },
   container: {
     flex: 1,
