@@ -97,7 +97,7 @@ const Main = ({ navigation }) => {
           title: "",
           headerStyle: {
             shadowColor: "transparent",
-            backgroundColor: "transparent",
+            backgroundColor: "#f6f0eb",
           },
           headerBackTitleVisible: false,
           headerBackImage: () => (
