@@ -58,11 +58,3 @@ const styles = StyleSheet.create({
   },
 });
 
-// activities.map(activity => {
-//   const { name, id } = activity.activity
-
-//   return (
-//     <Text style={styles.title} key={id}>{name}</Text>
-//   )
-
-// })

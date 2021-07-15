@@ -50,7 +50,8 @@ export default function ActivityPage({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f6f0eb",
+    backgroundColor: "#EBF0FE",
+    borderTopColor: "#EBF0FE",
   },
   loading: {
     flex: 1,
@@ -86,7 +87,7 @@ const styles = StyleSheet.create({
     fontFamily: "PatrickHandSC_400Regular",
     textAlign: "center",
     position: "absolute",
-    marginLeft: 50,
+    marginLeft: 40,
     marginTop: 30,
   },
 });
