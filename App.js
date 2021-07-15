@@ -110,7 +110,7 @@ const Main = ({ navigation }) => {
           ),
         }}
       />
-      <Stack.Screen name="Profile" component={EditMoods} />
+      <Stack.Screen name="Edit Activities" component={EditMoods} />
     </Stack.Navigator>
   );
 };
