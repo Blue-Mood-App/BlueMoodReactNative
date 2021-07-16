@@ -16,6 +16,7 @@ const { width } = Dimensions.get("window");
 export default function ActivityPage({ navigation }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const activities = useSelector((state) => state.activities);
+  const userInfo = useSelector((state) => state.auth);
   let [fontsLoaded] = useFonts({
     PatrickHandSC_400Regular,
   });
@@ -26,6 +27,14 @@ export default function ActivityPage({ navigation }) {
         <LottieView source={octopus} autoPlay loop></LottieView>
       </View>
       <Text style={styles.text}>Oops! Please edit your activities</Text>
+      {Array.isArray(userInfo.contactList) && (
+        <Text style={{ fontSize: 25, bottom: 100, position: "absolute" }}>
+          Or contact a friend that fits your mood :{" "}
+          {userInfo.contactList.map((el) => {
+            return <Text>{el + " "}</Text>;
+          })}{" "}
+        </Text>
+      )}
     </View>
   ) : (
     <View style={styles.container}>
@@ -79,7 +88,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 25,
-    paddingBottom: 200,
+    bottom: 200,
     position: "absolute",
   },
   textAll: {
