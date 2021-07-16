@@ -20,7 +20,7 @@ export default function ActivityPage({ navigation }) {
     PatrickHandSC_400Regular,
   });
 
-  return !activities.length && !fontsLoaded ? (
+  return !activities.length || !fontsLoaded ? (
     <View style={styles.loading}>
       <View style={styles.lottieView}>
         <LottieView source={octopus} autoPlay loop></LottieView>
