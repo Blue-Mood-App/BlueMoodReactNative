@@ -21,6 +21,13 @@ import Menu from "./screens/Menu";
 import Contacts from "./screens/Contacts";
 import { me } from "./store/auth";
 import * as SplashScreen from "expo-splash-screen";
+import {
+  useFonts,
+  OpenSansCondensed_300Light,
+  OpenSansCondensed_700Bold,
+} from "@expo-google-fonts/open-sans-condensed";
+import { PatrickHandSC_400Regular } from "@expo-google-fonts/patrick-hand-sc";
+import AppLoading from "expo-app-loading";
 //import * as Font from "expo-font";
 
 const { width } = Dimensions.get("window");
@@ -178,6 +185,11 @@ const Main = ({ navigation }) => {
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
+  let [fontsLoaded] = useFonts({
+    OpenSansCondensed_300Light,
+    OpenSansCondensed_700Bold,
+    PatrickHandSC_400Regular,
+  });
 
   const prepare = async () => {
     try {
@@ -214,23 +226,27 @@ export default function App() {
     return null;
   }
 
-  return (
-    <Provider store={store}>
-      <NavigationContainer>
-        {/* <View onLayout={onLayoutRootView}> */}
-        <RootStack.Navigator mode="modal" headerMode="none">
-          <RootStack.Screen
-            name="Main"
-            component={Main}
-            options={{ headerShown: false }}
-          />
-          <RootStack.Screen name="Menu" component={Menu} />
-          <RootStack.Screen name="Logged Out" component={LoggedOut} />
-        </RootStack.Navigator>
-        {/* </View> */}
-      </NavigationContainer>
-    </Provider>
-  );
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
+    return (
+      <Provider store={store}>
+        <NavigationContainer>
+          {/* <View onLayout={onLayoutRootView}> */}
+          <RootStack.Navigator mode="modal" headerMode="none">
+            <RootStack.Screen
+              name="Main"
+              component={Main}
+              options={{ headerShown: false }}
+            />
+            <RootStack.Screen name="Menu" component={Menu} />
+            <RootStack.Screen name="Logged Out" component={LoggedOut} />
+          </RootStack.Navigator>
+          {/* </View> */}
+        </NavigationContainer>
+      </Provider>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
