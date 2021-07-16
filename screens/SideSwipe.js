@@ -20,6 +20,9 @@ export default function SideSwipeCarousel(props) {
   });
 
   const handleClick = (element, currentActivity, queensAddress) => {
+    if (props.buttonVal) {
+      props.makeTrue();
+    }
     dispatch(editMoodActivities(queensAddress));
   };
 

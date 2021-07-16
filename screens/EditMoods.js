@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -27,6 +27,7 @@ const { height } = Dimensions.get("window");
 
 const EditMoods = ({ navigation }) => {
   const user = useSelector((state) => state.auth);
+  const [enabled, setEnabled] = useState(true);
   const sortedActivities = useSelector((state) => state.sortedActivities);
   const dispatch = useDispatch();
 
@@ -55,6 +56,10 @@ const EditMoods = ({ navigation }) => {
     navigation.navigate("Select Mood");
   };
 
+  const makeEnabled = () => {
+    setEnabled(false);
+  };
+
   return (
     <KeyboardAwareScrollView style={{ flex: 1 }}>
       <LinearGradient
@@ -71,7 +76,12 @@ const EditMoods = ({ navigation }) => {
                   <Text
                     style={styles.text1}
                   >{`when I am ${el[0].mood}...`}</Text>
-                  <SideSwipeCarousel mood={el[0].mood} currentRow={el} />
+                  <SideSwipeCarousel
+                    buttonVal={enabled}
+                    makeTrue={makeEnabled}
+                    mood={el[0].mood}
+                    currentRow={el}
+                  />
                 </View>
               );
             })}
@@ -81,7 +91,7 @@ const EditMoods = ({ navigation }) => {
               mode={"contained"}
               color="black"
               style={styles.btn}
-              disabled={true}
+              disabled={enabled}
               onPress={() => handleSubmit(user.id)}
             >
               Update
