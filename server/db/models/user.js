@@ -22,6 +22,9 @@ const User = db.define("user", {
       isEmail: true,
     },
   },
+  displayName: {
+    type: Sequelize.STRING,
+  },
   password: {
     type: Sequelize.STRING,
   },
@@ -36,6 +39,12 @@ const User = db.define("user", {
   contactList: {
     type: Sequelize.ARRAY(Sequelize.STRING),
     allowNull: true,
+  },
+  lat: {
+    type: Sequelize.STRING,
+  },
+  lng: {
+    type: Sequelize.STRING,
   },
 });
 
@@ -73,6 +82,30 @@ User.findByToken = async function (token) {
     const error = Error("bad token");
     error.status = 401;
     throw error;
+  }
+};
+
+// Get users on nearby radius.
+User.nearbyUsers = async function (coord) {
+  const { acos, sin, cos } = Math;
+  const radiusFilter = (user) => {
+    return (
+      acos(
+        sin(user.lat * 0.0175) * sin(coord.lat * 0.0175) +
+          cos(user.lat * 0.0175) *
+            cos(coord.lat * 0.0175) *
+            cos(coord.lng * 0.0175 - user.lng * 0.0175)
+      ) *
+        6371 <=
+      2
+    );
+  };
+  try {
+    const users = await User.findAll();
+    return users.filter(radiusFilter);
+  } catch (err) {
+    err.status = 500;
+    throw err;
   }
 };
 
