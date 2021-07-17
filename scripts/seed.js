@@ -12,6 +12,7 @@ async function seed() {
   console.log(blue("synced!"));
   let users, activities, moods, userSpecificActivities;
 
+  try {
   const usersCall = await fetch(
     "https://spreadsheets.google.com/feeds/list/1FOJOP5FwnfP6xDrBp7eUWLqFZlDZL_0yxC3V35MgzrY/1/public/values?alt=json"
   );
@@ -37,6 +38,10 @@ async function seed() {
   userSpecificActivities = googleJSONCleaner(
     userSpecificActivitiesJson.feed.entry
   );
+
+  } catch(error) {
+    console.log(error)
+  }
 
   await User.bulkCreate(users)
 
