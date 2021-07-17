@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Register from "./Register";
 import {
   StyleSheet,
   Text,
@@ -12,27 +11,27 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { getActivities, getMoods } from "../store/registration";
 import ActivitySelector from "./ActivitySelector";
-import {
-  useFonts,
-  OpenSansCondensed_300Light,
-  OpenSansCondensed_700Bold,
-} from "@expo-google-fonts/open-sans-condensed";
-import { PatrickHandSC_400Regular } from "@expo-google-fonts/patrick-hand-sc";
+// import {
+//   useFonts,
+//   OpenSansCondensed_300Light,
+//   OpenSansCondensed_700Bold,
+// } from "@expo-google-fonts/open-sans-condensed";
+// import { PatrickHandSC_400Regular } from "@expo-google-fonts/patrick-hand-sc";
 import { Button } from "react-native-paper";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { LinearGradient } from "expo-linear-gradient";
-import AppLoading from "expo-app-loading";
+// import AppLoading from "expo-app-loading";
 
 const { height } = Dimensions.get("window");
 
 const RegisterActivities = ({ navigation }) => {
   const dispatch = useDispatch();
 
-  let [fontsLoaded] = useFonts({
-    OpenSansCondensed_300Light,
-    OpenSansCondensed_700Bold,
-    PatrickHandSC_400Regular,
-  });
+  // let [fontsLoaded] = useFonts({
+  //   OpenSansCondensed_300Light,
+  //   OpenSansCondensed_700Bold,
+  //   PatrickHandSC_400Regular,
+  // });
 
   useEffect(() => {
     dispatch(getMoods());
@@ -42,47 +41,47 @@ const RegisterActivities = ({ navigation }) => {
   const registration = useSelector((state) => state.registration);
   const { moods, activities } = registration;
 
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  } else {
-    return (
-      <KeyboardAwareScrollView style={{ flex: 1 }}>
-        <LinearGradient
-          start={{ x: 0.3, y: 1.4 }}
-          end={{ x: 0.4, y: 0.2 }}
-          colors={["#fffae2", "#fcd29f"]}
-          style={styles.background}
-        >
-          <View style={styles.contentContainer}>
-            <Text style={styles.title}>Tell us more about you...</Text>
-            {moods.map((mood) => {
-              return (
-                <View key={mood.id} style={styles.moodsSpacing}>
-                  <Text style={styles.text}>{`when I am ${mood.name}...`}</Text>
-                  <ActivitySelector
-                    moodName={mood.name}
-                    activities={activities}
-                    moodId={mood.id}
-                  />
-                </View>
-              );
-            })}
-            <View style={styles.buttonContainer}>
-              <Button
-                mode={"contained"}
-                color="black"
-                style={styles.btn}
-                onPress={() => navigation.navigate("User Contacts")}
-              >
-                Next
-              </Button>
-            </View>
+  // if (!fontsLoaded) {
+  //   return <AppLoading />;
+  // } else {
+  return (
+    <KeyboardAwareScrollView style={{ flex: 1 }}>
+      <LinearGradient
+        start={{ x: 0.3, y: 1.4 }}
+        end={{ x: 0.4, y: 0.2 }}
+        colors={["#fffae2", "#fcd29f"]}
+        style={styles.background}
+      >
+        <View style={styles.contentContainer}>
+          <Text style={styles.title}>Tell us more about you...</Text>
+          {moods.map((mood) => {
+            return (
+              <View key={mood.id} style={styles.moodsSpacing}>
+                <Text style={styles.text}>{`when I am ${mood.name}...`}</Text>
+                <ActivitySelector
+                  moodName={mood.name}
+                  activities={activities}
+                  moodId={mood.id}
+                />
+              </View>
+            );
+          })}
+          <View style={styles.buttonContainer}>
+            <Button
+              mode={"contained"}
+              color="black"
+              style={styles.btn}
+              onPress={() => navigation.navigate("User Contacts")}
+            >
+              Next
+            </Button>
           </View>
-        </LinearGradient>
-      </KeyboardAwareScrollView>
-    );
-  }
+        </View>
+      </LinearGradient>
+    </KeyboardAwareScrollView>
+  );
 };
+// };
 
 const styles = StyleSheet.create({
   text: {

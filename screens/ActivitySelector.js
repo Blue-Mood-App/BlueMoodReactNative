@@ -3,18 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { StyleSheet, Text, TouchableOpacity, Image } from "react-native";
 import SideSwipe from "react-native-sideswipe";
 import { setFavActivity, deleteFavActivity } from "../store/registration";
-import {
-  useFonts,
-  OpenSansCondensed_300Light,
-  OpenSansCondensed_700Bold,
-} from "@expo-google-fonts/open-sans-condensed";
+// import {
+//   useFonts,
+//   OpenSansCondensed_300Light,
+//   OpenSansCondensed_700Bold,
+// } from "@expo-google-fonts/open-sans-condensed";
 import AppLoading from "expo-app-loading";
 
 const ActivitySelector = ({ activities, moodId, moodName }) => {
-  let [fontsLoaded] = useFonts({
-    OpenSansCondensed_300Light,
-    OpenSansCondensed_700Bold,
-  });
+  // let [fontsLoaded] = useFonts({
+  //   OpenSansCondensed_300Light,
+  //   OpenSansCondensed_700Bold,
+  // });
 
   const [index, setIndex] = useState(0);
   const [selectedActivities, setSelectedActivities] = useState({});
@@ -68,20 +68,20 @@ const ActivitySelector = ({ activities, moodId, moodName }) => {
     return <Item id={item.id} mood={item.moodId} name={item.name} />;
   };
 
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  } else {
-    return (
-      <SideSwipe
-        index={index}
-        data={activities}
-        renderItem={renderItem}
-        itemWidth={activities.length * 10}
-        onIndexChange={(index) => setIndex(index)}
-      />
-    );
-  }
+  // if (!fontsLoaded) {
+  //   return <AppLoading />;
+  // } else {
+  return (
+    <SideSwipe
+      index={index}
+      data={activities}
+      renderItem={renderItem}
+      itemWidth={activities.length * 10}
+      onIndexChange={(index) => setIndex(index)}
+    />
+  );
 };
+//};
 
 const styles = StyleSheet.create({
   container: {
