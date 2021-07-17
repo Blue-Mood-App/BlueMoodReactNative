@@ -13,51 +13,52 @@ async function seed() {
   let users, activities, moods, userSpecificActivities;
 
   try {
-  const usersCall = await fetch(
-    "https://spreadsheets.google.com/feeds/list/1FOJOP5FwnfP6xDrBp7eUWLqFZlDZL_0yxC3V35MgzrY/1/public/values?alt=json"
-  );
-  const usersJson = await usersCall.json();
-  users = googleJSONCleaner(usersJson.feed.entry);
+    const usersCall = await fetch(
+      "https://spreadsheets.google.com/feeds/list/1FOJOP5FwnfP6xDrBp7eUWLqFZlDZL_0yxC3V35MgzrY/1/public/values?alt=json"
+    );
 
-  const activitiesCall = await fetch(
-    "https://spreadsheets.google.com/feeds/list/1QZ2L7CA0waqeGUUmU6aTpO76LnNh0vvmPF1gAE3A3WE/2/public/values?alt=json"
-  );
-  const activitiesJson = await activitiesCall.json();
-  activities = googleJSONCleaner(activitiesJson.feed.entry);
+    const usersJson = await usersCall.json();
+    users = googleJSONCleaner(usersJson.feed.entry);
 
-  const moodsCall = await fetch(
-    "https://spreadsheets.google.com/feeds/list/1FOJOP5FwnfP6xDrBp7eUWLqFZlDZL_0yxC3V35MgzrY/3/public/values?alt=json"
-  );
-  const moodsJson = await moodsCall.json();
-  moods = googleJSONCleaner(moodsJson.feed.entry);
+    const activitiesCall = await fetch(
+      "https://spreadsheets.google.com/feeds/list/1FOJOP5FwnfP6xDrBp7eUWLqFZlDZL_0yxC3V35MgzrY/2/public/values?alt=json"
+    );
+    const activitiesJson = await activitiesCall.json();
+    activities = googleJSONCleaner(activitiesJson.feed.entry);
 
-  const userSpecificActivitiesCall = await fetch(
-    "https://spreadsheets.google.com/feeds/list/1FOJOP5FwnfP6xDrBp7eUWLqFZlDZL_0yxC3V35MgzrY/4/public/values?alt=json"
-  );
-  const userSpecificActivitiesJson = await userSpecificActivitiesCall.json();
-  userSpecificActivities = googleJSONCleaner(
-    userSpecificActivitiesJson.feed.entry
-  );
 
-  } catch(error) {
-    console.log(error)
-  }
+    const moodsCall = await fetch(
+      "https://spreadsheets.google.com/feeds/list/1FOJOP5FwnfP6xDrBp7eUWLqFZlDZL_0yxC3V35MgzrY/3/public/values?alt=json"
+    );
+    const moodsJson = await moodsCall.json();
+    moods = googleJSONCleaner(moodsJson.feed.entry);
 
-  await User.bulkCreate(users)
+    const userSpecificActivitiesCall = await fetch(
+      "https://spreadsheets.google.com/feeds/list/1FOJOP5FwnfP6xDrBp7eUWLqFZlDZL_0yxC3V35MgzrY/4/public/values?alt=json"
+    );
+    const userSpecificActivitiesJson = await userSpecificActivitiesCall.json();
+    userSpecificActivities = googleJSONCleaner(
+      userSpecificActivitiesJson.feed.entry
+    );
 
-  await Activity.bulkCreate(activities)
+    await User.bulkCreate(users);
 
-  await Mood.bulkCreate(moods)
+    await Activity.bulkCreate(activities);
 
-  await Promise.all(
-    userSpecificActivities.map((userSpecificActivity) =>
+    await Mood.bulkCreate(moods);
+
+    await Promise.all(
+      userSpecificActivities.map((userSpecificActivity) =>
         UserActivity.create({
           moodId: +userSpecificActivity.moodId,
           userId: +userSpecificActivity.userId,
           activityId: +userSpecificActivity.activityId,
         })
-    )
-  );
+      )
+    );
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 async function runSeed() {
@@ -75,7 +76,7 @@ async function runSeed() {
 }
 
 if (module === require.main) {
-  runSeed()
+  runSeed();
 }
 
 module.exports = seed;
