@@ -43,7 +43,7 @@ const User = db.define("user", {
   lat: {
     type: Sequelize.STRING,
   },
-  lng: {
+  long: {
     type: Sequelize.STRING,
   },
 });
@@ -88,20 +88,23 @@ User.findByToken = async function (token) {
 // Get users on nearby radius.
 User.nearbyUsers = async function (coord) {
   const { acos, sin, cos } = Math;
+  // Callback function to calculate coordinates that are within 2km/2000m
   const radiusFilter = (user) => {
     return (
       acos(
         sin(user.lat * 0.0175) * sin(coord.lat * 0.0175) +
           cos(user.lat * 0.0175) *
             cos(coord.lat * 0.0175) *
-            cos(coord.lng * 0.0175 - user.lng * 0.0175)
+            cos(coord.long * 0.0175 - user.long * 0.0175)
       ) *
         6371 <=
       2
     );
   };
   try {
+    //Try find all users
     const users = await User.findAll();
+    //Filter those users with the function above and return a new array.
     return users.filter(radiusFilter);
   } catch (err) {
     err.status = 500;
