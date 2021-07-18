@@ -79,35 +79,6 @@ const EditMoods = ({ navigation }) => {
           style={styles.background}
         >
           <ScrollView contentContainerStyle={styles.contentContainer}>
-            {Array.isArray(sortedActivities) &&
-              sortedActivities.map((el, idx) => {
-                return (
-                  <View key={idx}>
-                    <Text
-                      style={styles.text1}
-                    >{`when I am ${el[0].mood}...`}</Text>
-                    <SideSwipeCarousel mood={el[0].mood} currentRow={el} />
-                  </View>
-                );
-              })}
-            <View style={styles.buttonContainer}>
-              <Button
-                id="disabledButton"
-                mode={"contained"}
-                color="black"
-                style={styles.btn}
-                disabled={true}
-                onPress={() => handleSubmit(user.id)}
-              >
-                Update
-              </Button>
-            </View>
-          </ScrollView>
-        </LinearGradient>
-      </KeyboardAwareScrollView>
-    </LinearGradient>
-
-        <ScrollView contentContainerStyle={styles.contentContainer}>
           {Array.isArray(sortedActivities) &&
             sortedActivities.map((el, idx) => {
               return (
@@ -137,9 +108,9 @@ const EditMoods = ({ navigation }) => {
             </Button>
           </View>
         </ScrollView>
-      </LinearGradient>
-    </KeyboardAwareScrollView>
-
+        </LinearGradient>
+      </KeyboardAwareScrollView>
+    </LinearGradient>
   );
 };
 

@@ -71,7 +71,7 @@ router.put("/:userId", async function (req, res, next) {
   const { userId } = req.params;
   try {
     await User.update(
-      { agreedToMeet, nickname: nickname, phoneNumber: phoneNumber },
+      { agreedToMeet, displayName: nickname, phoneNumber: phoneNumber },
       { where: { id: userId } }
     );
     res.sendStatus(200);
