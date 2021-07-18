@@ -67,11 +67,11 @@ router.delete("/:activityId/:userId/:moodId", async function (req, res, next) {
 
 //Contact List put route.
 router.put("/:userId", async function (req, res, next) {
-  const { agreedToMeet, contacts } = req.body;
+  const { agreedToMeet, nickname, phoneNumber } = req.body;
   const { userId } = req.params;
   try {
     await User.update(
-      { agreedToMeet, contactList: contacts },
+      { agreedToMeet, nickname: nickname, phoneNumber: phoneNumber },
       { where: { id: userId } }
     );
     res.sendStatus(200);

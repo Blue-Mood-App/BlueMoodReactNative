@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { StyleSheet, View, Modal, ScrollView, Dimensions } from "react-native";
-import { Button, TextInput, RadioButton, Text } from "react-native-paper";
+import {
+  StyleSheet,
+  View,
+  Modal,
+  ScrollView,
+  Dimensions,
+  TextInput,
+} from "react-native";
+import { Button, RadioButton, Text } from "react-native-paper";
 import { FormBuilder } from "react-native-paper-form-builder";
 import { useForm } from "react-hook-form";
 import { setContactList } from "../store/registration";
@@ -15,19 +22,16 @@ export default function UserContacts({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalText, setModalText] = useState("");
   const [agreedToMeet, setAgreedToMeet] = useState(false);
+  const [nickname, onChangeNickname] = React.useState("");
+  const [phoneNumber, onChangePhoneNumber] = React.useState(null);
   const user = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const { id: userId, usernameEmail, password } = user;
 
-  //contacts
-  const { control, setFocus, handleSubmit } = useForm({
-    defaultValues: {
-      contactOne: "",
-      contactTwo: "",
-      contactThree: "",
-    },
-    mode: "onChange",
-  });
+  const validatePhoneNumber = (phoneNumber) => {
+    const phoneNumberRegex = /^\+?[0-9]{1,3}?[0-9]{9,15}$/;
+    return phoneNumberRegex.test(phoneNumber);
+  };
 
   return (
     <View style={styles.container}>
@@ -38,114 +42,107 @@ export default function UserContacts({ navigation }) {
       >
         <View style={styles.container}>
           <Text style={styles.text}>
-            {modalText === "contacts"
-              ? "Having a tough day and feel like chatting with your loved ones? Share the names of your favorite people, and we'll make sure to remind you to contact them when life is being unfair to you."
-              : "Hey! Why not join our connect program? Our connect program will connect you with other Blue Mood users who want to make new friends just like you. We will suggest users living in the same area as you, and you can then start a chat with them."}
+            {modalText === "contacts" &&
+              "Hey! Why not join our connect program? Our connect program will connect you with other Blue Mood users who want to make new friends just like you. We will suggest users living in the same area as you, and you can then start a chat with them."}
           </Text>
           <Button onPress={() => setModalVisible(!modalVisible)}>Close </Button>
         </View>
       </Modal>
-      <KeyboardAwareScrollView style={{ flex: 1 }}>
-        <LinearGradient
-          start={{ x: 0.5, y: 0 }}
-          end={{ x: 0.9, y: 2.4 }}
-          colors={["#f19c79", "#f5ee9e", "#fff"]}
-          style={styles.background}
+      <LinearGradient
+        start={{ x: 0.5, y: 0 }}
+        end={{ x: 0.9, y: 2.4 }}
+        colors={["#f19c79", "#f5ee9e", "#fff"]}
+        style={{ flex: 1, backgroundColor: "#f19c79" }}
+      >
+        <KeyboardAwareScrollView
+          style={{ flex: 1 }}
+          showsVerticalScrollIndicator={false}
         >
-          <View style={styles.textContainer}>
-            <Text
-              style={styles.titleText}
-              onPress={() => (setModalVisible(true), setModalText("contacts"))}
-            >
-              Would you like to share your contacts?{" "}
-              <Feather
-                name="info"
-                size={18}
-                color="black"
-                style={styles.infoIcon}
-                onPress={() => (
-                  setModalVisible(true), setModalText("contacts")
-                )}
-              />
-            </Text>
-            <FormBuilder
-              control={control}
-              setFocus={setFocus}
-              formConfigArray={[
-                {
-                  type: "text",
-                  name: "contactOne",
-
-                  textInputProps: {
-                    label: "Contact Name",
-                  },
-                },
-                {
-                  type: "text",
-                  name: "contactTwo",
-
-                  textInputProps: {
-                    label: "Contact Name",
-                  },
-                },
-                {
-                  type: "text",
-                  name: "contactThree",
-
-                  textInputProps: {
-                    label: "Contact Name",
-                  },
-                },
-              ]}
-            />
-            <View>
-              <Text
-                style={styles.titleText}
-                onPress={() => (
-                  setModalVisible(true), setModalText("permission")
-                )}
-              >
-                Would you like to connect with other members near you?{" "}
-                <Feather
-                  name="info"
-                  size={20}
-                  color="black"
+          <LinearGradient
+            start={{ x: 0.5, y: 0 }}
+            end={{ x: 0.9, y: 2.4 }}
+            colors={["#f19c79", "#f5ee9e", "#fff"]}
+            style={styles.background}
+          >
+            <View style={styles.textContainer}>
+              <View>
+                <Text
+                  style={styles.titleText}
                   onPress={() => (
                     setModalVisible(true), setModalText("permission")
                   )}
-                />
-              </Text>
-            </View>
-            <RadioButton.Group
-              onValueChange={(value) => setAgreedToMeet(value)}
-              value={agreedToMeet}
-            >
-              <RadioButton.Item label="Of course" value="true" />
-              <RadioButton.Item label="Not now" value="false" />
-            </RadioButton.Group>
-            <View style={styles.buttonContainer}>
-              <Button
-                style={styles.btn}
-                mode={"contained"}
-                color="black"
-                onPress={handleSubmit((data) => {
-                  const { contactOne, contactTwo, contactThree } = data;
-                  dispatch(
-                    setContactList(
-                      agreedToMeet,
-                      [contactOne, contactTwo, contactThree],
-                      userId
-                    )
-                  );
-                  navigation.navigate("Select Mood");
-                })}
+                >
+                  Would you like to connect with other members near you?{" "}
+                  <Feather
+                    name="info"
+                    size={20}
+                    color="black"
+                    onPress={() => (
+                      setModalVisible(true), setModalText("permission")
+                    )}
+                  />
+                </Text>
+              </View>
+              <RadioButton.Group
+                onValueChange={(value) => setAgreedToMeet(value)}
+                value={agreedToMeet}
               >
-                Submit
-              </Button>
+                <RadioButton.Item label="Of course" value={true} />
+                <RadioButton.Item label="Not now" value={false} />
+              </RadioButton.Group>
+              {agreedToMeet && (
+                <View>
+                  <Text style={styles.titleText}>
+                    If yes, share your preferred name
+                  </Text>
+                  <TextInput
+                    style={styles.input}
+                    onChangeText={onChangeNickname}
+                    value={nickname}
+                    placeholder="Nickname"
+                  />
+                  <Text style={styles.titleText}>
+                    share your preferred phone number
+                  </Text>
+                  <TextInput
+                    style={styles.input}
+                    onChangeText={onChangePhoneNumber}
+                    value={phoneNumber}
+                    placeholder="1111111111"
+                    keyboardType="numeric"
+                  />
+                </View>
+              )}
+              <View style={styles.buttonContainer}>
+                <Button
+                  style={styles.btn}
+                  mode={"contained"}
+                  color="black"
+                  onPress={() => {
+                    if (phoneNumber && !validatePhoneNumber(phoneNumber)) {
+                      alert("error, phone number is invalid");
+                      return;
+                    }
+
+                    console.log(agreedToMeet, nickname, phoneNumber, userId);
+                    dispatch(
+                      setContactList(
+                        agreedToMeet,
+                        nickname,
+                        phoneNumber,
+                        userId
+                      )
+                    );
+                    navigation.navigate("Select Mood");
+                  }}
+                >
+                  Submit
+                </Button>
+              </View>
             </View>
-          </View>
-        </LinearGradient>
-      </KeyboardAwareScrollView>
+          </LinearGradient>
+        </KeyboardAwareScrollView>
+      </LinearGradient>
     </View>
   );
 }
@@ -195,5 +192,10 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     paddingRight: 15,
     height: height,
+  },
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
   },
 });

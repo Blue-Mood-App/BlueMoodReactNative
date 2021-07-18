@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
   SafeAreaView,
   Alert,
   Dimensions,
@@ -40,48 +39,59 @@ const RegisterActivities = ({ navigation }) => {
 
   const registration = useSelector((state) => state.registration);
   const { moods, activities } = registration;
-
-  // if (!fontsLoaded) {
-  //   return <AppLoading />;
-  // } else {
-  return (
-    <KeyboardAwareScrollView style={{ flex: 1 }}>
+  
+// if (!fontsLoaded) {
+//     return <AppLoading />;
+//   } else {
+    return (
       <LinearGradient
         start={{ x: 0.3, y: 1.4 }}
         end={{ x: 0.4, y: 0.2 }}
         colors={["#fffae2", "#fcd29f"]}
-        style={styles.background}
+        style={{ flex: 1, backgroundColor: "#fcd29f" }}
       >
-        <View style={styles.contentContainer}>
-          <Text style={styles.title}>Tell us more about you...</Text>
-          {moods.map((mood) => {
-            return (
-              <View key={mood.id} style={styles.moodsSpacing}>
-                <Text style={styles.text}>{`when I am ${mood.name}...`}</Text>
-                <ActivitySelector
-                  moodName={mood.name}
-                  activities={activities}
-                  moodId={mood.id}
-                />
+        <KeyboardAwareScrollView
+          style={{ flex: 1 }}
+          showsVerticalScrollIndicator={false}
+        >
+          <LinearGradient
+            start={{ x: 0.3, y: 1.4 }}
+            end={{ x: 0.4, y: 0.2 }}
+            colors={["#fffae2", "#fcd29f"]}
+            style={styles.background}
+          >
+            <View style={styles.contentContainer}>
+              <Text style={styles.title}>Tell us more about you...</Text>
+              {moods.map((mood) => {
+                return (
+                  <View key={mood.id} style={styles.moodsSpacing}>
+                    <Text
+                      style={styles.text}
+                    >{`when I am ${mood.name}...`}</Text>
+                    <ActivitySelector
+                      moodName={mood.name}
+                      activities={activities}
+                      moodId={mood.id}
+                    />
+                  </View>
+                );
+              })}
+              <View style={styles.buttonContainer}>
+                <Button
+                  mode={"contained"}
+                  color="black"
+                  style={styles.btn}
+                  onPress={() => navigation.navigate("User Contacts")}
+                >
+                  Next
+                </Button>
               </View>
-            );
-          })}
-          <View style={styles.buttonContainer}>
-            <Button
-              mode={"contained"}
-              color="black"
-              style={styles.btn}
-              onPress={() => navigation.navigate("User Contacts")}
-            >
-              Next
-            </Button>
-          </View>
-        </View>
+            </View>
+          </LinearGradient>
+        </KeyboardAwareScrollView>
       </LinearGradient>
-    </KeyboardAwareScrollView>
-  );
+    );
 };
-// };
 
 const styles = StyleSheet.create({
   text: {

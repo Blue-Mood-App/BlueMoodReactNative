@@ -61,13 +61,52 @@ const EditMoods = ({ navigation }) => {
   };
 
   return (
-    <KeyboardAwareScrollView style={{ flex: 1 }}>
-      <LinearGradient
-        start={{ x: 0.3, y: 1.4 }}
-        end={{ x: 0.4, y: 0.2 }}
-        colors={["#fffae2", "#fcd29f"]}
-        style={styles.background}
+    <LinearGradient
+      start={{ x: 0.3, y: 1.4 }}
+      end={{ x: 0.4, y: 0.33 }}
+      colors={["#fffae2", "#fcd29f"]}
+      style={{ flex: 1, backgroundColor: "#fcd29f" }}
+    >
+      <KeyboardAwareScrollView
+        style={{ flex: 1 }}
+        showsVerticalScrollIndicator={false}
       >
+
+        <LinearGradient
+          start={{ x: 0.3, y: 1.4 }}
+          end={{ x: 0.4, y: 0.2 }}
+          colors={["#fffae2", "#fcd29f"]}
+          style={styles.background}
+        >
+          <ScrollView contentContainerStyle={styles.contentContainer}>
+            {Array.isArray(sortedActivities) &&
+              sortedActivities.map((el, idx) => {
+                return (
+                  <View key={idx}>
+                    <Text
+                      style={styles.text1}
+                    >{`when I am ${el[0].mood}...`}</Text>
+                    <SideSwipeCarousel mood={el[0].mood} currentRow={el} />
+                  </View>
+                );
+              })}
+            <View style={styles.buttonContainer}>
+              <Button
+                id="disabledButton"
+                mode={"contained"}
+                color="black"
+                style={styles.btn}
+                disabled={true}
+                onPress={() => handleSubmit(user.id)}
+              >
+                Update
+              </Button>
+            </View>
+          </ScrollView>
+        </LinearGradient>
+      </KeyboardAwareScrollView>
+    </LinearGradient>
+
         <ScrollView contentContainerStyle={styles.contentContainer}>
           {Array.isArray(sortedActivities) &&
             sortedActivities.map((el, idx) => {
@@ -100,6 +139,7 @@ const EditMoods = ({ navigation }) => {
         </ScrollView>
       </LinearGradient>
     </KeyboardAwareScrollView>
+
   );
 };
 
