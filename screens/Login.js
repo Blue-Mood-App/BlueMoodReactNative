@@ -1,5 +1,5 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { ScrollView, StyleSheet, Text, View, Dimensions } from "react-native";
 import { Button, TextInput } from "react-native-paper";
 import { FormBuilder } from "react-native-paper-form-builder";
@@ -14,7 +14,8 @@ import {
   PatrickHandSC_400Regular,
 } from "@expo-google-fonts/patrick-hand-sc";
 import AppLoading from "expo-app-loading";
-
+import { getLocation } from "../store/location";
+import { fetchNearByUsers } from "../store/getNearbyUsers";
 const { height } = Dimensions.get("window");
 
 export default function Login({ navigation }) {
@@ -31,6 +32,12 @@ export default function Login({ navigation }) {
   });
 
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getLocation());
+  }, []);
+
+  // dispatch(getLocation());
+  let location = useSelector((state) => state.location);
 
   if (!fontsLoaded) {
     return <AppLoading />;
@@ -96,6 +103,7 @@ export default function Login({ navigation }) {
                 onPress={handleSubmit((data) => {
                   const { email, password } = data;
                   dispatch(authenticateLogin(email, password));
+                  dispatch(fetchNearByUsers(location));
                   navigation.navigate("Select Mood");
                 })}
                 style={styles.btn}
