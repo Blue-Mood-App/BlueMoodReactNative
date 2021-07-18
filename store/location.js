@@ -12,6 +12,7 @@ export const getLocation = () => async (dispatch) => {
     let { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== "granted") {
       // dispatch(setErrorMsg("Permission to access location was denied"));
+      console.log('location services not accepted')
     }
     let location = await Location.getCurrentPositionAsync({});
     dispatch(gotLocation(location));

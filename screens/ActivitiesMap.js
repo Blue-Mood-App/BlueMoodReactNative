@@ -1,9 +1,34 @@
 import React from "react";
-import { Dimensions, StyleSheet, Text, View } from "react-native";
+import { Dimensions, StyleSheet, Text, View, Image } from "react-native";
 import { useSelector } from "react-redux";
-import MapView, { Marker } from "react-native-maps";
+import MapView, { Marker, Circle } from "react-native-maps";
 import MarkerCallout from "./MarkerCallout";
 import Loading from "./Loading";
+import personPin from "../assets/personpin.png";
+
+const people = [
+  {
+    id: 1,
+    firstName: "james",
+    latitude: 30.309254,
+    longitude: -97.694816,
+    phoneNumber: "343-555-2323",
+  },
+  {
+    id: 2,
+    firstName: "Kyle",
+    latitude: 30.329706,
+    longitude: -97.691989,
+    phoneNumber: "343-555-2323",
+  },
+  {
+    id: 3,
+    firstName: "Steve",
+    latitude: 30.272404,
+    longitude: -97.741538,
+    phoneNumber: "343-555-2323",
+  },
+];
 
 export default function ActivitiesMap() {
   const location = useSelector((state) => state.location);
@@ -47,6 +72,46 @@ export default function ActivitiesMap() {
                 detailsUrl={url}
               />
             </Marker>
+          );
+        })}
+        {people.map((person) => {
+          const {
+            latitude: destLat,
+            longitude: destLng,
+            firstName,
+            phoneNumber,
+            id,
+          } = person;
+          const lat = location.coords.latitude;
+          const lng = location.coords.longitude;
+          const mapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${lat}+${lng}&destination=${destLat}+${destLng}`;
+
+          return (
+            <>
+            <Circle key={"c" + id}
+            center={{
+              latitude: destLat,
+              longitude: destLng,
+            }}
+            radius={300}
+            fillColor='rgba(144,238,144, .5)'
+            strokeColor="#00ff00"
+            >
+            </Circle>
+            <Marker key={'m' + id}
+              coordinate={{
+                latitude: destLat,
+                longitude: destLng,
+              }}
+              icon={personPin}
+            >
+              {/*<MarkerCallout
+              name={firstName}
+              mapsUrl={mapsUrl}
+              phoneNumber={phoneNumber}
+          />*/}
+            </Marker>
+            </>
           );
         })}
       </MapView>
