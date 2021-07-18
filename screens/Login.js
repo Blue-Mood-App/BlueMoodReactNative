@@ -31,13 +31,13 @@ export default function Login({ navigation }) {
     mode: "onChange",
   });
 
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getLocation());
   }, []);
 
-  const dispatch = useDispatch();
-  dispatch(getLocation());
-  const location = useSelector((state) => state.location);
+  // dispatch(getLocation());
+  let location = useSelector((state) => state.location);
 
   if (!fontsLoaded) {
     return <AppLoading />;
