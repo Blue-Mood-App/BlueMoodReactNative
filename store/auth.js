@@ -41,7 +41,6 @@ export const authenticateLogin =
       });
       await SecureStore.setItemAsync(TOKEN, res.data.token);
       dispatch(me());
-      //history.push() we're going to need a method to send us to home page after login
     } catch (authError) {
       return dispatch(setAuth({ error: authError }));
     }

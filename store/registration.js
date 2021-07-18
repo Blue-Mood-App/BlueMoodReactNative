@@ -1,6 +1,5 @@
 import axios from "axios";
-import location from './serverInfo';
-
+import location from "./serverInfo";
 
 //action creator
 const SET_MOOD = "SET_MOOD";
@@ -67,15 +66,18 @@ export const deleteFavActivity = (activityId, userId, moodId) => async () => {
 //delete unselected favorite activites thunk goes here
 
 //update contact list thunk goes here
-export const setContactList = (agreedToMeet, contacts, userId) => async () => {
-  try {
-    await axios.put(
-      `${location}/api/registerActivities/${userId}`, { agreedToMeet, contacts }
-    );
-  } catch (err) {
-    console.log(err);
-  }
-};
+export const setContactList =
+  (agreedToMeet, nickname, phoneNumber, userId) => async () => {
+    try {
+      await axios.put(`${location}/api/registerActivities/${userId}`, {
+        agreedToMeet,
+        nickname,
+        phoneNumber,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
 //Reducer
 export default function (state = { moods: [], activities: [] }, action) {

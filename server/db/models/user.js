@@ -25,17 +25,22 @@ const User = db.define("user", {
   password: {
     type: Sequelize.STRING,
   },
-  agreedToMeet: {
-    type: Sequelize.BOOLEAN,
-    defaultValue: false,
-  },
   favoriteActivities: {
     type: Sequelize.INTEGER,
     allowNull: true,
   },
-  contactList: {
-    type: Sequelize.ARRAY(Sequelize.STRING),
+  agreedToMeet: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  nickname: {
+    type: Sequelize.STRING,
     allowNull: true,
+  },
+  phoneNumber: {
+    type: Sequelize.STRING,
+    allowNull: true,
+    unique: true,
   },
 });
 
