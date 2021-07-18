@@ -40,9 +40,9 @@ const RegisterActivities = ({ navigation }) => {
   const registration = useSelector((state) => state.registration);
   const { moods, activities } = registration;
   
-if (!fontsLoaded) {
-    return <AppLoading />;
-  } else {
+// if (!fontsLoaded) {
+//     return <AppLoading />;
+//   } else {
     return (
       <LinearGradient
         start={{ x: 0.3, y: 1.4 }}
@@ -91,7 +91,6 @@ if (!fontsLoaded) {
         </KeyboardAwareScrollView>
       </LinearGradient>
     );
-  }
 };
 
 const styles = StyleSheet.create({
