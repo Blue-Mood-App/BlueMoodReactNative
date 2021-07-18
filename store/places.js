@@ -1,6 +1,6 @@
 import axios from "axios";
 import * as SecureStore from "expo-secure-store";
-import location from './serverInfo'
+import location from "./serverInfo";
 
 const TOKEN = "token";
 
@@ -15,21 +15,10 @@ const getPlaces = (places) => {
 
 export const fetchPlaces = (searchQuery, geo) => async (dispatch) => {
   try {
-    const token = await SecureStore.getItemAsync(TOKEN);
-    if (token) {
-      const { data } = await axios.get(
-        `${location}/api/places/?searchQuery=${searchQuery}&lat=${geo.coords.latitude}&long=${geo.coords.longitude}`,
-        {
-          headers: {
-            authorization: token,
-          },
-        }
-      );
-
-      dispatch(getPlaces(data));
-    } else {
-      console.log("not logged in");
-    }
+    const { data } = await axios.get(
+      `${location}/api/places/?searchQuery=${searchQuery}&lat=${geo.coords.latitude}&long=${geo.coords.longitude}`
+    );
+    dispatch(getPlaces(data));
   } catch (error) {
     console.log(error);
   }

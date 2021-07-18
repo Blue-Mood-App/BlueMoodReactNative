@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Register from "./Register";
 import {
   StyleSheet,
   Text,
@@ -11,27 +10,27 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { getActivities, getMoods } from "../store/registration";
 import ActivitySelector from "./ActivitySelector";
-import {
-  useFonts,
-  OpenSansCondensed_300Light,
-  OpenSansCondensed_700Bold,
-} from "@expo-google-fonts/open-sans-condensed";
-import { PatrickHandSC_400Regular } from "@expo-google-fonts/patrick-hand-sc";
+// import {
+//   useFonts,
+//   OpenSansCondensed_300Light,
+//   OpenSansCondensed_700Bold,
+// } from "@expo-google-fonts/open-sans-condensed";
+// import { PatrickHandSC_400Regular } from "@expo-google-fonts/patrick-hand-sc";
 import { Button } from "react-native-paper";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { LinearGradient } from "expo-linear-gradient";
-import AppLoading from "expo-app-loading";
+// import AppLoading from "expo-app-loading";
 
 const { height } = Dimensions.get("window");
 
 const RegisterActivities = ({ navigation }) => {
   const dispatch = useDispatch();
 
-  let [fontsLoaded] = useFonts({
-    OpenSansCondensed_300Light,
-    OpenSansCondensed_700Bold,
-    PatrickHandSC_400Regular,
-  });
+  // let [fontsLoaded] = useFonts({
+  //   OpenSansCondensed_300Light,
+  //   OpenSansCondensed_700Bold,
+  //   PatrickHandSC_400Regular,
+  // });
 
   useEffect(() => {
     dispatch(getMoods());
@@ -40,8 +39,8 @@ const RegisterActivities = ({ navigation }) => {
 
   const registration = useSelector((state) => state.registration);
   const { moods, activities } = registration;
-
-  if (!fontsLoaded) {
+  
+if (!fontsLoaded) {
     return <AppLoading />;
   } else {
     return (
