@@ -5,6 +5,7 @@ const fetch = require("node-fetch")
 
 
 const yelpFetch = async (searchQuery, lat, long) => {
+  console.log(process.env.Y_KEY)
   const auth = {
     headers: {
       Authorization:

@@ -7,10 +7,8 @@ router.get("/", async function (req, res, next) {
   /*
 Once a user picks an activity, we need to find this activity in the table, grab the search query, and then modify that in the api call
 */
-
   try {
     const { searchQuery, lat, long } = req.query;
-    console.log('here')
     const mapData = await yelpFetch(searchQuery, lat, long)
 
     res.send(mapData);

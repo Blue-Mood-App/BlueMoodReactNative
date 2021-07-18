@@ -32,6 +32,7 @@ export default function ActivityItem(props) {
     PatrickHandSC_400Regular,
   });
 
+
   const [navigationAnimation, setNavigationAnimation] = useState(
     new Animated.Value(0)
   );
