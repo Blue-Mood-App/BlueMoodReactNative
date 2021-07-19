@@ -1,6 +1,7 @@
-import React from "react";
-import { TouchableOpacity, StyleSheet, View, Text } from "react-native";
+import React, { useState } from "react";
+import { TouchableOpacity, StyleSheet, View, Text, Switch } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
+import { setUpdatedConnect } from "../store/registration";
 import { logOut } from "../store/auth";
 import { Button } from "react-native-paper";
 import {
@@ -8,6 +9,7 @@ import {
   PatrickHandSC_400Regular,
 } from "@expo-google-fonts/patrick-hand-sc";
 import AppLoading from "expo-app-loading";
+import { setContactList } from "../store/registration";
 
 export default function Menu({ navigation }) {
   const dispatch = useDispatch();
@@ -15,6 +17,9 @@ export default function Menu({ navigation }) {
     PatrickHandSC_400Regular,
   });
   const auth = useSelector((state) => state.auth);
+  const agreedToMeetState = useSelector((state) => state.agreedToMeet);
+  const [agreedToMeet, setAgreedToMeet] = useState(agreedToMeet);
+  const toggleSwitch = () => setAgreedToMeet((previousState) => !previousState);
 
   const handleLogout = () => {
     dispatch(logOut());
@@ -33,9 +38,31 @@ export default function Menu({ navigation }) {
         >
           <Text style={styles.text}>Edit Activities</Text>
         </Button>
+
+        {/* <Button
+          color="white"
+          onPress={() => navigation.navigate("Connect")}
+          style={styles.btn}
+        >
+          <Text style={styles.text}>Connect?</Text>
+        </Button> */}
+
         <Button color="white" onPress={handleLogout} style={styles.btn}>
           <Text style={styles.text}>Log Out</Text>
         </Button>
+
+        <View style={styles.connectContainer}>
+          <Text style={styles.text}>Connect?</Text>
+          <Switch
+            trackColor={{ false: "#eafdcf", true: "#fffc99" }}
+            thumbColor={agreedToMeet ? "#FA976B" : "#b1f8f2"}
+            ios_backgroundColor="#94C7B8"
+            // onValueChange={
+            //   toggleSwitch && dispatch(setUpdatedConnect(agreedToMeet, auth.id))
+            // }
+            value={agreedToMeet}
+          />
+        </View>
 
         <Button
           color="white"
@@ -80,10 +107,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#F5A5A3",
+    marginBottom: -100,
   },
   text: {
     fontSize: 40,
     fontFamily: "PatrickHandSC_400Regular",
+    color: "white",
   },
   btn: {
     marginTop: 20,
@@ -96,4 +125,9 @@ const styles = StyleSheet.create({
     fontFamily: "PatrickHandSC_400Regular",
     fontSize: 20,
   },
+  // connectContainer: {
+  //   flex: 1,
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  // },
 });

@@ -67,17 +67,28 @@ export const deleteFavActivity = (activityId, userId, moodId) => async () => {
 
 //update contact list thunk goes here
 export const setContactList =
-  (agreedToMeet, nickname, phoneNumber, userId) => async () => {
+  (agreedToMeet, displayName, phoneNumber, userId) => async () => {
     try {
       await axios.put(`${location}/api/registerActivities/${userId}`, {
         agreedToMeet,
-        nickname,
+        displayName,
         phoneNumber,
       });
     } catch (err) {
       console.log(err);
     }
   };
+
+//update agreedToMeet thunk goes here
+export const setUpdatedConnect = (agreedToMeet) => async () => {
+  try {
+    await axios.put(`${location}/api/registerActivities/${userId}`, {
+      agreedToMeet,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 //Reducer
 export default function (state = { moods: [], activities: [] }, action) {

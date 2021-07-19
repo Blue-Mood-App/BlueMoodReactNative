@@ -67,13 +67,24 @@ router.delete("/:activityId/:userId/:moodId", async function (req, res, next) {
 
 //Contact List put route.
 router.put("/:userId", async function (req, res, next) {
-  const { agreedToMeet, nickname, phoneNumber } = req.body;
+  const { agreedToMeet, displayName, phoneNumber } = req.body;
   const { userId } = req.params;
   try {
     await User.update(
-      { agreedToMeet, nickname: nickname, phoneNumber: phoneNumber },
+      { agreedToMeet, displayName: displayName, phoneNumber: phoneNumber },
       { where: { id: userId } }
     );
+    res.sendStatus(200);
+  } catch (err) {
+    next(err);
+  }
+});
+
+//update agreedToMeet
+router.put("/:userId", async function (req, res, next) {
+  const { userId } = req.params;
+  try {
+    await User.update({ agreedToMeet }, { where: { id: userId } });
     res.sendStatus(200);
   } catch (err) {
     next(err);
