@@ -22,13 +22,11 @@ router.get("/me", async (req, res, next) => {
 router.get("/nearby", requireToken, async (req, res, next) => {
   try {
     const { user } = req;
-    
-    if (user.agreeToMeet) {
+
+    if (user.agreedToMeet) {
       const nearbyUsers = await User.nearbyUsers(user);
       res.send(nearbyUsers);
-    } else {
-      res.send([]);
-    }
+    } else res.send([])
   } catch (error) {
     next(error);
   }
