@@ -41,81 +41,88 @@ export default function Login({ navigation }) {
     return <AppLoading />;
   } else {
     return (
-      <KeyboardAwareScrollView style={styles.container}>
-        <LinearGradient
-          start={{ x: 0.9, y: 0.9 }}
-          end={{ x: 1.2, y: 0.5 }}
-          colors={["#EAF9D9", "#8EDCE6"]}
-          style={styles.background}
-        >
-          <View style={styles.lottieContainer}>
-            <LottieView
-              source={clouds}
-              autoPlay
-              loop
-              style={styles.image}
-            ></LottieView>
-          </View>
-          <Text style={styles.text}>Sign in</Text>
-          <View style={styles.scrollViewStyle}>
-            <FormBuilder
-              control={control}
-              setFocus={setFocus}
-              formConfigArray={[
-                {
-                  type: "email",
-                  name: "email",
-                  rules: {
-                    required: {
-                      value: true,
-                      message: "Email is required",
-                    },
-                  },
-                  textInputProps: {
-                    label: "Email",
-                    left: <TextInput.Icon name={"email"} />,
-                  },
-                },
-                {
-                  type: "password",
-                  name: "password",
-                  rules: {
-                    required: {
-                      value: true,
-                      message: "Password is required",
-                    },
-                  },
-                  textInputProps: {
-                    label: "Password",
-                    left: <TextInput.Icon name={"lock"} />,
-                  },
-                },
-              ]}
-            />
-            <View style={styles.buttonContainer}>
-              <Button
-                mode={"contained"}
-                color="black"
-                onPress={handleSubmit((data) => {
-                  const { email, password } = data;
-                  dispatch(authenticateLogin(email, password));
-                  navigation.navigate("Select Mood");
-                })}
-                style={styles.btn}
-              >
-                Login
-              </Button>
+      <LinearGradient
+        start={{ x: 0.9, y: 0.9 }}
+        end={{ x: 1.2, y: 0.5 }}
+        colors={["#EAF9D9", "#8EDCE6"]}
+        style={{ flex: 1, backgroundColor: "#EAF9D9" }}
+      >
+        <KeyboardAwareScrollView style={styles.container}>
+          <LinearGradient
+            start={{ x: 0.9, y: 0.9 }}
+            end={{ x: 1.2, y: 0.5 }}
+            colors={["#EAF9D9", "#8EDCE6"]}
+            style={styles.background}
+          >
+            <View style={styles.lottieContainer}>
+              <LottieView
+                source={clouds}
+                autoPlay
+                loop
+                style={styles.image}
+              ></LottieView>
             </View>
-            <Text style={styles.txtFirst}>First Time?</Text>
-            <Text
-              style={styles.txtRegister}
-              onPress={() => navigation.navigate("Register")}
-            >
-              Register
-            </Text>
-          </View>
-        </LinearGradient>
-      </KeyboardAwareScrollView>
+            <Text style={styles.text}>Sign in</Text>
+            <View style={styles.scrollViewStyle}>
+              <FormBuilder
+                control={control}
+                setFocus={setFocus}
+                formConfigArray={[
+                  {
+                    type: "email",
+                    name: "email",
+                    rules: {
+                      required: {
+                        value: true,
+                        message: "Email is required",
+                      },
+                    },
+                    textInputProps: {
+                      label: "Email",
+                      left: <TextInput.Icon name={"email"} />,
+                    },
+                  },
+                  {
+                    type: "password",
+                    name: "password",
+                    rules: {
+                      required: {
+                        value: true,
+                        message: "Password is required",
+                      },
+                    },
+                    textInputProps: {
+                      label: "Password",
+                      left: <TextInput.Icon name={"lock"} />,
+                    },
+                  },
+                ]}
+              />
+              <View style={styles.buttonContainer}>
+                <Button
+                  mode={"contained"}
+                  color="black"
+                  onPress={handleSubmit((data) => {
+                    const { email, password } = data;
+                    dispatch(authenticateLogin(email, password));
+                    navigation.navigate("Select Mood");
+                  })}
+                  style={styles.btn}
+                >
+                  Login
+                </Button>
+              </View>
+              <Text style={styles.txtFirst}>First Time?</Text>
+              <Text
+                style={styles.txtRegister}
+                onPress={() => navigation.navigate("Register")}
+              >
+                Register
+              </Text>
+            </View>
+          </LinearGradient>
+        </KeyboardAwareScrollView>
+      </LinearGradient>
     );
   }
 }

@@ -29,7 +29,7 @@ export default function LoggedOut({ navigation }) {
           onPress={() => navigation.navigate("Home")}
           style={styles.dismiss}
         >
-          Dismiss
+          <Text style={styles.dismissText}>Dismiss</Text>
         </Button>
       </View>
     );
@@ -55,5 +55,9 @@ const styles = StyleSheet.create({
     position: "absolute",
     fontFamily: "PatrickHandSC_400Regular",
     bottom: 100,
+  },
+  dismissText: {
+    fontFamily: "PatrickHandSC_400Regular",
+    fontSize: 20,
   },
 });
