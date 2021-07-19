@@ -1,8 +1,7 @@
 import axios from "axios";
 import { getActivities, getMoods } from "../store/registration";
 import * as SecureStore from "expo-secure-store";
-import location from './serverInfo'
-
+import location from "./serverInfo";
 
 const TOKEN = "token";
 
