@@ -1,7 +1,7 @@
 import React, { useCallback, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "react-native-gesture-handler";
-import { StyleSheet, TouchableOpacity, Dimensions, View } from "react-native";
+import { StyleSheet, TouchableOpacity, Dimensions, LogBox } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import ActivitiesMap from "./screens/ActivitiesMap";
@@ -184,6 +184,7 @@ const Main = ({ navigation }) => {
 };
 
 export default function App() {
+  LogBox.ignoreAllLogs()
   const [appIsReady, setAppIsReady] = useState(false);
   let [fontsLoaded] = useFonts({
     OpenSansCondensed_300Light,

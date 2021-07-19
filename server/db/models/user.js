@@ -104,7 +104,7 @@ User.nearbyUsers = async function (primaryUser) {
             cos(primaryUser.long * 0.0175 - user.long * 0.0175)
       ) *
         6371 <=
-      2
+      6
     );
   };
   try {

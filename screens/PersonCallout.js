@@ -14,7 +14,7 @@ export default function PersonCallout(props) {
 
   const handleTextLink = async (phoneNumber) => {
     Linking.openURL(
-      `https://wa.me/${phoneNumber}?text=Hey!%20my%20name%20is%20${auth.displayName},%20I%20found%20you%20by%20using%20Blue%20Mood.%20Would%20gityou%20like%20to%20meet%20up?`
+      `https://wa.me/${phoneNumber}?text=Hey!%20my%20name%20is%20${auth.displayName},%20I%20found%20you%20by%20using%20Blue%20Mood.%20Would%20you%20like%20to%20meet%20up?`
     );
   };
 

@@ -7,18 +7,19 @@ const animationPaths = {
     "wineries": require("../assets/wineTasting.json"),
     "gym": require("../assets/exercise.json"),
     "discgolf": require("../assets/golf.json"),
-    "park": require("../assets/walk.json"),
+    "parks": require("../assets/walk.json"),
     "movietheaters": require("../assets/cinema.json"),
     "museums": require("../assets/museum.json"),
     "karaoke": require("../assets/karaoke.json"),
     "comfortfood": require("../assets/comfortFood.json"),
     "escapegames": require("../assets/escapeRoom.json"),
     "meditationcenters": require("../assets/meditationCenters.json"),
-    "bicyclepaths": require("../assets/bicycles.json"),
+    "bikes": require("../assets/bicycles.json"),
     "massage_therapy": require("../assets/massage.json"),
     "beaches": require("../assets/swimming.json"),
     "aquariums": require("../assets/aquarium.json"),
     "icecream": require("../assets/iceCream.json"),
+    "rafting": require("../assets/kayaking.json")
 };
 
 export default animationPaths;

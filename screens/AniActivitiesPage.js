@@ -14,7 +14,7 @@ import { fetchNearByUsers } from "../store/nearbyUsers";
 
 const { width } = Dimensions.get("window");
 
-export default function ActivityPage({ navigation }) {
+export default function ActivityPage({ navigation, route }) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchNearByUsers());
@@ -55,7 +55,7 @@ export default function ActivityPage({ navigation }) {
         useNativeDriver={false}
         onIndexChange={(index) => setCurrentIndex(index)}
         renderItem={({ item, ...rest }) => (
-          <ActivityItem {...rest} {...item} navigation={navigation} />
+          <ActivityItem {...rest} {...item} moodId={route.params.moodId} navigation={navigation} />
         )}
       />
     </View>
