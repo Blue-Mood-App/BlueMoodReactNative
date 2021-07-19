@@ -20,7 +20,7 @@ export default function Menu({ navigation }) {
   const agreedToMeetState = auth.agreedToMeet;
   const [agreedToMeet, setAgreedToMeet] = useState(agreedToMeetState);
   const toggleSwitch = () => setAgreedToMeet((previousState) => !previousState);
-  console.log("agreedToMeet before toggle", agreedToMeet);
+  console.log("agreedToMeet", agreedToMeet);
 
   const handleLogout = () => {
     dispatch(logOut());
@@ -45,20 +45,23 @@ export default function Menu({ navigation }) {
           <Text style={styles.text}>Edit Activities</Text>
         </Button>
 
+        <View style={styles.connectContainer}>
+          <Text style={styles.text}>
+            Connect?{" "}
+            <Switch
+              style={styles.connectContainer}
+              trackColor={{ false: "#eafdcf", true: "#fffc99" }}
+              thumbColor={agreedToMeet ? "#FA976B" : "#b1f8f2"}
+              ios_backgroundColor="#94C7B8"
+              onValueChange={toggleSwitch}
+              value={agreedToMeet}
+            />
+          </Text>
+        </View>
+
         <Button color="white" onPress={handleLogout} style={styles.btn}>
           <Text style={styles.text}>Log Out</Text>
         </Button>
-
-        <View style={styles.connectContainer}>
-          <Text style={styles.text}>Connect?</Text>
-          <Switch
-            trackColor={{ false: "#eafdcf", true: "#fffc99" }}
-            thumbColor={agreedToMeet ? "#FA976B" : "#b1f8f2"}
-            ios_backgroundColor="#94C7B8"
-            onValueChange={toggleSwitch}
-            value={agreedToMeet}
-          />
-        </View>
 
         <Button
           color="white"
@@ -103,7 +106,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#F5A5A3",
-    marginBottom: -100,
+    marginBottom: -40,
   },
   text: {
     fontSize: 40,
@@ -121,9 +124,8 @@ const styles = StyleSheet.create({
     fontFamily: "PatrickHandSC_400Regular",
     fontSize: 20,
   },
-  // connectContainer: {
-  //   flex: 1,
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  // },
+  connectContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
 });
