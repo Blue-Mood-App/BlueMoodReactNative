@@ -47,7 +47,12 @@ export default function ActivityPage({ navigation, route }) {
         useNativeDriver={false}
         onIndexChange={(index) => setCurrentIndex(index)}
         renderItem={({ item, ...rest }) => (
-          <ActivityItem {...rest} {...item} moodId={route.params.moodId} navigation={navigation} />
+          <ActivityItem
+            {...rest}
+            {...item}
+            moodId={route.params.moodId}
+            navigation={navigation}
+          />
         )}
       />
     </View>

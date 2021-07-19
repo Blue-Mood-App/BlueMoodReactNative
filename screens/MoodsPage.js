@@ -50,7 +50,7 @@ export default function MoodsPage({ navigation }) {
           colors={["#bdb2ff", "#80ffdb"]}
           style={styles.background}
         >
-          <Text style={styles.text}>How you feeling today?</Text>
+          <Text style={styles.text}>How are you feeling?</Text>
           <TouchableOpacity
             style={styles.btnSpacing}
             onPress={() => handleSubmit(1)}
