@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Animated,
   Dimensions,
@@ -8,6 +8,7 @@ import {
   Text,
   TouchableWithoutFeedback,
   View,
+  Alert,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchPlaces } from "../store/places";
@@ -26,29 +27,45 @@ const width = screenWidth - 25;
 export const WIDTH = width + 16;
 
 export default function ActivityItem(props) {
+
   const dispatch = useDispatch();
   const location = useSelector((state) => state.location);
+  const auth = useSelector((state) => state.auth);
+
   let [fontsLoaded] = useFonts({
     PatrickHandSC_400Regular,
   });
-
 
   const [navigationAnimation, setNavigationAnimation] = useState(
     new Animated.Value(0)
   );
 
-  const { searchQuery, name } = props.activity;
+  const { imageName, searchQuery, name, id } = props.activity;
 
   const {
     animatedValue,
     //image,
     itemIndex,
     navigation,
+    moodId
   } = props;
 
   const onNavigate = () => {
-    dispatch(fetchPlaces(searchQuery, location));
-    navigation.navigate("Map");
+    if (!location.coords && !auth.id) {
+      Alert.alert("Your Location Not Found ", "Please make sure that you are sharing your location otherwise, try again" );
+    } else {
+
+    const geo = location.coords
+      ? location
+      : {
+          coords: {
+            longitude: +auth.long,
+            lat: +auth.lat,
+          },
+        };
+
+    dispatch(fetchPlaces(searchQuery, geo));
+    navigation.navigate("Map", { searchQuery: searchQuery, moodId });
     Animated.timing(navigationAnimation, {
       toValue: 1,
       duration: 350,
@@ -58,6 +75,7 @@ export default function ActivityItem(props) {
       navigation.navigate("Map");
     });
     setTimeout(() => navigationAnimation.setValue(0));
+  }
   };
 
   if (!fontsLoaded) {
@@ -68,7 +86,7 @@ export default function ActivityItem(props) {
         <View style={styles.polaroidWrapper}>
           <View>
             <LottieView
-              source={animationPaths[searchQuery]}
+              source={animationPaths[imageName]}
               autoPlay
               loop
               style={styles.image}

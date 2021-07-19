@@ -1,7 +1,7 @@
 import React, { useCallback, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "react-native-gesture-handler";
-import { StyleSheet, TouchableOpacity, Dimensions, View } from "react-native";
+import { StyleSheet, TouchableOpacity, Dimensions, LogBox } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import ActivitiesMap from "./screens/ActivitiesMap";
@@ -15,6 +15,7 @@ import { Provider } from "react-redux";
 import RegisterActivities from "./screens/RegisterActivities";
 import EditMoods from "./screens/EditMoods";
 import UserContacts from "./screens/UserContacts";
+import UpdatedMeet from "./screens/UpdatedMeet";
 import { AntDesign, Feather } from "@expo/vector-icons";
 import AniActivitiesPage from "./screens/AniActivitiesPage";
 import Menu from "./screens/Menu";
@@ -178,12 +179,24 @@ const Main = ({ navigation }) => {
         }}
       />
 
+      {/* <Stack.Screen
+        name="Connect"
+        component={UpdatedMeet}
+        options={{
+          title: null,
+          headerStyle: {
+            shadowColor: "transparent",
+            backgroundColor: "#fcd29f",
+          },
+        }}
+      /> */}
       <Stack.Screen name="Contacts page" component={Contacts} />
     </Stack.Navigator>
   );
 };
 
 export default function App() {
+  LogBox.ignoreAllLogs()
   const [appIsReady, setAppIsReady] = useState(false);
   let [fontsLoaded] = useFonts({
     OpenSansCondensed_300Light,

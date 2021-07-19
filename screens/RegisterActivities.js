@@ -26,11 +26,6 @@ const { height } = Dimensions.get("window");
 const RegisterActivities = ({ navigation }) => {
   const dispatch = useDispatch();
 
-  // let [fontsLoaded] = useFonts({
-  //   OpenSansCondensed_300Light,
-  //   OpenSansCondensed_700Bold,
-  //   PatrickHandSC_400Regular,
-  // });
 
   useEffect(() => {
     dispatch(getMoods());

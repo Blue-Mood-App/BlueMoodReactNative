@@ -71,7 +71,6 @@ const EditMoods = ({ navigation }) => {
         style={{ flex: 1 }}
         showsVerticalScrollIndicator={false}
       >
-
         <LinearGradient
           start={{ x: 0.3, y: 1.4 }}
           end={{ x: 0.4, y: 0.2 }}
@@ -79,35 +78,35 @@ const EditMoods = ({ navigation }) => {
           style={styles.background}
         >
           <ScrollView contentContainerStyle={styles.contentContainer}>
-          {Array.isArray(sortedActivities) &&
-            sortedActivities.map((el, idx) => {
-              return (
-                <View key={idx}>
-                  <Text
-                    style={styles.text1}
-                  >{`when I am ${el[0].mood}...`}</Text>
-                  <SideSwipeCarousel
-                    buttonVal={enabled}
-                    makeTrue={makeEnabled}
-                    mood={el[0].mood}
-                    currentRow={el}
-                  />
-                </View>
-              );
-            })}
-          <View style={styles.buttonContainer}>
-            <Button
-              id="disabledButton"
-              mode={"contained"}
-              color="black"
-              style={styles.btn}
-              disabled={enabled}
-              onPress={() => handleSubmit(user.id)}
-            >
-              Update
-            </Button>
-          </View>
-        </ScrollView>
+            {Array.isArray(sortedActivities) &&
+              sortedActivities.map((el, idx) => {
+                return (
+                  <View key={el[idx].mood}>
+                    <Text
+                      style={styles.text1}
+                    >{`when I am ${el[0].mood}...`}</Text>
+                    <SideSwipeCarousel
+                      buttonVal={enabled}
+                      makeTrue={makeEnabled}
+                      mood={el[0].mood}
+                      currentRow={el}
+                    />
+                  </View>
+                );
+              })}
+            <View style={styles.buttonContainer}>
+              <Button
+                id="disabledButton"
+                mode={"contained"}
+                color="black"
+                style={styles.btn}
+                disabled={enabled}
+                onPress={() => handleSubmit(user.id)}
+              >
+                Update
+              </Button>
+            </View>
+          </ScrollView>
         </LinearGradient>
       </KeyboardAwareScrollView>
     </LinearGradient>

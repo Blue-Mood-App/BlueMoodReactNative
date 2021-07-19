@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import {
   Dimensions,
   StyleSheet,
@@ -6,47 +6,25 @@ import {
   View,
   TouchableOpacity,
 } from "react-native";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import MapView, { Marker, Circle } from "react-native-maps";
 import MarkerCallout from "./MarkerCallout";
 import PersonCallout from "./PersonCallout";
 import Loading from "./Loading";
 import personPin from "../assets/personpin.png";
 import { FontAwesome5 } from "@expo/vector-icons";
+import { getLocActivitiesUsers } from '../store/location'
 
-const people = [
-  {
-    id: 1,
-    displayName: "james",
-    lat: 30.309254,
-    long: -97.694816,
-    phoneNumber: "13435552323",
-    imageUrl: null,
-  },
-  {
-    id: 2,
-    displayName: "Kyle",
-    lat: 30.329706,
-    long: -97.691989,
-    phoneNumber: "13435552323",
-    imageUrl: null,
-  },
-  {
-    id: 3,
-    displayName: "Steve",
-    lat: 30.272404,
-    long: -97.741538,
-    phoneNumber: "13435552323",
-    imageUrl: null,
-  },
-];
-
-export default function ActivitiesMap({ navigation }) {
+export default function ActivitiesMap({ navigation, route }) {
+  const dispatch = useDispatch();
   const location = useSelector((state) => state.location);
   const places = useSelector((state) => state.places);
+  const nearbyUsers = useSelector((state) => state.nearbyUsers);
+  const auth = useSelector(state => state.auth)
+  const { searchQuery, moodId } = route.params;
 
   const refreshLocation = () => {
-    console.log("location pressed");
+    dispatch(getLocActivitiesUsers(searchQuery))
   };
 
   const locationButton = () => (
@@ -55,13 +33,17 @@ export default function ActivitiesMap({ navigation }) {
     </TouchableOpacity>
   );
 
-  const setOptions = () => navigation.setOptions({
-    headerRight: () => locationButton(),
-  });
+  const setOptions = () =>
+    navigation.setOptions({
+      headerRight: () => locationButton(),
+    });
 
   useEffect(() => {
-    setOptions()
-  }, [])
+    setOptions();
+    if (!moodId || !searchQuery) {
+      navigation.navigate('Select Mood')
+    }
+  }, []);
 
   return !places.businesses || !location ? (
     <Loading />
@@ -103,36 +85,47 @@ export default function ActivitiesMap({ navigation }) {
             </Marker>
           );
         })}
-        {people.map((person) => {
-          const { lat, long, displayName, phoneNumber, id, imageUrl } = person;
+        {!nearbyUsers.length ? (
+          <></>
+        ) : (
+          nearbyUsers.map((person) => {
+            const {
+              lat,
+              long,
+              displayName,
+              phoneNumber,
+              id,
+              imageUrl,
+            } = person;
 
-          return (
-            <Fragment key={id}>
-              <Circle
-                center={{
-                  latitude: lat,
-                  longitude: long,
-                }}
-                radius={300}
-                fillColor="rgba(144,238,144, .5)"
-                strokeColor="#00ff00"
-              ></Circle>
-              <Marker
-                coordinate={{
-                  latitude: lat,
-                  longitude: long,
-                }}
-                icon={personPin}
-              >
-                <PersonCallout
-                  displayName={displayName}
-                  imageUrl={imageUrl}
-                  phoneNumber={phoneNumber}
-                />
-              </Marker>
-            </Fragment>
-          );
-        })}
+            return (
+              <Fragment key={id}>
+                <Circle
+                  center={{
+                    latitude: lat,
+                    longitude: long,
+                  }}
+                  radius={500}
+                  fillColor='#00FF00'
+                  strokeColor="#00ff00"
+                ></Circle>
+                <Marker
+                  coordinate={{
+                    latitude: lat,
+                    longitude: long,
+                  }}
+                  icon={personPin}
+                >
+                  <PersonCallout
+                    displayName={displayName}
+                    imageUrl={imageUrl}
+                    phoneNumber={phoneNumber}
+                  />
+                </Marker>
+              </Fragment>
+            );
+          })
+        )}
       </MapView>
     </View>
   );

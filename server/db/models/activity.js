@@ -8,7 +8,7 @@ const Activity = db.define("activity", {
   searchQuery: {
     type: Sequelize.STRING,
   },
-  image: {
+  imageName: {
     type: Sequelize.STRING,
   },
 });

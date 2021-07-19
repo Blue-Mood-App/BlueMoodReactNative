@@ -14,8 +14,6 @@ import {
   PatrickHandSC_400Regular,
 } from "@expo-google-fonts/patrick-hand-sc";
 import AppLoading from "expo-app-loading";
-import { getLocation } from "../store/location";
-import { fetchNearByUsers } from "../store/getNearbyUsers";
 const { height } = Dimensions.get("window");
 
 export default function Login({ navigation }) {
@@ -32,12 +30,12 @@ export default function Login({ navigation }) {
   });
 
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getLocation());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getLocation());
+  // }, []);
 
   // dispatch(getLocation());
-  let location = useSelector((state) => state.location);
+  //let location = useSelector((state) => state.location);
 
   if (!fontsLoaded) {
     return <AppLoading />;
@@ -47,7 +45,7 @@ export default function Login({ navigation }) {
         <LinearGradient
           start={{ x: 0.9, y: 0.9 }}
           end={{ x: 1.2, y: 0.5 }}
-          colors={["#eaf9d9", "#8edce6"]}
+          colors={["#EAF9D9", "#8EDCE6"]}
           style={styles.background}
         >
           <View style={styles.lottieContainer}>
@@ -67,7 +65,6 @@ export default function Login({ navigation }) {
                 {
                   type: "email",
                   name: "email",
-
                   rules: {
                     required: {
                       value: true,
@@ -82,7 +79,6 @@ export default function Login({ navigation }) {
                 {
                   type: "password",
                   name: "password",
-
                   rules: {
                     required: {
                       value: true,
@@ -103,7 +99,6 @@ export default function Login({ navigation }) {
                 onPress={handleSubmit((data) => {
                   const { email, password } = data;
                   dispatch(authenticateLogin(email, password));
-                  dispatch(fetchNearByUsers(location));
                   navigation.navigate("Select Mood");
                 })}
                 style={styles.btn}

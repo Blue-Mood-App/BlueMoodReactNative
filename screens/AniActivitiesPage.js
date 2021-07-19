@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Dimensions, Text, View, StyleSheet } from "react-native";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import SideSwipe from "react-native-sideswipe"; // 1.3.0
 import LottieView from "lottie-react-native";
 import octopus from "../assets/octopus.json";
@@ -10,10 +10,16 @@ import {
   useFonts,
   PatrickHandSC_400Regular,
 } from "@expo-google-fonts/patrick-hand-sc";
+import { fetchNearByUsers } from "../store/nearbyUsers";
 
 const { width } = Dimensions.get("window");
 
-export default function ActivityPage({ navigation }) {
+export default function ActivityPage({ navigation, route }) {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchNearByUsers());
+  }, []);
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const activities = useSelector((state) => state.activities);
   const userInfo = useSelector((state) => state.auth);
@@ -27,14 +33,6 @@ export default function ActivityPage({ navigation }) {
         <LottieView source={octopus} autoPlay loop></LottieView>
       </View>
       <Text style={styles.text}>Oops! Please edit your activities</Text>
-      {Array.isArray(userInfo.contactList) && (
-        <Text style={{ fontSize: 25, bottom: 100, position: "absolute" }}>
-          Or contact a friend that fits your mood :{" "}
-          {userInfo.contactList.map((el) => {
-            return <Text>{el + " "}</Text>;
-          })}{" "}
-        </Text>
-      )}
     </View>
   ) : (
     <View style={styles.container}>
@@ -49,7 +47,7 @@ export default function ActivityPage({ navigation }) {
         useNativeDriver={false}
         onIndexChange={(index) => setCurrentIndex(index)}
         renderItem={({ item, ...rest }) => (
-          <ActivityItem {...rest} {...item} navigation={navigation} />
+          <ActivityItem {...rest} {...item} moodId={route.params.moodId} navigation={navigation} />
         )}
       />
     </View>
