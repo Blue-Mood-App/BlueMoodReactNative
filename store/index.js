@@ -9,7 +9,7 @@ import places from "./places";
 import location from "./location";
 import userActivities from "./userActivities";
 import sortedActivities from "./sortedActivities";
-import getUsersNearBy from "./getNearbyUsers";
+import nearbyUsers from "./nearbyUsers";
 
 const reducer = combineReducers({
   auth,
@@ -19,7 +19,7 @@ const reducer = combineReducers({
   sortedActivities,
   places,
   location,
-  getUsersNearBy,
+  nearbyUsers,
 });
 
 const middleware = composeWithDevTools(

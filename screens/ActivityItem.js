@@ -47,6 +47,7 @@ export default function ActivityItem(props) {
   } = props;
 
   const onNavigate = () => {
+    console.log(location)
     dispatch(fetchPlaces(searchQuery, location));
     navigation.navigate("Map");
     Animated.timing(navigationAnimation, {

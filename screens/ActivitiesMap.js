@@ -44,6 +44,7 @@ const people = [
 export default function ActivitiesMap({ navigation }) {
   const location = useSelector((state) => state.location);
   const places = useSelector((state) => state.places);
+  const nearbyUsers = useSelector(state => state.nearbyUsers)
 
   const refreshLocation = () => {
     console.log("location pressed");
@@ -103,7 +104,7 @@ export default function ActivitiesMap({ navigation }) {
             </Marker>
           );
         })}
-        {people.map((person) => {
+        {!nearbyUsers.length ? (<></>) : nearbyUsers.map((person) => {
           const { lat, long, displayName, phoneNumber, id, imageUrl } = person;
 
           return (

@@ -82,7 +82,7 @@ const EditMoods = ({ navigation }) => {
             {Array.isArray(sortedActivities) &&
               sortedActivities.map((el, idx) => {
                 return (
-                  <View key={idx}>
+                  <View key={el[idx].mood}>
                     <Text
                       style={styles.text1}
                     >{`when I am ${el[0].mood}...`}</Text>

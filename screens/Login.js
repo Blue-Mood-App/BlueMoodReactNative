@@ -14,8 +14,6 @@ import {
   PatrickHandSC_400Regular,
 } from "@expo-google-fonts/patrick-hand-sc";
 import AppLoading from "expo-app-loading";
-import { getLocation } from "../store/location";
-import { fetchNearByUsers } from "../store/getNearbyUsers";
 const { height } = Dimensions.get("window");
 
 export default function Login({ navigation }) {
@@ -32,12 +30,12 @@ export default function Login({ navigation }) {
   });
 
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getLocation());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getLocation());
+  // }, []);
 
   // dispatch(getLocation());
-  let location = useSelector((state) => state.location);
+  //let location = useSelector((state) => state.location);
 
   if (!fontsLoaded) {
     return <AppLoading />;
@@ -89,33 +87,27 @@ export default function Login({ navigation }) {
                       message: "Password is required",
                     },
                   },
-                  textInputProps: {
-                    label: "Password",
-                    left: <TextInput.Icon name={"lock"} />,
-                  },
-                },
-              ]}
-            />
-            <View style={styles.buttonContainer}>
-              <Button
-                mode={"contained"}
-                color="black"
-                onPress={handleSubmit((data) => {
-                  const { email, password } = data;
-                  dispatch(authenticateLogin(email, password));
-                  dispatch(fetchNearByUsers(location));
-                  navigation.navigate("Select Mood");
-                })}
-                style={styles.btn}
+                ]}
+              />
+              <View style={styles.buttonContainer}>
+                <Button
+                  mode={"contained"}
+                  color="black"
+                  onPress={handleSubmit((data) => {
+                    const { email, password } = data;
+                    dispatch(authenticateLogin(email, password));
+                    navigation.navigate("Select Mood");
+                  })}
+                  style={styles.btn}
+                >
+                  Login
+                </Button>
+              </View>
+              <Text style={styles.txtFirst}>First Time?</Text>
+              <Text
+                style={styles.txtRegister}
+                onPress={() => navigation.navigate("Register")}
               >
-                Login
-              </Button>
-            </View>
-            <Text style={styles.txtFirst}>First Time?</Text>
-            <Text
-              style={styles.txtRegister}
-              onPress={() => navigation.navigate("Register")}
-            >
               Register
             </Text>
           </View>
