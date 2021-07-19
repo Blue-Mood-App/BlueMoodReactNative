@@ -86,18 +86,22 @@ const EditMoods = ({ navigation }) => {
                     <Text
                       style={styles.text1}
                     >{`when I am ${el[0].mood}...`}</Text>
-                    <SideSwipeCarousel mood={el[0].mood} currentRow={el} />
+                    <SideSwipeCarousel
+                      buttonVal={enabled}
+                      makeTrue={makeEnabled}
+                      mood={el[0].mood}
+                      currentRow={el}
+                    />
                   </View>
                 );
               })}
-
             <View style={styles.buttonContainer}>
               <Button
                 id="disabledButton"
                 mode={"contained"}
                 color="black"
                 style={styles.btn}
-                disabled={true}
+                disabled={enabled}
                 onPress={() => handleSubmit(user.id)}
               >
                 Update

@@ -17,13 +17,19 @@ export default function Menu({ navigation }) {
     PatrickHandSC_400Regular,
   });
   const auth = useSelector((state) => state.auth);
-  const agreedToMeetState = useSelector((state) => state.agreedToMeet);
-  const [agreedToMeet, setAgreedToMeet] = useState(agreedToMeet);
+  const agreedToMeetState = auth.agreedToMeet;
+  const [agreedToMeet, setAgreedToMeet] = useState(agreedToMeetState);
   const toggleSwitch = () => setAgreedToMeet((previousState) => !previousState);
+  console.log("agreedToMeet before toggle", agreedToMeet);
 
   const handleLogout = () => {
     dispatch(logOut());
     navigation.navigate("Logged Out");
+  };
+
+  const handleAgreeUpdate = () => {
+    dispatch(setUpdatedConnect(agreedToMeet));
+    navigation.goBack();
   };
 
   if (!fontsLoaded) {
@@ -39,14 +45,6 @@ export default function Menu({ navigation }) {
           <Text style={styles.text}>Edit Activities</Text>
         </Button>
 
-        {/* <Button
-          color="white"
-          onPress={() => navigation.navigate("Connect")}
-          style={styles.btn}
-        >
-          <Text style={styles.text}>Connect?</Text>
-        </Button> */}
-
         <Button color="white" onPress={handleLogout} style={styles.btn}>
           <Text style={styles.text}>Log Out</Text>
         </Button>
@@ -57,16 +55,14 @@ export default function Menu({ navigation }) {
             trackColor={{ false: "#eafdcf", true: "#fffc99" }}
             thumbColor={agreedToMeet ? "#FA976B" : "#b1f8f2"}
             ios_backgroundColor="#94C7B8"
-            // onValueChange={
-            //   toggleSwitch && dispatch(setUpdatedConnect(agreedToMeet, auth.id))
-            // }
+            onValueChange={toggleSwitch}
             value={agreedToMeet}
           />
         </View>
 
         <Button
           color="white"
-          onPress={() => navigation.goBack()}
+          onPress={() => handleAgreeUpdate()}
           style={styles.dismiss}
         >
           Dismiss
@@ -94,7 +90,7 @@ export default function Menu({ navigation }) {
           onPress={() => navigation.goBack()}
           style={styles.dismiss}
         >
-          <Text style={styles.dismissText}> Dismiss </Text>
+          <Text style={styles.dismissText}>Dismiss</Text>
         </Button>
       </View>
     );

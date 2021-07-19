@@ -2,6 +2,7 @@ const router = require("express").Router();
 const {
   models: { Mood, Activity, UserActivity, User },
 } = require("../db");
+const requireToken = require("../auth/middleware");
 
 router.get("/moods", async function (req, res, next) {
   try {
@@ -81,10 +82,13 @@ router.put("/:userId", async function (req, res, next) {
 });
 
 //update agreedToMeet
-router.put("/:userId", async function (req, res, next) {
-  const { userId } = req.params;
+router.put("/", requireToken, async function (req, res, next) {
+  const { agreedToMeet } = req.body;
+  console.log("server", agreedToMeet);
   try {
-    await User.update({ agreedToMeet }, { where: { id: userId } });
+    // await User.update({ agreedToMeet }, { where: { id: req.user.id } });
+    const { user } = req;
+    await user.update({ agreedToMeet });
     res.sendStatus(200);
   } catch (err) {
     next(err);

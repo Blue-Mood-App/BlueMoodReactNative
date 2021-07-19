@@ -1,5 +1,7 @@
 import axios from "axios";
 import location from "./serverInfo";
+import * as SecureStore from "expo-secure-store";
+const TOKEN = "token";
 
 //action creator
 const SET_MOOD = "SET_MOOD";
@@ -81,10 +83,20 @@ export const setContactList =
 
 //update agreedToMeet thunk goes here
 export const setUpdatedConnect = (agreedToMeet) => async () => {
+  console.log("store", agreedToMeet);
+  const token = await SecureStore.getItemAsync(TOKEN);
   try {
-    await axios.put(`${location}/api/registerActivities/${userId}`, {
-      agreedToMeet,
-    });
+    if (token) {
+      await axios.put(
+        `${location}/api/registerActivities`,
+        { agreedToMeet },
+        {
+          headers: {
+            authorization: token,
+          },
+        }
+      );
+    }
   } catch (err) {
     console.log(err);
   }
