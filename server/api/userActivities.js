@@ -30,8 +30,8 @@ router.post("/", requireToken, async function (req, res, next) {
       let [activityId, moodId] = activities[i].queensAddress.split("-");
       await UserActivity.create({
         userId: +req.user.id,
-        activityId: Number(activityId[0]),
-        moodId: Number(moodId[0]),
+        activityId: +activityId,
+        moodId: +moodId,
       });
     }
     res.sendStatus(201);

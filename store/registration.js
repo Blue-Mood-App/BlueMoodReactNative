@@ -1,5 +1,7 @@
 import axios from "axios";
 import location from "./serverInfo";
+import * as SecureStore from "expo-secure-store";
+const TOKEN = "token";
 
 //action creator
 const SET_MOOD = "SET_MOOD";
@@ -67,17 +69,38 @@ export const deleteFavActivity = (activityId, userId, moodId) => async () => {
 
 //update contact list thunk goes here
 export const setContactList =
-  (agreedToMeet, nickname, phoneNumber, userId) => async () => {
+  (agreedToMeet, displayName, phoneNumber, userId) => async () => {
     try {
       await axios.put(`${location}/api/registerActivities/${userId}`, {
         agreedToMeet,
-        nickname,
+        displayName,
         phoneNumber,
       });
     } catch (err) {
       console.log(err);
     }
   };
+
+//update agreedToMeet thunk goes here
+export const setUpdatedConnect = (agreedToMeet) => async () => {
+  console.log("store", agreedToMeet);
+  const token = await SecureStore.getItemAsync(TOKEN);
+  try {
+    if (token) {
+      await axios.put(
+        `${location}/api/registerActivities`,
+        { agreedToMeet },
+        {
+          headers: {
+            authorization: token,
+          },
+        }
+      );
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 //Reducer
 export default function (state = { moods: [], activities: [] }, action) {
