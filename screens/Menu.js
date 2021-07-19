@@ -22,6 +22,7 @@ export default function Menu({ navigation }) {
   const toggleSwitch = () => setAgreedToMeet((previousState) => !previousState);
 
   const handleLogout = () => {
+    dispatch(setUpdatedConnect(agreedToMeet));
     dispatch(logOut());
     navigation.navigate("Logged Out");
   };
@@ -68,7 +69,7 @@ export default function Menu({ navigation }) {
           onPress={() => handleAgreeUpdate()}
           style={styles.dismiss}
         >
-          Dismiss
+          <Text style={styles.dismissText}>Dismiss</Text>
         </Button>
       </View>
     ) : (
