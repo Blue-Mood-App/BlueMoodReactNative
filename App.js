@@ -15,6 +15,7 @@ import { Provider } from "react-redux";
 import RegisterActivities from "./screens/RegisterActivities";
 import EditMoods from "./screens/EditMoods";
 import UserContacts from "./screens/UserContacts";
+import UpdatedMeet from "./screens/UpdatedMeet";
 import { AntDesign, Feather } from "@expo/vector-icons";
 import AniActivitiesPage from "./screens/AniActivitiesPage";
 import Menu from "./screens/Menu";
@@ -178,6 +179,17 @@ const Main = ({ navigation }) => {
         }}
       />
 
+      {/* <Stack.Screen
+        name="Connect"
+        component={UpdatedMeet}
+        options={{
+          title: null,
+          headerStyle: {
+            shadowColor: "transparent",
+            backgroundColor: "#fcd29f",
+          },
+        }}
+      /> */}
       <Stack.Screen name="Contacts page" component={Contacts} />
     </Stack.Navigator>
   );

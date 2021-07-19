@@ -2,6 +2,7 @@ const router = require("express").Router();
 const {
   models: { Mood, Activity, UserActivity, User },
 } = require("../db");
+const requireToken = require("../auth/middleware");
 
 router.get("/moods", async function (req, res, next) {
   try {
@@ -47,33 +48,45 @@ router.delete("/:activityId/:userId/:moodId", async function (req, res, next) {
   }
 });
 
-//delete route for unselected activites goes here
-router.delete("/:activityId/:userId/:moodId", async function (req, res, next) {
-  try {
-    const { activityId, userId, moodId } = req.params;
+// //delete route for unselected activites goes here
+// router.delete("/:activityId/:userId/:moodId", async function (req, res, next) {
+//   try {
+//     const { activityId, userId, moodId } = req.params;
 
-    await UserActivity.destroy({
-      where: {
-        activityId,
-        userId,
-        moodId,
-      },
-    });
+//     await UserActivity.destroy({
+//       where: {
+//         activityId,
+//         userId,
+//         moodId,
+//       },
+//     });
+//     res.sendStatus(200);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
+
+//Contact List put route.
+router.put("/:userId", async function (req, res, next) {
+  const { agreedToMeet, displayName, phoneNumber } = req.body;
+  const { userId } = req.params;
+  try {
+    await User.update(
+      { agreedToMeet, displayName: displayName, phoneNumber: phoneNumber },
+      { where: { id: userId } }
+    );
     res.sendStatus(200);
   } catch (err) {
     next(err);
   }
 });
 
-//Contact List put route.
-router.put("/:userId", async function (req, res, next) {
-  const { agreedToMeet, nickname, phoneNumber } = req.body;
-  const { userId } = req.params;
+//update agreedToMeet
+router.put("/", requireToken, async function (req, res, next) {
+  const { agreedToMeet } = req.body;
   try {
-    await User.update(
-      { agreedToMeet, nickname: nickname, phoneNumber: phoneNumber },
-      { where: { id: userId } }
-    );
+    const { user } = req;
+    await user.update({ agreedToMeet });
     res.sendStatus(200);
   } catch (err) {
     next(err);
