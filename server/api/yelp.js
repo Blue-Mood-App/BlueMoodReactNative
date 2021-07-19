@@ -1,15 +1,10 @@
-const fetch = require("node-fetch")
+const fetch = require("node-fetch");
 // const result = require('dotenv').config()
 
-
-
-
 const yelpFetch = async (searchQuery, lat, long) => {
-  console.log(process.env.Y_KEY)
   const auth = {
     headers: {
-      Authorization:
-      `Bearer ${process.env.Y_KEY}`,
+      Authorization: `Bearer ${process.env.Y_KEY}`,
     },
   };
 
@@ -18,9 +13,9 @@ const yelpFetch = async (searchQuery, lat, long) => {
     auth
   );
 
-  const mapData = await data.json()
+  const mapData = await data.json();
 
-  return mapData
-}
+  return mapData;
+};
 
-module.exports = yelpFetch
+module.exports = yelpFetch;

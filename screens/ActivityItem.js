@@ -32,7 +32,6 @@ export default function ActivityItem(props) {
     PatrickHandSC_400Regular,
   });
 
-
   const [navigationAnimation, setNavigationAnimation] = useState(
     new Animated.Value(0)
   );
@@ -47,7 +46,6 @@ export default function ActivityItem(props) {
   } = props;
 
   const onNavigate = () => {
-    console.log(location)
     dispatch(fetchPlaces(searchQuery, location));
     navigation.navigate("Map");
     Animated.timing(navigationAnimation, {

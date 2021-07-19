@@ -83,7 +83,6 @@ export const setContactList =
 
 //update agreedToMeet thunk goes here
 export const setUpdatedConnect = (agreedToMeet) => async () => {
-  console.log("store", agreedToMeet);
   const token = await SecureStore.getItemAsync(TOKEN);
   try {
     if (token) {

@@ -41,7 +41,6 @@ const EditMoods = ({ navigation }) => {
   }, []);
 
   const handleSubmit = (userId) => {
-    console.log("clicked!");
     let currentActivities = [];
     sortedActivities.forEach((el) => {
       let trueCurrentActivities = el.filter((el) => {

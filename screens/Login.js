@@ -45,7 +45,7 @@ export default function Login({ navigation }) {
         <LinearGradient
           start={{ x: 0.9, y: 0.9 }}
           end={{ x: 1.2, y: 0.5 }}
-          colors={["#eaf9d9", "#8edce6"]}
+          colors={["#EAF9D9", "#8EDCE6"]}
           style={styles.background}
         >
           <View style={styles.lottieContainer}>
@@ -65,7 +65,6 @@ export default function Login({ navigation }) {
                 {
                   type: "email",
                   name: "email",
-
                   rules: {
                     required: {
                       value: true,
@@ -80,34 +79,38 @@ export default function Login({ navigation }) {
                 {
                   type: "password",
                   name: "password",
-
                   rules: {
                     required: {
                       value: true,
                       message: "Password is required",
                     },
                   },
-                ]}
-              />
-              <View style={styles.buttonContainer}>
-                <Button
-                  mode={"contained"}
-                  color="black"
-                  onPress={handleSubmit((data) => {
-                    const { email, password } = data;
-                    dispatch(authenticateLogin(email, password));
-                    navigation.navigate("Select Mood");
-                  })}
-                  style={styles.btn}
-                >
-                  Login
-                </Button>
-              </View>
-              <Text style={styles.txtFirst}>First Time?</Text>
-              <Text
-                style={styles.txtRegister}
-                onPress={() => navigation.navigate("Register")}
+                  textInputProps: {
+                    label: "Password",
+                    left: <TextInput.Icon name={"lock"} />,
+                  },
+                },
+              ]}
+            />
+            <View style={styles.buttonContainer}>
+              <Button
+                mode={"contained"}
+                color="black"
+                onPress={handleSubmit((data) => {
+                  const { email, password } = data;
+                  dispatch(authenticateLogin(email, password));
+                  navigation.navigate("Select Mood");
+                })}
+                style={styles.btn}
               >
+                Login
+              </Button>
+            </View>
+            <Text style={styles.txtFirst}>First Time?</Text>
+            <Text
+              style={styles.txtRegister}
+              onPress={() => navigation.navigate("Register")}
+            >
               Register
             </Text>
           </View>

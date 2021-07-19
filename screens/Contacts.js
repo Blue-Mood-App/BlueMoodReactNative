@@ -22,7 +22,6 @@ export default function Contact() {
 
         if (data.length > 0) {
           const contact = data[20];
-          console.log(contact);
         }
       }
     })();

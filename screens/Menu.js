@@ -20,7 +20,6 @@ export default function Menu({ navigation }) {
   const agreedToMeetState = auth.agreedToMeet;
   const [agreedToMeet, setAgreedToMeet] = useState(agreedToMeetState);
   const toggleSwitch = () => setAgreedToMeet((previousState) => !previousState);
-  console.log("agreedToMeet", agreedToMeet);
 
   const handleLogout = () => {
     dispatch(logOut());

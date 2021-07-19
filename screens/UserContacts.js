@@ -124,7 +124,6 @@ export default function UserContacts({ navigation }) {
                       return;
                     }
 
-                    console.log(agreedToMeet, displayName, phoneNumber, userId);
                     dispatch(
                       setContactList(
                         agreedToMeet,
