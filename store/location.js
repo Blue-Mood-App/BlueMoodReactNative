@@ -3,6 +3,8 @@ import axios from "axios";
 import location from "./serverInfo";
 import * as SecureStore from "expo-secure-store";
 import me from "./auth";
+import { fetchNearByUsers } from "./nearbyUsers";
+import { fetchPlaces } from "./places";
 
 const GOT_LOCATION = "GOT_LOCATION";
 const TOKEN = "token";
@@ -33,8 +35,14 @@ export const getLocation = () => async (dispatch) => {
     );
     dispatch(me());
   }
-
 };
+
+export const getLocActivitiesUsers = (searchQuery) => async (dispatch) => {
+  const geo = await Location.getCurrentPositionAsync({});
+  dispatch(fetchNearByUsers(geo))
+  dispatch(fetchPlaces(searchQuery, geo))
+  dispatch(gotLocation(geo))
+}
 
 export default function (state = {}, action) {
   switch (action.type) {

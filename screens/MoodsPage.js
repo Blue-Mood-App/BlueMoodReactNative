@@ -1,20 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import {
   TouchableOpacity,
   StyleSheet,
   View,
   Text,
-  Image,
   Dimensions,
 } from "react-native";
 import { fetchActivity } from "../store/activities";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getLocation } from "../store/location";
-import excited from "../assets/icons/excited.png";
-import happy from "../assets/icons/happy.png";
-import calm from "../assets/icons/calm.png";
-import sad from "../assets/icons/sad.png";
-import depressed from "../assets/icons/depressed.png";
 import LottieView from "lottie-react-native";
 import excitedFace from "../assets/excitedFace.json";
 import content from "../assets/content.json";
@@ -38,7 +32,7 @@ export default function MoodsPage({ navigation }) {
   const dispatch = useDispatch();
   const handleSubmit = (val) => {
     dispatch(fetchActivity(val));
-    navigation.navigate("Select Activity");
+    navigation.navigate("Select Activity", { moodId: val });
   };
 
   useEffect(() => {
