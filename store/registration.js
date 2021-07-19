@@ -1,6 +1,7 @@
 import axios from "axios";
 import location from "./serverInfo";
 import * as SecureStore from "expo-secure-store";
+import { me } from "./auth.js";
 const TOKEN = "token";
 
 //action creator
@@ -82,7 +83,7 @@ export const setContactList =
   };
 
 //update agreedToMeet thunk goes here
-export const setUpdatedConnect = (agreedToMeet) => async () => {
+export const setUpdatedConnect = (agreedToMeet) => async (dispatch) => {
   const token = await SecureStore.getItemAsync(TOKEN);
   try {
     if (token) {
@@ -95,6 +96,7 @@ export const setUpdatedConnect = (agreedToMeet) => async () => {
           },
         }
       );
+      dispatch(me());
     }
   } catch (err) {
     console.log(err);

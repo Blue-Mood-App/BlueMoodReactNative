@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TouchableOpacity, StyleSheet, View, Text, Switch } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { setUpdatedConnect } from "../store/registration";
@@ -31,16 +31,17 @@ export default function Menu({ navigation }) {
     navigation.goBack();
   };
 
+  const handleNavActivities = () => {
+    dispatch(setUpdatedConnect(agreedToMeet));
+    navigation.navigate("Edit Activities");
+  };
+
   if (!fontsLoaded) {
     return <AppLoading />;
   } else {
     return auth.id ? (
       <View style={styles.container}>
-        <Button
-          color="white"
-          onPress={() => navigation.navigate("Edit Activities")}
-          style={styles.btn}
-        >
+        <Button color="white" onPress={handleNavActivities} style={styles.btn}>
           <Text style={styles.text}>Edit Activities</Text>
         </Button>
 
