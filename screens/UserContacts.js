@@ -22,11 +22,11 @@ export default function UserContacts({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalText, setModalText] = useState("");
   const [agreedToMeet, setAgreedToMeet] = useState(false);
-  const [nickname, onChangeNickname] = React.useState("");
+  const [displayName, onChangeDisplayName] = React.useState("");
   const [phoneNumber, onChangePhoneNumber] = React.useState(null);
-  const user = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  const { id: userId, usernameEmail, password } = user;
+  const user = useSelector((state) => state.auth);
+  const { id: userId } = user;
 
   const validatePhoneNumber = (phoneNumber) => {
     const phoneNumberRegex = /^\+?[0-9]{1,3}?[0-9]{9,15}$/;
@@ -97,9 +97,9 @@ export default function UserContacts({ navigation }) {
                   </Text>
                   <TextInput
                     style={styles.input}
-                    onChangeText={onChangeNickname}
-                    value={nickname}
-                    placeholder="Nickname"
+                    onChangeText={onChangeDisplayName}
+                    value={displayName}
+                    placeholder="Display Name"
                   />
                   <Text style={styles.titleText}>
                     share your preferred phone number
@@ -124,11 +124,11 @@ export default function UserContacts({ navigation }) {
                       return;
                     }
 
-                    console.log(agreedToMeet, nickname, phoneNumber, userId);
+                    console.log(agreedToMeet, displayName, phoneNumber, userId);
                     dispatch(
                       setContactList(
                         agreedToMeet,
-                        nickname,
+                        displayName,
                         phoneNumber,
                         userId
                       )

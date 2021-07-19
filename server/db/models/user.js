@@ -37,7 +37,7 @@ const User = db.define("user", {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
   },
-  nickname: {
+  displayName: {
     type: Sequelize.STRING,
     allowNull: true,
   },
