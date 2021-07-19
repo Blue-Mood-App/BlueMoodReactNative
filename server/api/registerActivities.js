@@ -48,23 +48,23 @@ router.delete("/:activityId/:userId/:moodId", async function (req, res, next) {
   }
 });
 
-//delete route for unselected activites goes here
-router.delete("/:activityId/:userId/:moodId", async function (req, res, next) {
-  try {
-    const { activityId, userId, moodId } = req.params;
+// //delete route for unselected activites goes here
+// router.delete("/:activityId/:userId/:moodId", async function (req, res, next) {
+//   try {
+//     const { activityId, userId, moodId } = req.params;
 
-    await UserActivity.destroy({
-      where: {
-        activityId,
-        userId,
-        moodId,
-      },
-    });
-    res.sendStatus(200);
-  } catch (err) {
-    next(err);
-  }
-});
+//     await UserActivity.destroy({
+//       where: {
+//         activityId,
+//         userId,
+//         moodId,
+//       },
+//     });
+//     res.sendStatus(200);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
 
 //Contact List put route.
 router.put("/:userId", async function (req, res, next) {
