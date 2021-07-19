@@ -33,14 +33,6 @@ export default function ActivityPage({ navigation }) {
         <LottieView source={octopus} autoPlay loop></LottieView>
       </View>
       <Text style={styles.text}>Oops! Please edit your activities</Text>
-      {Array.isArray(userInfo.contactList) && (
-        <Text style={{ fontSize: 25, bottom: 100, position: "absolute" }}>
-          Or contact a friend that fits your mood :{" "}
-          {userInfo.contactList.map((el) => {
-            return <Text>{el + " "}</Text>;
-          })}{" "}
-        </Text>
-      )}
     </View>
   ) : (
     <View style={styles.container}>
