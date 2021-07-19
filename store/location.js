@@ -19,7 +19,8 @@ export const getLocation = () => async (dispatch) => {
     // dispatch(setErrorMsg("Permission to access location was denied"));
     console.log("location services not accepted");
   }
-  let geo = await Location.getCurrentPositionAsync({});
+  const geo = await Location.getCurrentPositionAsync({});
+  dispatch(gotLocation(geo));
   if (token) {
     await axios.put(
       `${location}/api/users/?lat=${geo.coords.latitude}&long=${geo.coords.longitude}`,
@@ -33,7 +34,6 @@ export const getLocation = () => async (dispatch) => {
     dispatch(me());
   }
 
-  dispatch(gotLocation(geo));
 };
 
 export default function (state = {}, action) {

@@ -15,6 +15,7 @@ const getPlaces = (places) => {
 
 export const fetchPlaces = (searchQuery, geo) => async (dispatch) => {
   try {
+    console.log(geo)
     const { data } = await axios.get(
       `${location}/api/places/?searchQuery=${searchQuery}&lat=${geo.coords.latitude}&long=${geo.coords.longitude}`
     );

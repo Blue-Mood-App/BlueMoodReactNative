@@ -10,7 +10,7 @@ import {
   useFonts,
   PatrickHandSC_400Regular,
 } from "@expo-google-fonts/patrick-hand-sc";
-import { fetchNearByUsers } from "../store/getNearbyUsers";
+import { fetchNearByUsers } from "../store/nearbyUsers";
 
 const { width } = Dimensions.get("window");
 

@@ -14,8 +14,6 @@ import {
   PatrickHandSC_400Regular,
 } from "@expo-google-fonts/patrick-hand-sc";
 import AppLoading from "expo-app-loading";
-import { getLocation } from "../store/location";
-import { fetchNearByUsers } from "../store/getNearbyUsers";
 const { height } = Dimensions.get("window");
 
 export default function Login({ navigation }) {
