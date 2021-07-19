@@ -26,7 +26,6 @@ async function seed() {
     const activitiesJson = await activitiesCall.json();
     activities = googleJSONCleaner(activitiesJson.feed.entry);
 
-
     const moodsCall = await fetch(
       "https://spreadsheets.google.com/feeds/list/1FOJOP5FwnfP6xDrBp7eUWLqFZlDZL_0yxC3V35MgzrY/3/public/values?alt=json"
     );

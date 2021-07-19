@@ -32,12 +32,12 @@ export default function Login({ navigation }) {
   });
 
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getLocation());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getLocation());
+  // }, []);
 
   // dispatch(getLocation());
-  let location = useSelector((state) => state.location);
+  //let location = useSelector((state) => state.location);
 
   if (!fontsLoaded) {
     return <AppLoading />;
@@ -103,7 +103,6 @@ export default function Login({ navigation }) {
                       left: <TextInput.Icon name={"lock"} />,
                     },
                   },
-
                 ]}
               />
               <View style={styles.buttonContainer}>
@@ -124,25 +123,6 @@ export default function Login({ navigation }) {
               <Text
                 style={styles.txtRegister}
                 onPress={() => navigation.navigate("Register")}
-
-                  textInputProps: {
-                    label: "Password",
-                    left: <TextInput.Icon name={"lock"} />,
-                  },
-                },
-              ]}
-            />
-            <View style={styles.buttonContainer}>
-              <Button
-                mode={"contained"}
-                color="black"
-                onPress={handleSubmit((data) => {
-                  const { email, password } = data;
-                  dispatch(authenticateLogin(email, password));
-                  dispatch(fetchNearByUsers(location));
-                  navigation.navigate("Select Mood");
-                })}
-                style={styles.btn}
               >
                 Register
               </Text>

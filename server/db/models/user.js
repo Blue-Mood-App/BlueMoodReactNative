@@ -2,6 +2,7 @@ const Sequelize = require("sequelize");
 const db = require("../db");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const Op = Sequelize.Op;
 
 const SALT_ROUNDS = 5;
 
@@ -91,16 +92,16 @@ User.findByToken = async function (token) {
 };
 
 // Get users on nearby radius.
-User.nearbyUsers = async function (coord) {
+User.nearbyUsers = async function (primaryUser) {
   const { acos, sin, cos } = Math;
-  // Callback function to calculate coordinates that are within 2km/2000m
+  // Callback function to calculate primaryUserinates that are within 2km/2000m
   const radiusFilter = (user) => {
     return (
       acos(
-        sin(user.lat * 0.0175) * sin(coord.lat * 0.0175) +
+        sin(user.lat * 0.0175) * sin(primaryUser.lat * 0.0175) +
           cos(user.lat * 0.0175) *
-            cos(coord.lat * 0.0175) *
-            cos(coord.long * 0.0175 - user.long * 0.0175)
+            cos(primaryUser.lat * 0.0175) *
+            cos(primaryUser.long * 0.0175 - user.long * 0.0175)
       ) *
         6371 <=
       2
@@ -108,7 +109,9 @@ User.nearbyUsers = async function (coord) {
   };
   try {
     //Try find all users
-    const users = await User.findAll();
+    const users = await User.findAll({
+      where: { id: { [Op.ne]: primaryUser.id } },
+    });
     //Filter those users with the function above and return a new array.
     return users.filter(radiusFilter);
   } catch (err) {
