@@ -47,7 +47,10 @@ export default function Login({ navigation }) {
         colors={["#EAF9D9", "#8EDCE6"]}
         style={{ flex: 1, backgroundColor: "#EAF9D9" }}
       >
-        <KeyboardAwareScrollView style={styles.container}>
+        <KeyboardAwareScrollView
+          showsVerticalScrollIndicator={false}
+          style={styles.container}
+        >
           <LinearGradient
             start={{ x: 0.9, y: 0.9 }}
             end={{ x: 1.2, y: 0.5 }}
