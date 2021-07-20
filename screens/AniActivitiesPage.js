@@ -45,6 +45,7 @@ export default function ActivityPage({ navigation, route }) {
         extractKey={(item) => item.activity.id.toString()}
         contentOffset={13}
         useNativeDriver={false}
+        useVelocityForIndex={false}
         onIndexChange={(index) => setCurrentIndex(index)}
         renderItem={({ item, ...rest }) => (
           <ActivityItem
