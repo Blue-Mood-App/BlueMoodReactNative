@@ -1,5 +1,3 @@
-
-
 # BlueMoodReactNative
 
 ## About Blue Mood
@@ -14,7 +12,7 @@ Try it out!
 
 https://user-images.githubusercontent.com/70176837/126364668-9448ee54-e879-47cd-83eb-997e2501bc0d.mov
 
-Sign in 
+Sign in
 
 ![Login_resized](https://user-images.githubusercontent.com/70176837/126372919-789bcb76-1836-4d52-b470-1459c7894f48.png)
 
@@ -30,7 +28,6 @@ Connect
 
 ![Connect_resized](https://user-images.githubusercontent.com/70176837/126372801-bc31e4b6-b17f-448f-9caf-33a23d70914f.png)
 
-
 ## Demo video
 
 Youtube :
@@ -44,7 +41,7 @@ Youtube :
 - PostgreSQL
 - Material UI Paper
 - Google Maps API
-- Yahoo Fusion API
+- Yelp Fusion API
 - Lottie
 
 ## Contributors
@@ -53,5 +50,3 @@ Youtube :
 - [Kyle Surma](https://github.com/kylesurma)
 - [Yagna Patel](https://github.com/yagna11)
 - [Victor Bouret](https://github.com/Vicbouret)
-
-
