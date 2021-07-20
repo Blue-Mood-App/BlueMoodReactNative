@@ -51,9 +51,9 @@ export default function Menu({ navigation }) {
             Connect?{" "}
             <Switch
               style={styles.connectContainer}
-              trackColor={{ false: "#eafdcf", true: "#fffc99" }}
-              thumbColor={agreedToMeet ? "#FA976B" : "#b1f8f2"}
-              ios_backgroundColor="#94C7B8"
+              trackColor={{ false: "#e63946", true: "#fff3b0" }}
+              thumbColor={agreedToMeet ? "#fb8500" : "#ffe3e0"}
+              ios_backgroundColor="#f07167"
               onValueChange={toggleSwitch}
               value={agreedToMeet}
             />
