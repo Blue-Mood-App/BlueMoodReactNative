@@ -26,7 +26,7 @@ https://user-images.githubusercontent.com/70176837/126364668-9448ee54-e879-47cd-
 
 ![Update_resize](https://user-images.githubusercontent.com/70176837/126372851-92ffcd6f-eec6-4bc2-a6ae-9e810dbf2c16.png)
 
-Connect
+### Connect
 
 ![Connect_resized](https://user-images.githubusercontent.com/70176837/126372801-bc31e4b6-b17f-448f-9caf-33a23d70914f.png)
 
