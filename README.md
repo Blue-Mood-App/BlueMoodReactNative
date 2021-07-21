@@ -14,19 +14,19 @@ https://user-images.githubusercontent.com/70176837/126364668-9448ee54-e879-47cd-
 
 Sign in
 
-![Login_resized](https://user-images.githubusercontent.com/70176837/126372919-789bcb76-1836-4d52-b470-1459c7894f48.png)
+<img width="250" alt="Screen Shot 2021-07-16 at 10 49 37 AM" src="https://user-images.githubusercontent.com/70176837/126372919-789bcb76-1836-4d52-b470-1459c7894f48.png">
 
 Register
 
-![Register_resized](https://user-images.githubusercontent.com/70176837/126372957-84efbe0f-2cb9-41af-9ab8-226e4fefcebf.png)
+<img width="450" alt="Screen Shot 2021-07-16 at 10 49 37 AM" src="https://user-images.githubusercontent.com/70176837/126520856-2c84071c-6e45-413b-97e4-48f8359fa3d0.png">
 
 Update Activities as a logged in user
 
-![Update_resize](https://user-images.githubusercontent.com/70176837/126372851-92ffcd6f-eec6-4bc2-a6ae-9e810dbf2c16.png)
+<img width="450" alt="Screen Shot 2021-07-16 at 10 49 37 AM" src="https://user-images.githubusercontent.com/70176837/126521023-7bd9df68-db6a-4cdb-85c4-935ff359252c.png">
 
 Connect
 
-![Connect_resized](https://user-images.githubusercontent.com/70176837/126372801-bc31e4b6-b17f-448f-9caf-33a23d70914f.png)
+<img width="250" alt="Screen Shot 2021-07-16 at 10 49 37 AM" src="https://user-images.githubusercontent.com/70176837/126521265-709a1df0-06bc-480c-805e-0ed419cad1d1.jpg">
 
 ## Demo video
 
