@@ -18,7 +18,7 @@ Sign in
 
 Register
 
-<img width="450" alt="Screen Shot 2021-07-16 at 10 49 37 AM" src="https://user-images.githubusercontent.com/70176837/126520856-2c84071c-6e45-413b-97e4-48f8359fa3d0.png">
+<img width="600" alt="Screen Shot 2021-07-16 at 10 49 37 AM" src="https://user-images.githubusercontent.com/70176837/126520856-2c84071c-6e45-413b-97e4-48f8359fa3d0.png">
 
 Update Activities as a logged in user
 
