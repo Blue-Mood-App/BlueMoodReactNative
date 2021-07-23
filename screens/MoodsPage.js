@@ -8,7 +8,6 @@ import {
 } from "react-native";
 import { fetchActivity } from "../store/activities";
 import { useDispatch } from "react-redux";
-import { getLocation } from "../store/location";
 import LottieView from "lottie-react-native";
 import excitedFace from "../assets/excitedFace.json";
 import content from "../assets/content.json";
@@ -34,10 +33,6 @@ export default function MoodsPage({ navigation }) {
     dispatch(fetchActivity(val));
     navigation.navigate("Select Activity", { moodId: val });
   };
-
-  useEffect(() => {
-    dispatch(getLocation());
-  }, []);
 
   if (!fontsLoaded) {
     return <AppLoading />;

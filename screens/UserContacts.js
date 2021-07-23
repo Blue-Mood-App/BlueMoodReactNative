@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   StyleSheet,
@@ -15,6 +15,7 @@ import { setContactList } from "../store/registration";
 import { Feather } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { LinearGradient } from "expo-linear-gradient";
+import { getLocation } from "../store/location";
 
 const { height } = Dimensions.get("window");
 
@@ -33,14 +34,19 @@ export default function UserContacts({ navigation }) {
     return phoneNumberRegex.test(phoneNumber);
   };
 
+  useEffect(() => {
+    dispatch(getLocation());
+  }, []);
+
   return (
     <View style={styles.container}>
       <Modal
         animationType="slide"
+        transparent={true}
         visible={modalVisible}
         onRequestClose={() => setModalVisible(!modalVisible)}
       >
-        <View style={styles.container}>
+        <View style={styles.modal}>
           <Text style={styles.text}>
             {modalText === "contacts" &&
               "Hey! Why not join our connect program? Our connect program will connect you with other Blue Mood users who want to make new friends just like you. We will suggest users living in the same area as you, and you can then start a chat with them."}
@@ -69,7 +75,7 @@ export default function UserContacts({ navigation }) {
                 <Text
                   style={styles.titleText}
                   onPress={() => (
-                    setModalVisible(true), setModalText("permission")
+                    setModalVisible(true), setModalText("contacts")
                   )}
                 >
                   Would you like to connect with other members near you?{" "}
@@ -78,7 +84,7 @@ export default function UserContacts({ navigation }) {
                     size={20}
                     color="black"
                     onPress={() => (
-                      setModalVisible(true), setModalText("permission")
+                      setModalVisible(true), setModalText("contacts")
                     )}
                   />
                 </Text>
@@ -151,8 +157,21 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
   },
+  modal: {
+    flex: 1,
+    backgroundColor: "#F4F4F4",
+    color: "#FFF",
+    justifyContent: "center",
+    maxWidth: 350,
+    maxHeight: 300,
+    marginHorizontal: 32,
+    marginVertical: 250,
+    paddingHorizontal: 16,
+    borderRadius: 13,
+  },
   text: {
     fontSize: 18,
+    marginBottom: 8,
   },
   textContainer: {
     flex: 1,

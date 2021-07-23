@@ -2,7 +2,8 @@ import 'react-native-gesture-handler';
 import { registerRootComponent } from 'expo';
 
 import App from './App';
-console.disableYellowBox = true;
+import { LogBox } from 'react-native';
+LogBox.ignoreAllLogs(true);
 
 // registerRootComponent calls AppRegistry.registerComponent('main', () => App);
 // It also ensures that whether you load the app in Expo Go or in a native build,
