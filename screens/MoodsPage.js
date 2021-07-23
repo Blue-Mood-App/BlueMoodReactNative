@@ -20,6 +20,7 @@ import {
   PatrickHandSC_400Regular,
 } from "@expo-google-fonts/patrick-hand-sc";
 import AppLoading from "expo-app-loading";
+import { getLocation } from "../store/location";
 
 const { height } = Dimensions.get("window");
 const { width } = Dimensions.get("window");
@@ -29,6 +30,9 @@ export default function MoodsPage({ navigation }) {
     PatrickHandSC_400Regular,
   });
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getLocation());
+  }, []);
   const handleSubmit = (val) => {
     dispatch(fetchActivity(val));
     navigation.navigate("Select Activity", { moodId: val });
