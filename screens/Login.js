@@ -107,8 +107,7 @@ export default function Login({ navigation }) {
                   color="black"
                   onPress={handleSubmit((data) => {
                     const { email, password } = data;
-                    dispatch(authenticateLogin(email, password));
-                    navigation.navigate("Select Mood");
+                    dispatch(authenticateLogin(email, password, navigation));
                   })}
                   style={styles.btn}
                 >

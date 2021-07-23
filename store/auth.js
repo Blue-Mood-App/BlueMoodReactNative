@@ -2,7 +2,7 @@ import axios from "axios";
 import * as SecureStore from "expo-secure-store";
 import Constants from "expo-constants";
 const { manifest } = Constants;
-import location from './serverInfo'
+import location from "./serverInfo";
 
 const TOKEN = "token";
 
@@ -33,21 +33,25 @@ export const me = () => async (dispatch) => {
 
 // when dispatching authenticateLogin -- method is used to determine if it's "login" or "signup" use either or in place of method.
 export const authenticateLogin =
-  (usernameEmail, password) => async (dispatch) => {
+  (usernameEmail, password, navigation) => async (dispatch) => {
     try {
       const res = await axios.post(`${location}/auth/login`, {
         usernameEmail,
         password,
       });
+
       await SecureStore.setItemAsync(TOKEN, res.data.token);
       dispatch(me());
+      navigation.navigate("Select Mood");
     } catch (authError) {
+      alert("invalid credentials");
       return dispatch(setAuth({ error: authError }));
     }
   };
 
 export const authenticateRegister =
-  (firstName, lastName, usernameEmail, password) => async (dispatch) => {
+  (firstName, lastName, usernameEmail, password, navigation) =>
+  async (dispatch) => {
     try {
       const res = await axios.post(`${location}/auth/signup`, {
         firstName,
@@ -57,15 +61,26 @@ export const authenticateRegister =
       });
       await SecureStore.setItemAsync(TOKEN, res.data.token);
       dispatch(me());
+      navigation.navigate("Register Activities");
+
+      alert(
+        `Hi ${firstName}, please help us personalize your profile and give you exactly what you need to perfect your day!`
+      );
       //history.push() we're going to need a method to send us to home page after login
     } catch (authError) {
+      if (authError.response.status === 500) {
+        alert("invalid email");
+      } else {
+        alert("user with that email already exists");
+      }
+
       return dispatch(setAuth({ error: authError }));
     }
   };
 
 export const logOut = () => async (dispatch) => {
   await SecureStore.deleteItemAsync(TOKEN);
-  dispatch(setAuth({}))
+  dispatch(setAuth({}));
 };
 
 /**
