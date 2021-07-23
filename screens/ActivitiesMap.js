@@ -102,8 +102,8 @@ export default function ActivitiesMap({ navigation, route }) {
               <Fragment key={id}>
                 <Circle
                   center={{
-                    latitude: lat,
-                    longitude: long,
+                    latitude: +lat,
+                    longitude: +long,
                   }}
                   radius={500}
                   fillColor='#00FF00'
@@ -111,8 +111,8 @@ export default function ActivitiesMap({ navigation, route }) {
                 ></Circle>
                 <Marker
                   coordinate={{
-                    latitude: lat,
-                    longitude: long,
+                    latitude: +lat,
+                    longitude: +long,
                   }}
                   icon={personPin}
                 >
